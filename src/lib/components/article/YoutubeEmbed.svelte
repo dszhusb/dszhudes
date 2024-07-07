@@ -1,0 +1,8 @@
+<script lang="ts">
+    import Youtube from "svelte-youtube-embed";
+    export let url: string;
+</script>
+
+<div class="my-16 border-t-[1px] border-b-[1px] border-stone-800">
+    <Youtube id={url} />
+</div>

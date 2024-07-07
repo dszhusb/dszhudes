@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    a {
+        @apply hover:underline
+    }
+
+    h1 {
+        @apply text-2xl font-bold font-grotesk;
+    }
+    h2 {
+        @apply text-2xl uppercase;
+    }
+    h3 {
+        @apply text-lg;
+    }
+    p {
+        @apply text-base font-light font-grotesk;
+    }
+
+    .content a{
+        @apply underline
+    }
+
+    .imageGrid {
+        @apply mt-16 mb-24
+    }
+
+    .content h1 {
+        @apply pb-8 max-w-3xl mx-auto uppercase
+    }
+
+    .content h2 {
+        @apply pb-6 max-w-3xl mx-auto
+    }
+
+    .content h3 {
+        @apply pb-8 max-w-3xl mx-auto
+    }
+
+    .content p {
+        @apply pb-4 max-w-3xl mx-auto leading-relaxed
+    }
+}
+

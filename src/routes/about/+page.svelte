@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
     import { hColors } from "$lib/store";
+    import Grad from '$lib/assets/icons/grad.webp'
 </script>
 
 <main class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full">
@@ -8,12 +9,12 @@
     >
         <img
             class="w-full"
-            src="/src/lib/assets/icons/grad.webp"
+            src={Grad}
             alt="portrait"
         />
         <img
             class="w-full contrast-50 grayscale hidden lg:inline"
-            src="/src/lib/assets/icons/grad.webp"
+            src={Grad}
             alt="portrait"
         />
     </div>

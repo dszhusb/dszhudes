@@ -32,19 +32,19 @@
     }
 
     .content h1 {
-        @apply pb-8 max-w-3xl mx-auto uppercase
+        @apply pb-8 max-w-3xl mx-auto uppercase px-8
     }
 
     .content h2 {
-        @apply pb-6 max-w-3xl mx-auto
+        @apply pb-6 max-w-3xl mx-auto px-8
     }
 
     .content h3 {
-        @apply pb-8 max-w-3xl mx-auto
+        @apply pb-8 max-w-3xl mx-auto px-8
     }
 
     .content p {
-        @apply pb-4 max-w-3xl mx-auto leading-relaxed
+        @apply pb-4 max-w-3xl mx-auto leading-relaxed px-8
     }
 }
 

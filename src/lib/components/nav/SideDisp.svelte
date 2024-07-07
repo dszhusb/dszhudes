@@ -1,3 +1,19 @@
+<script context="module" lang="ts">
+    import type { Picture } from "vite-imagetools";
+    const modules: Record<string, { default: Picture }> = import.meta.glob(
+        "$lib/assets/iconShells/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}",
+        {
+            eager: true,
+            query: {
+                enhanced: true,
+            },
+        },
+    );
+    const images = Object.fromEntries(
+        Object.entries(modules).map((x) => [x[0], x[1].default]),
+    );
+</script>
+
 <script lang="ts">
     import { gsap } from "gsap";
     import { onMount } from "svelte";
@@ -27,9 +43,9 @@
         {$page.url.pathname.split("/").slice(-1)[0].replace("_", " ")}
     </div>
     <button on:click={resetIcon} on:click={trigger}>
-        <img
+        <enhanced:img
             class="icon w-full p-2 hover:saturate-150"
-            src={`/src/lib/assets/iconShells/${$hIcon}.webp`}
+            src={images[`/src/lib/assets/iconShells/${$hIcon}.webp`]}
             alt="shell"
         />
     </button>

@@ -1,16 +1,33 @@
 <!-- Work Page -->
+<script context="module" lang="ts">
+    import type { Picture } from 'vite-imagetools';
+    const modules : Record<string, {default: Picture}> = import.meta.glob(
+		'$lib/assets/iconShells/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
+		{
+			eager: true,
+			query: {
+				enhanced: true
+			}
+		}
+	)
+    const images = Object.fromEntries(Object.entries(modules).map(x => [x[0], x[1].default]));
+</script>
+
 <script lang="ts">
     import { gsap } from "gsap";
     import { onMount } from "svelte";
 
     interface Shell {
-        id: number;
+        id: Picture;
         size: number;
     }
 
     const shells: Shell[] = [];
-    for (let i = 0; i < 50; i++) {
-        shells.push({ id: i % 23, size: Math.random() * 2 + 10 });
+    for (let i=0; i<50; i++) {
+        shells.push({
+            id: images[`/src/lib/assets/iconShells/${i%23}.webp`],
+            size: Math.random() * 2 + 10,
+        });
     }
 
     let tl = gsap.timeline({ repeat: -1, repeatDelay: 0 });
@@ -37,10 +54,9 @@
 
 <main class="relative w-screen h-screen overflow-hidden bg-white">
     {#each shells as s}
-        <img
+        <enhanced:img src={s.id}
             style:width={`${s.size}rem`}
             class="shell saturate-140 pointer-events-none"
-            src={`/src/lib/assets/iconShells/${s.id}.webp`}
             alt="shell"
         />
     {/each}
@@ -53,7 +69,7 @@
             <div class="title">Daniel</div>
             <div class="title">Zhu</div>
         </div>
-        <div class="place-content-center flex flex-row gap-4 items-center" >
+        <div class="place-content-center flex flex-row gap-4 items-center">
             <svg
                 fill="white"
                 viewBox="0 0 24 24"

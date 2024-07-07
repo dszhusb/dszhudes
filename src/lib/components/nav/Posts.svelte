@@ -1,3 +1,20 @@
+<!-- Work Page -->
+<script context="module" lang="ts">
+    import type { Picture } from "vite-imagetools";
+    const modules: Record<string, { default: Picture }> = import.meta.glob(
+        "$lib/assets/thumbnails/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}",
+        {
+            eager: true,
+            query: {
+                enhanced: true,
+            },
+        },
+    );
+    const images = Object.fromEntries(
+        Object.entries(modules).map((x) => [x[0], x[1].default]),
+    );
+</script>
+
 <script>
     import { hColors } from "$lib/store";
     export let data;
@@ -10,10 +27,12 @@
         {#each data.posts as post}
             <li class="">
                 <a href={post.path} class="relative">
-                    <img
+                    <enhanced:img
                         class=""
                         alt={post.meta.title}
-                        src={`/src/lib/assets/thumbnails/${post.meta.thumbnail}.webp`}
+                        src={images[
+                            `/src/lib/assets/thumbnails/${post.meta.thumbnail}.webp`
+                        ]}
                     />
                     <div
                         class="absolute flex gap-2 items-center top-2 left-4 px-2 bg-stone-50/60"

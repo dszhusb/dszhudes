@@ -10,21 +10,33 @@
 	let exploration: GSAPTween;
 
 	onMount(() => {
-		physical = gsap.to(".physical", {
-			width: "100%",
-			duration: 0.2,
-			borderStyle: "none",
-		});
-		digital = gsap.to(".digital", {
-			width: "100%",
-			duration: 0.2,
-			borderStyle: "none",
-		});
-		exploration = gsap.to(".exploration", {
-			width: "100%",
-			duration: 0.2,
-			borderStyle: "none",
-		});
+		physical = gsap.fromTo(
+			".physical",
+			{ width: "1rem", duration: 0.2 },
+			{
+				width: "100%",
+				duration: 0.2,
+				borderStyle: "none",
+			},
+		);
+		digital = gsap.fromTo(
+			".digital",
+			{ width: "1rem", duration: 0.2 },
+			{
+				width: "100%",
+				duration: 0.2,
+				borderStyle: "none",
+			},
+		);
+		exploration = gsap.fromTo(
+			".exploration",
+			{ width: "1rem", duration: 0.2 },
+			{
+				width: "100%",
+				duration: 0.2,
+				borderStyle: "none",
+			},
+		);
 
 		physical.reverse();
 		digital.reverse();
@@ -55,9 +67,7 @@
 					: undefined}>work</a
 			>
 		</button>
-		<div
-			class="indicators"
-		>
+		<div class="indicators">
 			<div class="divide-y-[1px] divide-stone-800">
 				<button
 					class="button relative inside"
@@ -122,7 +132,7 @@
 		@apply border-stone-800 border-b-[1px] border-t-[1px] border-x-0;
 	}
 	.inside {
-		@apply bg-stone-100
+		@apply bg-stone-100;
 	}
 
 	a {

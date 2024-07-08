@@ -21,8 +21,6 @@
     import TopNav from "$lib/components/nav/TopNav.svelte";
     import Sidebar from "$lib/components/nav/Sidebar.svelte";
     import SideDisp from "$lib/components/nav/SideDisp.svelte";
-
-    console.log(images[`/src/lib/assets/iconShells/${$hIcon}.webp`])
 </script>
 
 <svelte:head>

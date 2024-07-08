@@ -21,7 +21,7 @@ categories:
     const process = [p + 'construction', p + 'logo', p + 'pcb', p + 'render']
 
     const hero = p + 'interaction'
-    const footer = p + 'hero2'
+    const footer = p + 'Hero2'
 
     const demo = "mW48x7GRV78"
     const render = "UxG64x8rIbk"

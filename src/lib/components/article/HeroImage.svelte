@@ -30,7 +30,7 @@
             />
         </a>
     {:else}
-        <img class="w-full" alt={link} src={`/src/lib/assets/${link}.webp`} />
+        <enhanced:img class="w-full" alt={link} src={images[`/src/lib/assets/${link}.webp`]} />
     {/if}
     {#if description !== undefined}
         <div class="float-right p-4 capitalize">{description}</div>

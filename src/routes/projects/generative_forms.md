@@ -27,11 +27,11 @@ categories:
 
 # Organic Form, Artificial Rules is an ongoing exploration of generative design and making. Initially inspired by the book [Theoretical Morphology](https://cup.columbia.edu/book/theoretical-morphology/9780231106177) by George R. McGhee, I have been iterating on the concept of turning the formulas described in research papers into interactive web experiences.
 
+<HeroImage link={genmorphhero} description="WIP Generative Morphology Website" url="http://generative-morphology.vercel.app"/>
+
 ## 3D Exploration | Generative Morphology Site
 
 My most recent exploration of generative morphology has been a website hosting models based on different formulas to describe forms like shells and branching organisms. Working off formulas found in the book but also more recent papers cited online, I've been creating a interactive web tool with React and React Three Fiber. Users can play around with each parameter to explore the morphospace described by each formula. I am continually updating and improving the site, adding more models and features. The [site](http://generative-morphology.vercel.app) is pictured below:
-
-<HeroImage link={genmorphhero} description="WIP Generative Morphology Website" url="http://generative-morphology.vercel.app"/>
 
 Learning three.js during the course of this project has been a challenging and rewarding experience. For example,  the library wasn't created with the intention to generate a new mesh from a set of points, which seemed like the most straight forward initial option. The approach I ended up taking with the shell models involved creating a cylindrical mesh first and mapping each point to a point along the curvature of the shell.
 

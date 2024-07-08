@@ -35,7 +35,7 @@
     }
 </script>
 
-<div class="relative w-full pt-24 flex flex-col items-center">
+<div class="relative w-full pt-24 flex flex-col items-center overflow-hidden">
     <div class="absolute bottom-0 h-8 w-full bg-stone-800" />
     <button class="w-24 px-4 pt-2 bg-stone-800 rounded-t-full" on:click={goTop}>
         <enhanced:img

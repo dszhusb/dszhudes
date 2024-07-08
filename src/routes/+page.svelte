@@ -56,7 +56,7 @@
     {#each shells as s}
         <enhanced:img src={s.id}
             style:width={`${s.size}rem`}
-            class="shell saturate-140 pointer-events-none"
+            class="shell"
             alt="shell"
         />
     {/each}
@@ -92,7 +92,7 @@
 
 <style>
     img {
-        @apply absolute saturate-150 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+        @apply absolute saturate-150 hover:saturate-200 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
     }
 
     .title {

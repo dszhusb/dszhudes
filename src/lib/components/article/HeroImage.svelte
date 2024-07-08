@@ -16,8 +16,8 @@
 </script>
 <script>
     export let link;
-    export let description;
-    export let url;
+    export let description = "";
+    export let url = "";
 </script>
 
 <div class="imageGrid border-t-[1px] border-b-[1px] border-stone-800">

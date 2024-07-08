@@ -6,7 +6,7 @@
 
 <div class="relative px-8 pb-8 pt-4">
     <img
-        class="fade invert-[0.75] grayscale hover:invert-0 hover:grayscale-0 w-full border-solid border-[1px] border-stone-200"
+        class="fade grayscale hover:grayscale-0 w-full border-solid border-[1px] border-stone-200"
         src={Grad}
         alt="icon"
     />

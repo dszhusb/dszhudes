@@ -16,7 +16,7 @@
 </script>
 <script>
     export let links;
-    export let description;
+    export let description = "";
     export let type;
 
     let fileType = ".webp";

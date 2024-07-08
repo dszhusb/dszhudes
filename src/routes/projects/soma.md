@@ -4,6 +4,7 @@ thumbnail: somaNail
 role: UI/UX Design, Front/Backend Development, Prototyping
 collaborators: Alison Hu, Richard Zhou
 duration: 6 weeks
+priority: 3
 documentation: https://www.notion.so/366560df767742cbbdadbdb9188bebc8
 site:
 categories:

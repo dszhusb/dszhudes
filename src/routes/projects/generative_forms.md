@@ -4,6 +4,7 @@ thumbnail: genNail
 role: Design, Development
 collaborators: N/A
 duration: Ongoing
+priority: 0
 documentation: https://github.com/dszhusb/generative-morphology
 site: https://generative-morphology.vercel.app
 categories:

@@ -7,6 +7,7 @@ export type Post = {
         role: string,
         collaborators: string,
         duration: string,
+        priority: number,
         documentation: string,
         site: string,
         categories: string[]
@@ -16,7 +17,7 @@ export type Post = {
 
 export async function load({ params }) {
     const post: Post = await import(`../${params.slug}.md`)//.catch(error(404, 'Not Found'))
-    const { title, thumbnail, role, collaborators, duration, documentation, site, categories } = post.metadata
+    const { title, thumbnail, role, collaborators, duration, priority, documentation, site, categories } = post.metadata
     const Content = post.default
 
     return {
@@ -25,6 +26,7 @@ export async function load({ params }) {
         role,
         collaborators,
         duration,
+        priority,
         documentation,
         site,
         categories,

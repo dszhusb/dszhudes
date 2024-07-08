@@ -1,22 +1,24 @@
 <script context="module" lang="ts">
-	import type { Picture } from "vite-imagetools";
-	const modules: Record<string, { default: Picture }> = import.meta.glob(
-		`$lib/assets/iconShells/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}`,
-		{
-			eager: true,
-			query: {
-				enhanced: true,
-			},
-		},
-	);
-	const images = Object.fromEntries(
-		Object.entries(modules).map((x) => [x[0], x[1].default]),
-	);
+    import type { Picture } from "vite-imagetools";
+    const modules: Record<string, { default: Picture }> = import.meta.glob(
+        `$lib/assets/iconShells/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}`,
+        {
+            eager: true,
+            query: {
+                enhanced: true,
+            },
+        },
+    );
+    const images = Object.fromEntries(
+        Object.entries(modules).map((x) => [x[0], x[1].default]),
+    );
 </script>
+
 <script lang="ts">
     import { gsap } from "gsap";
     import { onMount } from "svelte";
     import { hIcon } from "$lib/store";
+    export let flush = false;
 
     function goTop() {
         document.body.scrollIntoView();
@@ -35,7 +37,10 @@
     }
 </script>
 
-<div class="relative w-full pt-24 flex flex-col items-center overflow-hidden">
+<div class="relative w-full flex flex-col items-center overflow-hidden">
+    {#if !flush}
+        <div class="h-24 w-full" />
+    {/if}
     <div class="absolute bottom-0 h-8 w-full bg-stone-800" />
     <button class="w-24 px-4 pt-2 bg-stone-800 rounded-t-full" on:click={goTop}>
         <enhanced:img

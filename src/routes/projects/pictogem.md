@@ -4,6 +4,7 @@ thumbnail: pictoNail
 role: Design, Development
 collaborators: N/A
 duration: 1 week
+priority: 1
 documentation: https://github.com/dszhusb/photo-three-album
 site: https://photo-three-album.vercel.app/
 categories:

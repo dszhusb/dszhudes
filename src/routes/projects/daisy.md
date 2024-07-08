@@ -4,6 +4,7 @@ thumbnail: daisyNail
 role: Design, Hardware Development
 collaborators: Joseph Kim
 duration: 12 weeks
+priority: 0
 documentation:
 site:
 categories:

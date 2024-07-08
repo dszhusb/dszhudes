@@ -4,6 +4,7 @@ thumbnail: favoriteFoodsNail
 role: Design, Web Development
 collaborators: Maggie Ma, Adam Grant
 duration: 6 weeks
+priority: 3
 documentation: https://dandy-catcher-a71.notion.site/Favorite-Foods-By-The-Month-8fe21323bd3e422eb1f7cedf1439a521
 site: https://dszhusb.github.io/CDT-Sandbox/
 categories:
@@ -48,6 +49,6 @@ With the forms mapped out, I moulded and casted each organ dozens of times to na
 
 On the front end, we coded everything in the website with native HTML and CSS. Originally, we had planned to create embedded graphs and visualizations with p5.js canvases, however, feedback sessions with users showed that they produced more visual clutter than useful insight. Looking back on the process with my current knowledge, using a framework like react or svelte would have sped up the development and increased our options for interaction.
 
-Working on Favorite Foods by The Months provided an interesting challenge from both the design and development perspectives. Iterating on the website's UI/UX, we sought to make the website as informative as possible at each stage without being overwhelming. On the development side, we learned to process data through API and to serve and display that data through the front and backend portions of a website.
-
 <HeroImage link={bottom} />
+
+Working on Favorite Foods by The Months provided an interesting challenge from both the design and development perspectives. Iterating on the website's UI/UX, we sought to make the website as informative as possible at each stage without being overwhelming. On the development side, we learned to process data through API and to serve and display that data through the front and backend portions of a website.

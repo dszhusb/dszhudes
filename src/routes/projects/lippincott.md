@@ -3,6 +3,7 @@ title: lippincott
 thumbnail: lippincottNail
 role: Design, Development, 3D Developer
 collaborators: Lippincott
+priority: 2
 duration: Ongoing
 documentation:
 site:

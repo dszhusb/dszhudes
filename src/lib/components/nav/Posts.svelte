@@ -22,7 +22,7 @@
 
 <div>
     <ul
-        class="w-full grid grid-cols-2 divide-x-[1px] divide-y-[1px] divide-stone-800"
+        class="w-full grid grid-cols-1 md:grid-cols-2 divide-x-[1px] divide-y-[1px] divide-stone-800"
     >
         {#each data.posts as post}
             <li class="">

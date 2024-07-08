@@ -4,6 +4,7 @@ thumbnail: kineticNail
 role: Prototyping
 collaborators: Saloni Ghandi
 duration: 6 weeks
+priority: 2
 documentation:
 site:
 categories:

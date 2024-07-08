@@ -4,6 +4,7 @@ thumbnail: pilotNail
 role: Design, Hardware Development, Production
 collaborators: Landing Gear
 duration: 6 weeks
+priority: 0
 documentation: https://github.com/landing-gear-production
 site:
 categories:

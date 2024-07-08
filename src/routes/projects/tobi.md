@@ -4,6 +4,7 @@ thumbnail: tobiNail
 role: Design, Hardware Development
 collaborators: N/A
 duration: 12 weeks
+priority: 3
 documentation: https://dandy-catcher-a71.notion.site/TOBI-Data-Visualization-and-Tangible-Surfaces-34da0f7d414643f98b11546d170e0695
 site:
 categories:

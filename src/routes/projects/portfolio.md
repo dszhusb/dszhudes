@@ -4,6 +4,7 @@ thumbnail: portfolioNail
 role: Design, Development
 collaborators:
 duration: Ongoing
+priority: 0
 documentation:
 site:
 categories:

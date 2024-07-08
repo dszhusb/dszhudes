@@ -96,6 +96,6 @@
     }
 
     .title {
-        @apply text-white text-9xl font-medium uppercase tracking-tight font-grotesk leading-[7.5rem] md:leading-tight;
+        @apply text-white text-8xl md:text-9xl font-medium uppercase tracking-tight font-grotesk leading-[6rem] md:leading-tight;
     }
 </style>

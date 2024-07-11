@@ -31,3 +31,11 @@ let shells = [
     { f1: "#7C7B79", f2: "#ABB6BB", f3: "#D6ECF9", text: "#6B665C" },
     { f1: "#C1C56E", f2: "#EBD6C1", f3: "#F3E2FF", text: "#747736" }
 ];
+
+//Easing Handle Positions
+export interface Coord { x: number, y: number}
+export const chart_size = writable(500)
+export const handle_one = writable(<Coord>({x: 150, y: 350}))
+export const handle_two = writable(<Coord>({x: 350, y: 150}))
+export const scaled_handle_one = derived([handle_one, chart_size], ([$handle_one, $chart_size]) => <Coord>({x: $handle_one.x / $chart_size, y: $handle_one.y / $chart_size}))
+export const scaled_handle_two = derived([handle_two, chart_size], ([$handle_two, $chart_size]) => <Coord>({x: $handle_two.x / $chart_size, y: $handle_two.y / $chart_size}))

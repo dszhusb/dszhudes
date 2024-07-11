@@ -45,7 +45,7 @@
 </script>
 
 <nav
-	class="sticky top-0 h-screen w-60 border-r-[1px] border-stone-800 overscroll-contain"
+	class="sticky top-0 max-h-screen h-full w-60 border-r-[1px] border-stone-800 overscroll-contain"
 >
 	<div class="button mt-4">
 		<a href="/">daniel zhu</a>
@@ -122,6 +122,16 @@
 			>
 		</div>
 	</div>
+	<a href="/easing" class="experiment">
+		<p
+			style:color={$hColors.text}
+			style:background-color={$hColors.f3}
+			style:border-color={$hColors.text}
+			class="p-2 border-b-[1px] w-full"
+		>
+			Easing Experiment
+		</p>
+	</a>
 </nav>
 
 <style>
@@ -133,6 +143,10 @@
 	}
 	.inside {
 		@apply bg-stone-100;
+	}
+
+	.experiment {
+		@apply p-0
 	}
 
 	a {

@@ -72,8 +72,8 @@
     div[aria-current="page"] {
         @apply hidden;
     }
-    .cursor {
+    /* .cursor {
         transform: translate(-50%, -50%) translate(var(--x, 0px), var(--y, 0px));
         @apply absolute w-24 h-24 z-50 grayscale;
-    }
+    } */
 </style>

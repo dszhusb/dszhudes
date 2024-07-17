@@ -1,11 +1,21 @@
 import { writable, derived } from 'svelte/store';
+import cloverCupImage from "$lib/assets/ceramics/cloverCup.webp"
+import flowerCupImage from '$lib/assets/ceramics/flowerCup.webp'
+import peaPotImage from "$lib/assets/ceramics/peaPot.webp"
+
+export const cIndex = writable(0);
+export const ceramicInfo = [
+    { img: cloverCupImage, blurb: "This is a tea cup I received as a gift. \nI'm not sure exactly what the type and origin of the glaze is. It appears to be related to Jian Zhan or Tenmoku Glaze types. \nI love the flower like shape and the delicate almost brain-like patterns on the surface." },
+    { img: flowerCupImage, blurb: "This is a tea cup I received as a gift. \nI'm not sure exactly what the type and origin of the glaze is. It appears to be related to Jian Zhan or Tenmoku Glaze types. \nThis is one my favorite cups that I own due to its coloration and how the profile of the inside curves away from the outside profile." },
+    { img: peaPotImage, blurb: "This is a single person teapot I received as a gift. \nWhile I am not particularly fond of white clay, I love the delicate brushwork on the peacock and the way it pours." }
+]
 
 //Color Variables
 export const hIcon = writable(0);
 export const hColors = derived(hIcon, $hIcon => shells[$hIcon]);
 
 //Shell Values
-let shells = [
+export const shells = [
     { f1: "#53A8BA", f2: "#A6C6E1", f3: "#EDCDFE", text: "#248399" },
     { f1: "#8FAB82", f2: "#F3C2D2", f3: "#FFE0FF", text: "#3A7D1D" },
     { f1: "#9965B8", f2: "#BEBBF3", f3: "#E2F4FD", text: "#8345A8" },
@@ -33,9 +43,9 @@ let shells = [
 ];
 
 //Easing Handle Positions
-export interface Coord { x: number, y: number}
-export const chart_size = writable(500)
-export const handle_one = writable(<Coord>({x: 150, y: 350}))
-export const handle_two = writable(<Coord>({x: 350, y: 150}))
-export const scaled_handle_one = derived([handle_one, chart_size], ([$handle_one, $chart_size]) => <Coord>({x: $handle_one.x / $chart_size, y: $handle_one.y / $chart_size}))
-export const scaled_handle_two = derived([handle_two, chart_size], ([$handle_two, $chart_size]) => <Coord>({x: $handle_two.x / $chart_size, y: $handle_two.y / $chart_size}))
+export interface Coord { x: number, y: number };
+export const chart_size = writable(500);
+export const handle_one = writable(<Coord>({ x: 150, y: 350 }));
+export const handle_two = writable(<Coord>({ x: 350, y: 150 }));
+export const scaled_handle_one = derived([handle_one, chart_size], ([$handle_one, $chart_size]) => <Coord>({ x: $handle_one.x / $chart_size, y: $handle_one.y / $chart_size }));
+export const scaled_handle_two = derived([handle_two, chart_size], ([$handle_two, $chart_size]) => <Coord>({ x: $handle_two.x / $chart_size, y: $handle_two.y / $chart_size }));

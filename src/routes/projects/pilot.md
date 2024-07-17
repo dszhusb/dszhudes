@@ -1,5 +1,5 @@
 ---
-title: pilot
+title: pilot trucking simulator
 thumbnail: pilotNail
 role: Design, Hardware Development, Production
 collaborators: Landing Gear

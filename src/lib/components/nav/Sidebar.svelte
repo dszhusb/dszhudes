@@ -2,7 +2,7 @@
 	import { onMount } from "svelte";
 	import { gsap } from "gsap";
 	import { page } from "$app/stores";
-	import { hColors } from "$lib/store";
+	import { hColors, hIcon, shells} from "$lib/store";
 	import NavIcon from "$lib/components/nav/NavIcon.svelte";
 
 	let physical: GSAPTween;
@@ -122,6 +122,16 @@
 			>
 		</div>
 	</div>
+	<a href="/object_gallery" class="experiment">
+		<p
+			style:color={$hColors.text}
+			style:background-color={$hColors.f2}
+			style:border-color={$hColors.text}
+			class="p-2 border-b-[1px] w-full"
+		>
+			My Ceramics Collection
+		</p>
+	</a>
 	<a href="/easing" class="experiment">
 		<p
 			style:color={$hColors.text}

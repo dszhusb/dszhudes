@@ -31,7 +31,7 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
     materials: {};
   };
 
-  const gltf = useGltf<GLTFResult>("/src/lib/assets/ceramics/flowerCup.glb");
+  const gltf = useGltf<GLTFResult>("/flowerCup.glb");
   const component = forwardEventHandlers();
 
   const scale = createTransition<Mesh>((ref) => {

@@ -1,17 +1,13 @@
 <script lang="ts">
     import { hColors } from "$lib/store";
-    import Grad from '$lib/assets/icons/grad.webp'
+    import Grad from "$lib/assets/icons/grad.webp";
 </script>
 
 <main class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full">
     <div
         class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-stone-200"
     >
-        <img
-            class="w-full"
-            src={Grad}
-            alt="portrait"
-        />
+        <img class="w-full" src={Grad} alt="portrait" />
         <img
             class="w-full contrast-50 grayscale hidden lg:inline"
             src={Grad}
@@ -52,8 +48,8 @@
         </p>
         <p class="uppercase text-xl text-stone-800">
             <b
-                >Send me an email to see what I'm currently working on bringing
-                to life!</b
+                >Send me an email to dszhu.design@gmail.com to see what I'm
+                currently working on bringing to life!</b
             >
         </p>
     </div>
@@ -80,11 +76,10 @@
             on:click={() => {}}>Github</a
         >
         <a
-            href="mailto: dszhu.design@gmail.com"
-            target="_blank"
+            href="mailto:dszhu.design@gmail.com"
+            target="_top"
             style:background-color={$hColors.f3}
-            class="button text-stone-800"
-            on:click={() => {}}>Email</a
+            class="button text-stone-800">Email</a
         >
         <div />
     </div>

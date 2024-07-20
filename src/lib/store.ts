@@ -2,12 +2,20 @@ import { writable, derived } from 'svelte/store';
 import cloverCupImage from "$lib/assets/ceramics/cloverCup.webp"
 import flowerCupImage from '$lib/assets/ceramics/flowerCup.webp'
 import peaPotImage from "$lib/assets/ceramics/peaPot.webp"
+import mottledPot from "$lib/assets/ceramics/mottledPot.webp"
+import redCup from "$lib/assets/ceramics/redCup.webp"
+import triToneHolder from '$lib/assets/ceramics/triToneHolder.webp'
+import paleLotus from "$lib/assets/ceramics/paleLotus.webp"
 
 export const cIndex = writable(0);
 export const ceramicInfo = [
-    { img: cloverCupImage, blurb: "This is a tea cup I received as a gift. \nI'm not sure exactly what the type and origin of the glaze is. It appears to be related to Jian Zhan or Tenmoku Glaze types. \nI love the flower like shape and the delicate almost brain-like patterns on the surface." },
-    { img: flowerCupImage, blurb: "This is a tea cup I received as a gift. \nI'm not sure exactly what the type and origin of the glaze is. It appears to be related to Jian Zhan or Tenmoku Glaze types. \nThis is one my favorite cups that I own due to its coloration and how the profile of the inside curves away from the outside profile." },
-    { img: peaPotImage, blurb: "This is a single person teapot I received as a gift. \nWhile I am not particularly fond of white clay, I love the delicate brushwork on the peacock and the way it pours." }
+    { img: cloverCupImage, blurb: ["This is a tea cup I received as a gift.", "I'm not sure exactly what the type and origin of the glaze is. It appears to be related to Jian Zhan or Tenmoku Glaze types.", "I love the flower like shape and the delicate almost brain-like patterns on the surface."] },
+    { img: flowerCupImage, blurb: ["This is a tea cup I received as a gift.", "I'm not sure exactly what the type and origin of the glaze is. It appears to be related to Jian Zhan or Tenmoku Glaze types.", "This is one my favorite cups that I own due to its coloration and how the profile of the inside curves away from the outside profile."] },
+    { img: peaPotImage, blurb: ["This is a single person teapot I received as a gift.", "While I am not particularly fond of white clay, I love the delicate brushwork on the peacock and the way it pours."] },
+    { img: mottledPot, blurb: ["This is a teapot I made during my senior year in college. I attempted to replicate the form of a tokoname kyusu teapot while adding slight changes in specific details and glaze.", "As this was one of my first attempts, it does not pour particularly well. As a result, I've been using it as a ornamental work instead."] },
+    { img: redCup, blurb: ["This is a tea cup I received as a gift.", "I'm not sure exactly what the type and origin of the glaze is. It appears to be related to Jian Zhan or Tenmoku Glaze types.", "I particularly like the shape and the legibility of its colors."] },
+    { img: triToneHolder, blurb: ["This is a small platter I created in my senior year of college.", "I was experimenting with overlapping two glazes and I really liked how these two in particular combined."] },
+    { img: paleLotus, blurb: ["This is a tea cup I received as a gift.", "I'm a fan of the petal-like shape and the pale blue green glaze."] },
 ]
 
 //Color Variables

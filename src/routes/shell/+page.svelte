@@ -1,7 +1,7 @@
 <script lang="ts">
     // import P5 from "p5-svelte";
     import p5 from 'p5'
-    import init, { p5SVG } from 'p5.js-svg'
+    // import init, { p5SVG } from 'p5.js-svg'
     import { Shell } from '$lib/components/shell/shell'
 
     init(p5)

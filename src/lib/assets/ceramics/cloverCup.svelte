@@ -42,7 +42,7 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
         ref.scale.set(t, t, t);
       },
       easing: cubicOut,
-      duration: 200,
+      duration: 100,
     };
   });
 </script>

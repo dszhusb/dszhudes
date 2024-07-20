@@ -6,7 +6,7 @@
     import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
     let moreInfo = false;
-    const limit = 2;
+    const limit = 6;
 
     let info = ceramicInfo[$cIndex];
     cIndex.subscribe((v) => {
@@ -62,7 +62,11 @@
                     src={info.img}
                     alt="img"
                 />
-                <p class="max-w-64 p-4">{info.blurb}</p>
+                <div class="flex flex-col gap-4 max-w-64 p-2">
+                    {#each info.blurb as b}
+                        <p>{b}</p>
+                    {/each}
+                </div>
             </div>
         {/if}
     </div>

@@ -1,13 +1,13 @@
 <script lang="ts">
     import { gsap } from "gsap";
     import { onMount } from "svelte";
-    import Grad from '$lib/assets/icons/grad.webp'
+    import headshot from '$lib/assets/icons/headshot.webp'
 </script>
 
 <div class="relative px-8 pb-8 pt-4">
     <img
         class="fade grayscale hover:grayscale-0 w-full border-solid border-[1px] border-stone-200"
-        src={Grad}
+        src={headshot}
         alt="icon"
     />
 </div>

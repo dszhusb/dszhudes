@@ -1,17 +1,16 @@
 <script lang="ts">
     import { T, useThrelte } from "@threlte/core";
-    import { Suspense, Grid } from "@threlte/extras";
-    import { transitions } from "@threlte/extras";
+    import { Suspense, Environment, transitions} from "@threlte/extras";
     import { cIndex } from "$lib/store";
     import Camera from "./Camera.svelte";
 
     import CloverCup from "$lib/assets/ceramics/cloverCup.svelte";
     import FlowerCup from "$lib/assets/ceramics/FlowerCup.svelte";
     import PeaPot from "$lib/assets/ceramics/PeaPot.svelte";
-    import MottledPot from "$lib/assets/ceramics/mottledPot.svelte"
-    import RedCup from "$lib/assets/ceramics/redCup.svelte"
-    import TriToneHolder from "$lib/assets/ceramics/triToneHolder.svelte"
-    import PaleLotus from "$lib/assets/ceramics/paleLotus.svelte"
+    import MottledPot from "$lib/assets/ceramics/mottledPot.svelte";
+    import RedCup from "$lib/assets/ceramics/redCup.svelte";
+    import TriToneHolder from "$lib/assets/ceramics/triToneHolder.svelte";
+    import PaleLotus from "$lib/assets/ceramics/paleLotus.svelte";
 
     const { renderer, invalidate } = useThrelte();
     $: {
@@ -21,7 +20,6 @@
 
     let index = $cIndex;
     cIndex.subscribe((v) => {
-        console.log(v);
         index = v;
     });
 
@@ -54,4 +52,5 @@
     {/if}
 </Suspense>
 <T.AmbientLight intensity={1} />
-<T.DirectionalLight position={[1, 2, 5]} />
+<T.DirectionalLight position={[1, 5, 2]}  intensity={6} />
+<!-- <Environment path="/" files="aristea_wreck_puresky_2k.hdr" isBackground={true} format="hdr" /> -->

@@ -2,8 +2,8 @@
     import { hColors, cIndex, ceramicInfo } from "$lib/store";
     import { Canvas, extend } from "@threlte/core";
     import Scene from "./Scene.svelte";
-    import { Sky } from "@threlte/extras";
     import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+    import { LinearSRGBColorSpace } from 'three'
 
     let moreInfo = false;
     const limit = 6;
@@ -20,15 +20,7 @@
 
 <div class="relative w-full h-full">
     <div id="int-target" class="absolute w-full h-full left-0 top-0">
-        <Canvas>
-            <Sky
-                elevation={30}
-                setEnvironment={true}
-                turbidity={4.78}
-                rayleigh={0.3}
-                mieCoefficient={0.002}
-                mieDirectionalG={0.86}
-            />
+        <Canvas colorSpace={ LinearSRGBColorSpace } >
             <Scene />
         </Canvas>
     </div>

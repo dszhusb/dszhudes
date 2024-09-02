@@ -1,16 +1,17 @@
 <script lang="ts">
     import { hColors } from "$lib/store";
-    import Grad from "$lib/assets/icons/grad.webp";
+    import Headshot from "$lib/assets/icons/headshot.webp";
+    import resume from "$lib/assets/DanielZhu.pdf";
 </script>
 
 <main class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full">
     <div
         class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-stone-200"
     >
-        <img class="w-full" src={Grad} alt="portrait" />
+        <img class="w-full" src={Headshot} alt="portrait" />
         <img
             class="w-full contrast-50 grayscale hidden lg:inline"
-            src={Grad}
+            src={Headshot}
             alt="portrait"
         />
     </div>
@@ -58,7 +59,7 @@
     >
         <a
             class="button inside bg-stone-800 text-stone-50"
-            href="/src/lib/assets/DanielZhu.pdf"
+            href={resume}
             target="_blank">Resume</a
         >
         <a

@@ -63,7 +63,7 @@
                 class="arrow-up absolute -top-[13px] -translate-x-1/2 left-1/2"
             />
             <p style:color={$hColors.text} class="sideways uppercase">
-                Click Me
+                Click Me!
             </p>
         </div>
     {/if}

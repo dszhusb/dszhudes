@@ -47,12 +47,6 @@
             strengths is the ability to evaluate and learn the technical skills
             I need on the fly to bring the concepts I dream of to life.
         </p>
-        <p class="uppercase text-xl text-stone-800">
-            <b
-                >Send me an email to dszhu.design@gmail.com to see what I'm
-                currently working on bringing to life!</b
-            >
-        </p>
     </div>
     <div
         class="flex-initial lg:w-64 divide-y-[1px] divide-stone-800 bg-stone-200"
@@ -80,7 +74,7 @@
             href="mailto:dszhu.design@gmail.com"
             target="_top"
             style:background-color={$hColors.f3}
-            class="button text-stone-800">Email</a
+            class="button text-stone-800">dszhu.design@gmail.com</a
         >
         <div />
     </div>

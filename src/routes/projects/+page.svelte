@@ -40,10 +40,4 @@
         Check out my work below!
     </h2>
 </div>
-<div class="flex h-4 grayscale">
-    <div class="w-full h-full" style:background-color={$hColors.f2} />
-    <div class="w-full h-full" style:background-color={$hColors.f3} />
-    <div class="w-full h-full" style:background-color={$hColors.f2} />
-    <div class="w-full h-full" style:background-color={$hColors.f1} />
-</div>
 <Posts {data} />

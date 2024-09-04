@@ -5,17 +5,7 @@
 </script>
 
 <main class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full">
-    <div
-        class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-stone-200"
-    >
-        <img class="w-full" src={Headshot} alt="portrait" />
-        <img
-            class="w-full contrast-50 grayscale hidden lg:inline"
-            src={Headshot}
-            alt="portrait"
-        />
-    </div>
-    <div class="about flex-1 py-4 px-12">
+    <div class="about py-4 px-12">
         <h1 class="uppercase">Hi, I'm Daniel Zhu</h1>
         <p>
             I'm a newly graduated designer and creative technologist who studied
@@ -49,35 +39,41 @@
         </p>
     </div>
     <div
-        class="flex-initial lg:w-64 divide-y-[1px] divide-stone-800 bg-stone-200"
+        class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-stone-200"
     >
-        <a
-            class="button inside bg-stone-800 text-stone-50"
-            href={resume}
-            target="_blank">Resume</a
+        <img class="w-full" src={Headshot} alt="portrait" />
+        <div
+            class="flex-initial w-full divide-y-[1px] divide-stone-800 bg-stone-200"
         >
-        <a
-            href="http://www.linkedin.com/in/danielszhu"
-            target="_blank"
-            style:background-color={$hColors.f1}
-            class="button text-stone-800"
-            on:click={() => {}}>LinkedIn</a
-        >
-        <a
-            href="https://github.com/dszhusb"
-            target="_blank"
-            style:background-color={$hColors.f2}
-            class="button text-stone-800"
-            on:click={() => {}}>Github</a
-        >
-        <a
-            href="mailto:dszhu.design@gmail.com"
-            target="_top"
-            style:background-color={$hColors.f3}
-            class="button text-stone-800">dszhu.design@gmail.com</a
-        >
-        <div />
+            <a
+                class="button inside bg-stone-800 text-stone-50"
+                href={resume}
+                target="_blank">Resume</a
+            >
+            <a
+                href="http://www.linkedin.com/in/danielszhu"
+                target="_blank"
+                style:background-color={$hColors.f1}
+                class="button text-stone-800"
+                on:click={() => {}}>LinkedIn</a
+            >
+            <a
+                href="https://github.com/dszhusb"
+                target="_blank"
+                style:background-color={$hColors.f2}
+                class="button text-stone-800"
+                on:click={() => {}}>Github</a
+            >
+            <a
+                href="mailto:dszhu.design@gmail.com"
+                target="_top"
+                style:background-color={$hColors.f3}
+                class="button text-stone-800">dszhu.design@gmail.com</a
+            >
+            <div />
+        </div>
     </div>
+    <div class="flex-1 py-4 px-12"></div>
 </main>
 
 <style>

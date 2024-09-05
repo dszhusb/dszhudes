@@ -26,7 +26,7 @@ categories:
     const demo = "oXNYHTHYJD8"
 </script>
 
-# TOBI is an electronic organism that lives and breathes the electronic signals in the environment around it. The movement of TOBI's 3 “organs” each represent a type of electronic data: WiFi strength, bluetooth connections, and electromagnetic noise.
+# TOBI – a electronic organism that lives and breathes the electronic signals in the environment around it. The movement of TOBI's 3 “organs” each represent a type of electronic data: WiFi strength, bluetooth connections, and electromagnetic noise.
 
 <YoutubeEmbed url={demo} />
 

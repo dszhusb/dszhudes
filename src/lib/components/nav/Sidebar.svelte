@@ -2,8 +2,25 @@
 	import { onMount } from "svelte";
 	import { gsap } from "gsap";
 	import { page } from "$app/stores";
-	import { hColors, hIcon, shells } from "$lib/store";
+	import { tweened } from "svelte/motion";
+	import { hColors, colorSettings } from "$lib/store";
 	import NavIcon from "$lib/components/nav/NavIcon.svelte";
+
+	const cWork = tweened('#e7e5e4', colorSettings);
+	const cAbout = tweened('$#292524', colorSettings);
+	const c1 = tweened($hColors.f1, colorSettings);
+	const c2 = tweened($hColors.f2, colorSettings);
+	const c3 = tweened($hColors.f3, colorSettings);
+	const cText = tweened($hColors.text, colorSettings);
+
+	// const f1w = tweened('1rem')
+
+	hColors.subscribe((value) => {
+		c1.set(value.f1);
+		c2.set(value.f2);
+		c3.set(value.f3);
+		cText.set(value.text);
+	});
 
 	let physical: GSAPTween;
 	let digital: GSAPTween;
@@ -79,7 +96,7 @@
 				>
 					<div
 						class="fIndicator physical"
-						style:background-color={$hColors.f1}
+						style:background-color={$c1}
 					/>
 					<a href="/projects/category/physical">physical</a>
 				</button>
@@ -93,7 +110,7 @@
 				>
 					<div
 						class="fIndicator digital"
-						style:background-color={$hColors.f2}
+						style:background-color={$c2}
 					/>
 					<a href="/projects/category/digital">digital</a>
 				</button>
@@ -107,7 +124,7 @@
 				>
 					<div
 						class="fIndicator exploration"
-						style:background-color={$hColors.f3}
+						style:background-color={$c3}
 					/>
 					<a href="/projects/category/exploration">exploration</a>
 				</button>
@@ -125,12 +142,12 @@
 	<a
 		href="/object_gallery"
 		class="experiment"
-		style:text-decoration-color={$hColors.text}
+		style:text-decoration-color={$cText}
 	>
 		<p
-			style:color={$hColors.text}
-			style:background-color={$hColors.f2}
-			style:border-color={$hColors.text}
+			style:color={$cText}
+			style:background-color={$c2}
+			style:border-color={$cText}
 			class="p-2 border-b-[1px] w-full"
 		>
 			My Ceramics Collection
@@ -139,12 +156,12 @@
 	<a
 		href="/easing"
 		class="experiment"
-		style:text-decoration-color={$hColors.text}
+		style:text-decoration-color={$cText}
 	>
 		<p
-			style:color={$hColors.text}
-			style:background-color={$hColors.f3}
-			style:border-color={$hColors.text}
+			style:color={$cText}
+			style:background-color={$c3}
+			style:border-color={$cText}
 			class="p-2 border-b-[1px] w-full"
 		>
 			Easing Experiment

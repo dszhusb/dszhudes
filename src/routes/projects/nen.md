@@ -19,7 +19,7 @@ categories:
     const hero = p + 'restate'
 </script>
 
-# At Nen Creative I work as a designer and developer contractor on websites and branding for startups.
+# Nen Creative – I work as a designer and developer contractor on websites and branding for startups.
 
 At Nen, I design low and high fidelity UI/UX wireframes for web with Figma. I implement the designs through Webflow, specializing in features requiring custom code. Acting both as designer and developer, I am able to ensure responsive design choices through iterative testing. I also translate engineering requirements for clients with expanded technical needs and feature requests.
 

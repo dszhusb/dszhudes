@@ -20,7 +20,7 @@ categories:
     const demo = "4FG9xUcryY8"
 </script>
 
-# The Pilot Semi-Truck Simulator was an immersive experience built for the 2024 Berkshire Hathaway Shareholder Conference. We converted a real semi-truck into a realistic trucking simulator game.
+# The Pilot Semi-Truck Simulator – an immersive experience built for the 2024 Berkshire Hathaway Shareholder Conference. We converted a real semi-truck into a realistic trucking simulator game.
 
 <YoutubeEmbed url={demo} />
 

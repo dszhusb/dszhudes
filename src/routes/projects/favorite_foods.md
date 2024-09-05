@@ -25,7 +25,7 @@ categories:
     const bottom = p + "ffbtmBottom"
 </script>
 
-# Favorite Foods by the Months is a recipe resource and data exploration website. Drawing from Google Trends and NYT APIs, it displays the 'trendiest' foods in each month.
+# Favorite Foods by the Months – a recipe resource and data exploration website. Drawing from Google Trends and NYT APIs, it displays the 'trendiest' foods in each month.
 
 <HeroImage link={hero} description="Favorite Foods by the Months Landing Page" url="https://dszhusb.github.io/CDT-Sandbox/" />
 

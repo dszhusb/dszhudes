@@ -1,7 +1,19 @@
 <script lang="ts">
-    import { hColors } from "$lib/store";
+    import { tweened } from "svelte/motion";
+    import { hColors, colorSettings } from "$lib/store";
     import Headshot from "$lib/assets/icons/headshot.webp";
     import resume from "$lib/assets/DanielZhu.pdf";
+
+    const c1 = tweened($hColors.f1, colorSettings);
+    const c2 = tweened($hColors.f2, colorSettings);
+    const c3 = tweened($hColors.f3, colorSettings);
+    const cText = tweened($hColors.text, colorSettings);
+    hColors.subscribe((value) => {
+        c1.set(value.f1);
+        c2.set(value.f2);
+        c3.set(value.f3);
+        cText.set(value.text);
+    });
 </script>
 
 <main class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full">
@@ -10,14 +22,14 @@
         <p>
             I'm a newly graduated designer and creative technologist who studied
             <a
-                style:color={$hColors.text}
+                style:color={$cText}
                 href="https://design.cmu.edu/content/environments-1">Design</a
             >,
-            <a style:color={$hColors.text} href="https://www.hcii.cmu.edu/"
+            <a style:color={$cText} href="https://www.hcii.cmu.edu/"
                 >HCI</a
             >, and
             <a
-                style:color={$hColors.text}
+                style:color={$cText}
                 href="https://ideate.cmu.edu/undergraduate-programs/physical-computing/"
                 >Physical Computing</a
             > at Carnegie Mellon University.
@@ -53,21 +65,21 @@
             <a
                 href="http://www.linkedin.com/in/danielszhu"
                 target="_blank"
-                style:background-color={$hColors.f1}
+                style:background-color={$c1}
                 class="button text-stone-800"
                 on:click={() => {}}>LinkedIn</a
             >
             <a
                 href="https://github.com/dszhusb"
                 target="_blank"
-                style:background-color={$hColors.f2}
+                style:background-color={$c2}
                 class="button text-stone-800"
                 on:click={() => {}}>Github</a
             >
             <a
                 href="mailto:dszhu.design@gmail.com"
                 target="_top"
-                style:background-color={$hColors.f3}
+                style:background-color={$c3}
                 class="button text-stone-800">dszhu.design@gmail.com</a
             >
             <div />

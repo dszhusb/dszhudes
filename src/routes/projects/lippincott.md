@@ -13,7 +13,7 @@ categories:
 
 ---
 
-### At Lippincott, I worked as a jack of all trades Creative Technologist: Unity VR Development, AI and Web development, as well as UI/UX and motion design. While the details of the projects are under NDA, a broad description follows below.
+### Lippincott – I worked as a jack of all trades Creative Technologist: Unity VR Development, AI and Web development, as well as UI/UX and motion design. While the details of the projects are under NDA, a broad description follows below.
 
 ## VR BRANDBOOK
 

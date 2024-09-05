@@ -20,6 +20,6 @@ categories:
     const url = "JCsBg1sU5OY"
 </script>
 
-# Kinetic Fabrics creates a private alcove in a public space In crowded public spaces, we crave pockets of calm and isolation to grab a moment of peace. This project explores one way of carving out a space to rest through a screen that isolates sound and light with a timed curtain that moves at its own pace.
+# Kinetic Fabrics – a private alcove in a public space. In a crowded public space, we crave pockets of calm and isolation to grab a moment of peace. This project explores one way of carving out a space to rest through a screen that isolates sound and light with a timed curtain that moves at its own pace.
 
 <YoutubeEmbed url={url} />

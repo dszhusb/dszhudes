@@ -1,4 +1,5 @@
 import { writable, derived } from 'svelte/store';
+import { interpolateLab } from "d3-interpolate";
 import cloverCupImage from "$lib/assets/ceramics/cloverCup.webp"
 import flowerCupImage from '$lib/assets/ceramics/flowerCup.webp'
 import peaPotImage from "$lib/assets/ceramics/peaPot.webp"
@@ -21,6 +22,7 @@ export const ceramicInfo = [
 //Color Variables
 export const hIcon = writable(0);
 export const hColors = derived(hIcon, $hIcon => shells[$hIcon]);
+export const colorSettings = { duration: 300, interpolate: interpolateLab }
 
 //Shell Values
 export const shells = [

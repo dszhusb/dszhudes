@@ -24,7 +24,7 @@ categories:
     const chart = p + "chart"
 </script>
 
-# SOMA is a inflatable puppet that motions and gestures based on speech. As you talk to SOMA, it manifests the cadence and emotion of your speech in real time. SOMA is an exploration into how gestures and body language communicate.
+# SOMA – a inflatable puppet that motions and gestures based on speech. As you talk to SOMA, it manifests the cadence and emotion of your speech in real time. SOMA is an exploration into how gestures and body language communicate.
 
 ## PROJECT OVERVIEW
 

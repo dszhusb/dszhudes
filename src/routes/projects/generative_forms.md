@@ -26,7 +26,7 @@ categories:
     const buffer = p + 'buffer'
 </script>
 
-# Organic Form, Artificial Rules is an ongoing exploration of generative design and making. Initially inspired by the book [Theoretical Morphology](https://cup.columbia.edu/book/theoretical-morphology/9780231106177) by George R. McGhee, I have been iterating on the concept of turning the formulas described in research papers into interactive web experiences.
+# Organic Form, Artificial Rules – an ongoing exploration of generative design and making. Initially inspired by the book [Theoretical Morphology](https://cup.columbia.edu/book/theoretical-morphology/9780231106177) by George R. McGhee, I have been iterating on the concept of turning the formulas described in research papers into interactive web experiences.
 
 <HeroImage link={genmorphhero} description="WIP Generative Morphology Website" url="http://generative-morphology.vercel.app"/>
 

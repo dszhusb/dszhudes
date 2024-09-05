@@ -23,6 +23,7 @@ export const ceramicInfo = [
 export const hIcon = writable(0);
 export const hColors = derived(hIcon, $hIcon => shells[$hIcon]);
 export const colorSettings = { duration: 300, interpolate: interpolateLab }
+export const colorSettingsSlow = { duration: 200, interpolate: interpolateLab }
 
 //Shell Values
 export const shells = [

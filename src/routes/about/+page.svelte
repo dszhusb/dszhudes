@@ -16,7 +16,7 @@
     });
 </script>
 
-<main class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full">
+<main class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full w-full">
     <div class="about py-4 px-12">
         <h1 class="uppercase">Hi, I'm Daniel Zhu</h1>
         <p>
@@ -98,9 +98,9 @@
     .about a {
         @apply font-semibold;
     }
-    b {
+    /* b {
         @apply font-bold;
-    }
+    } */
     .button {
         @apply w-full flex place-content-center uppercase p-4;
     }

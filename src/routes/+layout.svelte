@@ -18,16 +18,11 @@
     import "../app.css";
     import { page } from "$app/stores";
     import { hIcon } from "$lib/store";
+    import { fly } from "svelte/transition";
+    import { cubicOut, circOut } from "svelte/easing";
     import TopNav from "$lib/components/nav/TopNav.svelte";
     import Sidebar from "$lib/components/nav/Sidebar.svelte";
     import SideDisp from "$lib/components/nav/SideDisp.svelte";
-
-    import { spring } from "svelte/motion";
-    const mouseCoords = spring({ x: 0, y: 0 });
-    // mouseCoords.stiffness = 90;
-    const onMouseMove = (event: MouseEvent) => {
-        $mouseCoords = { x: event.x, y: event.y };
-    };
 </script>
 
 <svelte:head>
@@ -38,9 +33,7 @@
     />
 </svelte:head>
 
-<svelte:window on:mousemove={onMouseMove} />
-
-<main class="font-mono flex flex-col md:flex-row">
+<main class="font-mono flex flex-col md:flex-row relative scroll-smooth">
     <div
         class="block md:hidden"
         aria-current={$page.url.pathname === "/" ? "page" : undefined}
@@ -54,18 +47,11 @@
         <Sidebar />
         <SideDisp />
     </div>
-    <div class="w-full">
-        <slot></slot>
-    </div>
-    <!-- <div class="fixed top-0 left-0 w-screen h-screen pointer-events-none">
-        <enhanced:img
-            class="cursor"
-            style:--x={`${$mouseCoords.x}px`}
-            style:--y={`${$mouseCoords.y}px`}
-            src={images[`/src/lib/assets/iconShells/${$hIcon}.webp`]}
-            alt="cursor"
-        />
-    </div> -->
+    {#key $page.url.pathname}
+        <div in:fly={{ duration: 300, opacity: 0.8, y: -200, easing: circOut }}>
+            <slot />
+        </div>
+    {/key}
 </main>
 
 <style>
@@ -73,7 +59,6 @@
         @apply hidden;
     }
     /* .cursor {
-        transform: translate(-50%, -50%) translate(var(--x, 0px), var(--y, 0px));
-        @apply absolute w-24 h-24 z-50 grayscale;
+        @apply absolute w-16 h-16 z-50 pointer-events-none -translate-x-1/2 -translate-y-1/2 saturate-150;
     } */
 </style>

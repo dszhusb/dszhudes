@@ -1,8 +1,8 @@
 <script>
-    import { hIcon, hColors } from "$lib/store";
+    import { hColors } from "$lib/store";
 </script>
 
-<nav class="w-full border-b-[1px] border-stone-800">
+<nav class="w-full border-b-[1px] border-stone-800 bg-white z-[100]">
     <ul class="p-4 pb-10 w-full">
         <li class="float-left px-4">
             <a href="/projects">DANIEL ZHU</a>

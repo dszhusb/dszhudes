@@ -1,6 +1,6 @@
 <script lang="ts">
     import { T, useThrelte } from "@threlte/core";
-    import { Suspense, Environment, transitions} from "@threlte/extras";
+    import { Suspense, Environment, transitions } from "@threlte/extras";
     import { cIndex } from "$lib/store";
     import Camera from "./Camera.svelte";
 
@@ -51,6 +51,5 @@
         <PaleLotus />
     {/if}
 </Suspense>
-<T.AmbientLight intensity={1} />
-<T.DirectionalLight position={[1, 5, 2]}  intensity={6} />
-<!-- <Environment path="/" files="aristea_wreck_puresky_2k.hdr" isBackground={true} format="hdr" /> -->
+<T.AmbientLight intensity={6} color="#fffceb" />
+<T.DirectionalLight position={[1, 5, 2]} intensity={1} />

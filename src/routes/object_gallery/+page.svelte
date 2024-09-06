@@ -3,7 +3,7 @@
     import { Canvas, extend } from "@threlte/core";
     import Scene from "./Scene.svelte";
     import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-    import { LinearSRGBColorSpace } from 'three'
+    import { LinearSRGBColorSpace } from "three";
 
     let moreInfo = false;
     const limit = 6;
@@ -18,9 +18,9 @@
     });
 </script>
 
-<div class="relative w-full h-full">
+<div class="relative w-full h-full bg-stone-950">
     <div id="int-target" class="absolute w-full h-full left-0 top-0">
-        <Canvas colorSpace={ LinearSRGBColorSpace } >
+        <Canvas colorSpace={LinearSRGBColorSpace}>
             <Scene />
         </Canvas>
     </div>
@@ -68,7 +68,13 @@
         <button
             on:click={() => {
                 console.log("clicked");
-                cIndex.update((n) => Math.max(n - 1, 0));
+                cIndex.update((n) => {
+                    let nn = n - 1;
+                    if (nn < 0) {
+                        nn = limit;
+                    }
+                    return nn;
+                });
             }}
             style:background-color={$hColors.f1}
             style:border-color={$hColors.text}
@@ -77,7 +83,7 @@
         >
         <button
             on:click={() => {
-                cIndex.update((n) => Math.min(n + 1, limit));
+                cIndex.update((n) => (n + 1) % limit);
             }}
             style:background-color={$hColors.f1}
             style:border-color={$hColors.text}

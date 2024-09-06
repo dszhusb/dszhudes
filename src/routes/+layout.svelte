@@ -48,7 +48,10 @@
         <SideDisp />
     </div>
     {#key $page.url.pathname}
-        <div in:fly={{ duration: 300, opacity: 0.8, y: -200, easing: circOut }}>
+        <div
+            in:fly={{ duration: 300, opacity: 0.8, y: -200, easing: circOut }}
+            class="w-full"
+        >
             <slot />
         </div>
     {/key}

@@ -24,7 +24,7 @@
     );
 </script>
 
-<main class="flex flex-col w-full">
+<main class="flex flex-col">
     <div class="grid place-content-center bg-stone-950">
         <div
             class="relative border-stone-800 border-[1px] overflow-hidden bg-stone-100 w-fit h-fit"

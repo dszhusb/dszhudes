@@ -46,7 +46,7 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/static/triT
   const gltf = useGltf<GLTFResult>("/triToneHolder.glb");
   const component = forwardEventHandlers();
 
-  $: console.log($gltf)
+  $: console.log($gltf);
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
@@ -57,11 +57,10 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/static/triT
       in={scale}
       out={scale}
       geometry={gltf.nodes.mesh_0.geometry}
+      material={gltf.nodes.mesh_0.material}
       scale={5}
       position={[0, -0.85, 0]}
-    >
-      <T.MeshPhysicalMaterial clearcoat={1} />
-    </T.Mesh>
+    />
   {:catch error}
     <slot name="error" {error} />
   {/await}

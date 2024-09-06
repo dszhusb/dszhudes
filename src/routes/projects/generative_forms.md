@@ -58,7 +58,7 @@ Following my exploration with voronoi patterns, I decided to focus on shells. I 
 
 To create a physical form, I created a 3D model in Blender to print. With this 3D print, I created a series of negatives with silicone to produce moulds for material exploration. To complement the form and origin of the shell, I settled on using concrete to recreate the shell.
 
-<ImageGrid links={gifs} description="Voronoi Patterns Exploration" type="gif"/>
+<!-- <ImageGrid links={gifs} description="Voronoi Patterns Exploration" type="gif"/> -->
 
 ## REFLECTION
 

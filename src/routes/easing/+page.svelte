@@ -1,6 +1,8 @@
 <script lang="ts">
     import { derived } from "svelte/store";
     import { hColors } from "$lib/store";
+    import { fly } from "svelte/transition";
+    import { circOut } from "svelte/easing";
     import { plotCubic, cubicRawText } from "./cubicBezier";
     import { CodeBlock } from "svhighlight";
     import {
@@ -24,7 +26,10 @@
     );
 </script>
 
-<main class="flex flex-col">
+<main
+    class="flex flex-col"
+    in:fly={{ duration: 500, opacity: 0.8, x: 200, easing: circOut }}
+>
     <div class="grid place-content-center bg-stone-950">
         <div
             class="relative border-stone-800 border-[1px] overflow-hidden bg-stone-100 w-fit h-fit"

@@ -30,7 +30,7 @@ categories:
 
 # DAISY – The guitar pedal for casual listening. Filling the niche between a listening device and a full electronic instrument, Daisy allows listeners to personalize their music listening in an interactive way.
 
-<YoutubeEmbed url={demo} />
+<YoutubeEmbed url={render} />
 
 ## PROJECT OVERVIEW
 
@@ -54,7 +54,7 @@ To achieve this level of refinement, we decided to stick to a simple concept and
 
 After settling on our general concept, I immediately began research on the tools we would need to bring it to life. The first and most important component was the microcontroller that would be doing all the audio processing.Electrosmith's Daisy Board, a microcontroller that can run MAX MSP patches quickly became the most obvious choice. At this time, MAX MSP was an attractive option to shore up my limited C, it uses a visual programming system that I could use to quickly mock up effects. Choosing MAX MSP to create the effects was key to being able to iterate quickly and loosely with a smaller margin for error during this project. If we are to do a second iteration, I would love to try using C to create the effects from scratch and to also save some of the logic headache that comes with adding additional parameters to MSP patches.
 
-<YoutubeEmbed url={render} />
+<YoutubeEmbed url={demo} />
 
 As I was exploring the software side in MSP, I was also working on the hardware in parallel. We quickly settled on a set of inputs and outputs both in terms of controls but also with aux in/out power options and so on. We decided on a set of inputs that balanced the modern trend toward bluetooth and traditional aux in/out. Users can stream music through aux or bluetooth and use the internal speakers or an aux out port. With this base, I prototyped with basic components on a breadboard but as the project progressed, I worked with Joseph to find components with the most satisfying haptic feedback that would fit the frame we would be mounting them into. I also worked with him to decide the mechanical interfaces and electronic components.
 

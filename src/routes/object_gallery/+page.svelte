@@ -1,5 +1,7 @@
 <script land="ts">
     import { hColors, cIndex, ceramicInfo } from "$lib/store";
+    import { fly } from "svelte/transition";
+    import { circOut } from "svelte/easing";
     import { Canvas, extend } from "@threlte/core";
     import Scene from "./Scene.svelte";
     import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
@@ -18,7 +20,10 @@
     });
 </script>
 
-<div class="relative w-full h-full bg-stone-950">
+<div
+    class="relative w-full h-full bg-stone-950"
+    in:fly={{ duration: 400, y: 100, easing: circOut }}
+>
     <div id="int-target" class="absolute w-full h-full left-0 top-0">
         <Canvas colorSpace={LinearSRGBColorSpace}>
             <Scene />

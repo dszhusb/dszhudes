@@ -16,11 +16,13 @@
 </script>
 
 <script>
+    import { fly } from "svelte/transition";
+    import { circOut } from "svelte/easing";
     import { hColors } from "$lib/store";
     export let data;
 </script>
 
-<div>
+<div in:fly={{ duration: 500, opacity: 0.8, y: 50, easing: circOut }}>
     <ul
         class="w-full grid grid-cols-1 md:grid-cols-2 divide-x-[1px] divide-y-[1px] divide-stone-800"
     >

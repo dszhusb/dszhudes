@@ -30,7 +30,5 @@
         Hi, I'm Daniel – designer, developer, and maker building digital and
         physical experiences.
     </h1>
-    <h2 class="normal-case" style:color={$c1}>
-        Check out my work below!
-    </h2>
+    <h2 class="normal-case" style:color={$c1}>Check out my work below!</h2>
 </div>

@@ -1,16 +1,18 @@
 <!-- Work Page -->
 <script context="module" lang="ts">
-    import type { Picture } from 'vite-imagetools';
-    const modules : Record<string, {default: Picture}> = import.meta.glob(
-		'$lib/assets/iconShells/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}',
-		{
-			eager: true,
-			query: {
-				enhanced: true
-			}
-		}
-	)
-    const images = Object.fromEntries(Object.entries(modules).map(x => [x[0], x[1].default]));
+    import type { Picture } from "vite-imagetools";
+    const modules: Record<string, { default: Picture }> = import.meta.glob(
+        "$lib/assets/iconShells/*.{avif,gif,heif,jpeg,jpg,png,tiff,webp,svg}",
+        {
+            eager: true,
+            query: {
+                enhanced: true,
+            },
+        },
+    );
+    const images = Object.fromEntries(
+        Object.entries(modules).map((x) => [x[0], x[1].default]),
+    );
 </script>
 
 <script lang="ts">
@@ -23,9 +25,9 @@
     }
 
     const shells: Shell[] = [];
-    for (let i=0; i<50; i++) {
+    for (let i = 0; i < 50; i++) {
         shells.push({
-            id: images[`/src/lib/assets/iconShells/${i%23}.webp`],
+            id: images[`/src/lib/assets/iconShells/${i % 23}.webp`],
             size: Math.random() * 2 + 10,
         });
     }
@@ -52,9 +54,12 @@
     });
 </script>
 
-<main class="relative w-screen h-screen overflow-hidden bg-white">
+<main
+    class="relative w-screen h-screen overflow-hidden bg-white"
+>
     {#each shells as s}
-        <enhanced:img src={s.id}
+        <enhanced:img
+            src={s.id}
             style:width={`${s.size}rem`}
             class="shell"
             alt="shell"

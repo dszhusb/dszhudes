@@ -16,6 +16,8 @@
 
 <script lang="ts">
 	import Footer from "$lib/components/article/Footer.svelte";
+	import { fly } from "svelte/transition";
+	import { circOut } from "svelte/easing";
 	import { hColors } from "$lib/store";
 
 	export let data;
@@ -31,7 +33,7 @@
 	} = data;
 </script>
 
-<article>
+<article in:fly={{ duration: 300, opacity: 0.8, y: 200, easing: circOut }}>
 	{#if data.priority != 4}
 		<div
 			class="flex flex-col md:flex-row items-stretch border-stone-800 border-b-[1px] mb-16"

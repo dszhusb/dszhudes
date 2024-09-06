@@ -1,6 +1,8 @@
 <script lang="ts">
     import { tweened } from "svelte/motion";
     import { hColors, colorSettings } from "$lib/store";
+    import { fly } from "svelte/transition";
+    import { circOut } from "svelte/easing";
     import Headshot from "$lib/assets/icons/headshot.webp";
     import resume from "$lib/assets/DanielZhu.pdf";
 
@@ -16,18 +18,20 @@
     });
 </script>
 
-<main class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full w-full">
+<main
+    class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full w-full"
+    in:fly={{ duration: 300, opacity: 0.8, x: 200, easing: circOut }}
+>
     <div class="about py-4 px-12">
         <h1 class="uppercase">Hi, I'm Daniel Zhu</h1>
         <p>
-            I'm a newly graduated designer and creative technologist who studied
+            I'm a designer and creative technologist hailing from
             <a
                 style:color={$cText}
                 href="https://design.cmu.edu/content/environments-1">Design</a
             >,
-            <a style:color={$cText} href="https://www.hcii.cmu.edu/"
-                >HCI</a
-            >, and
+            <a style:color={$cText} href="https://www.hcii.cmu.edu/">HCI</a>,
+            and
             <a
                 style:color={$cText}
                 href="https://ideate.cmu.edu/undergraduate-programs/physical-computing/"
@@ -49,13 +53,18 @@
             strengths is the ability to evaluate and learn the technical skills
             I need on the fly to bring the concepts I dream of to life.
         </p>
+        <p>
+            Send me an email if you'd like to work together!
+        </p>
     </div>
     <div
         class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-stone-200"
     >
         <img class="w-full" src={Headshot} alt="portrait" />
+    </div>
+    <div class="flex-1">
         <div
-            class="flex-initial w-full divide-y-[1px] divide-stone-800 bg-stone-200"
+            class="w-full divide-y-[1px] divide-stone-800 bg-stone-200"
         >
             <a
                 class="button inside bg-stone-800 text-stone-50"
@@ -85,7 +94,6 @@
             <div />
         </div>
     </div>
-    <div class="flex-1 py-4 px-12"></div>
 </main>
 
 <style>

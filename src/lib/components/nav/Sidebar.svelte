@@ -44,7 +44,9 @@
 	<div class="button mt-4">
 		<a href="/">daniel zhu</a>
 	</div>
-	<NavIcon />
+	<a href="/about" class="navA">
+		<NavIcon />
+	</a>
 	<div class="bg-stone-200">
 		<button
 			class="button border"
@@ -165,6 +167,11 @@
 	a {
 		@apply w-full p-4 uppercase text-center z-50;
 	}
+
+	.navA {
+		@apply p-0 m-0
+	}
+
 	a[aria-current="page"] {
 		@apply text-white;
 	}

@@ -18,8 +18,6 @@
     import "../app.css";
     import { page } from "$app/stores";
     import { hIcon } from "$lib/store";
-    import { fly } from "svelte/transition";
-    import { cubicOut, circOut } from "svelte/easing";
     import TopNav from "$lib/components/nav/TopNav.svelte";
     import Sidebar from "$lib/components/nav/Sidebar.svelte";
     import SideDisp from "$lib/components/nav/SideDisp.svelte";
@@ -47,14 +45,9 @@
         <Sidebar />
         <SideDisp />
     </div>
-    {#key $page.url.pathname}
-        <div
-            in:fly={{ duration: 300, opacity: 0.8, y: -200, easing: circOut }}
-            class="w-full"
-        >
-            <slot />
-        </div>
-    {/key}
+    <div class="w-full">
+        <slot />
+    </div>
 </main>
 
 <style>

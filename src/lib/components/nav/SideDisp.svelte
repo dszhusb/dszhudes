@@ -20,6 +20,7 @@
     import { hIcon, hColors } from "$lib/store";
     import { page } from "$app/stores";
     import Zhu from "$lib/components/nav/Zhu.svelte";
+    import Back from "$lib/components/nav/Back.svelte";
 
     let showFlag = true;
 
@@ -41,7 +42,11 @@
 </script>
 
 <main class="w-20 border-r-[1px] border-stone-800 pt-2 sticky top-0 h-screen">
-    <Zhu fill={$hColors.text} />
+    {#if $page.url.pathname === "/projects"}
+        <Zhu fill={$hColors.text} />
+    {:else}
+        <Back fill={$hColors.text} />
+    {/if}
     <div class="sideways mx-auto uppercase font-thin text-3xl pt-2">
         {$page.url.pathname.split("/").slice(-1)[0].replace("_", " ")}
     </div>

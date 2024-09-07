@@ -21,7 +21,8 @@
 </script>
 
 <div
-    class="relative w-full h-full bg-stone-950"
+    class="relative w-full h-full"
+    style:background-image={`linear-gradient(#ffffff, ${$hColors.f3})`}
     in:fly={{ duration: 400, y: 100, easing: circOut }}
 >
     <div id="int-target" class="absolute w-full h-full left-0 top-0">

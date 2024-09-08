@@ -17,6 +17,7 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
   import { createTransition } from "@threlte/extras";
   import type { Mesh } from "three";
   import { cubicOut } from "svelte/easing";
+  import Loading from "./loading.svelte";
 
   type $$Props = Props<THREE.Group>;
   type $$Events = Events<THREE.Group>;
@@ -50,7 +51,9 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
   {#await gltf}
-    <slot name="fallback" />
+    <slot name="fallback">
+      <Loading />
+    </slot>
   {:then gltf}
     <T.Mesh
       in={scale}

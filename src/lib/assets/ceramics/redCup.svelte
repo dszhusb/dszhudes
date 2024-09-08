@@ -17,6 +17,7 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/static/redC
     forwardEventHandlers,
   } from "@threlte/core";
   import { useGltf } from "@threlte/extras";
+  import Loading from "./loading.svelte";
 
   type $$Props = Props<THREE.Group>;
   type $$Events = Events<THREE.Group>;
@@ -49,7 +50,9 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/static/redC
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
   {#await gltf}
-    <slot name="fallback" />
+    <slot name="fallback">
+      <Loading />
+    </slot>
   {:then gltf}
     <T.Mesh
       in={scale}

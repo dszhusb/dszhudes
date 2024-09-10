@@ -6,6 +6,4 @@
 </script>
 
 <ProjectHeader />
-{#key $page.url.pathname.split("/").at(-1)}
-    <Posts {data} />
-{/key}
+<Posts {data} />

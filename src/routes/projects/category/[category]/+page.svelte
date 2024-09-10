@@ -6,6 +6,6 @@
 </script>
 
 <ProjectHeader />
-{#key $page.url.pathname.split("/").at(-1)}
+{#key $page.params.category}
     <Posts {data} />
 {/key}

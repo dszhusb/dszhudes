@@ -18,6 +18,8 @@
     import "../app.css";
     import { page } from "$app/stores";
     import { hIcon } from "$lib/store";
+    import { fly } from "svelte/transition";
+    import { circOut } from "svelte/easing";
     import TopNav from "$lib/components/nav/TopNav.svelte";
     import Sidebar from "$lib/components/nav/Sidebar.svelte";
     import SideDisp from "$lib/components/nav/SideDisp.svelte";
@@ -32,28 +34,26 @@
 </svelte:head>
 
 <main class="font-mono flex flex-col md:flex-row relative scroll-smooth">
+    {#if $page.route.id != "/"}
+        <div class="block md:hidden">
+            <TopNav />
+        </div>
+        <div
+            class="hidden md:flex"
+            in:fly={{ duration: 200, opacity: 0.8, x: -200, easing: circOut }}
+        >
+            <Sidebar />
+            <SideDisp />
+        </div>
+    {/if}
     <div
-        class="block md:hidden"
-        aria-current={$page.url.pathname === "/" ? "page" : undefined}
+        class="w-full"
     >
-        <TopNav />
-    </div>
-    <div
-        class="hidden md:flex"
-        aria-current={$page.url.pathname === "/" ? "page" : undefined}
-    >
-        <Sidebar />
-        <SideDisp />
-    </div>
-    <div class="w-full">
         <slot />
     </div>
 </main>
 
 <style>
-    div[aria-current="page"] {
-        @apply hidden;
-    }
     /* .cursor {
         @apply absolute w-16 h-16 z-50 pointer-events-none -translate-x-1/2 -translate-y-1/2 saturate-150;
     } */

@@ -22,7 +22,6 @@
     import { writable } from "svelte/store";
     export let data: PageData;
 
-    const txt = $hColors.text;
     const spanIndex = writable(1);
     let spans: NodeListOf<HTMLSpanElement>;
 
@@ -73,7 +72,10 @@
 </div>
 <div class="flex flex-row max-w-4xl mx-auto gap-x-24 p-16">
     <div class="flex flex-1 flex-col gap-12">
-        <h2>✍️<br />A Handwriting <br />Monologue</h2>
+        <h2>
+            <span class="highlight" style="--txt-color: {$hColors.f3}">✍️</span
+            ><br />A Handwriting <br />Monologue
+        </h2>
         {#each Object.entries(data) as [id, info]}
             <p>
                 {#each info.text as snippet, i}
@@ -103,11 +105,10 @@
             The above is an experiment in how writing and ideas can be
             experienced differently on the internet. If this made you think or
             if you have any suggestions for improvements let me know at
-            <b style:color={$hColors.text}>dszhu.design@gmail.com</b>
+            <b>dszhu.design@gmail.com</b>
         </h3>
     </div>
 </div>
-<span class="highlight hidden">Test</span>
 
 <style>
     .highlight {

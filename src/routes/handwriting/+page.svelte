@@ -72,8 +72,8 @@
 </div>
 <div class="flex flex-row max-w-4xl mx-auto gap-x-24 p-16">
     <div class="flex flex-1 flex-col gap-12">
-        <h2>
-            <span class="highlight" style="--txt-color: {$hColors.f3}">✍️</span
+        <h2 style="--txt-color: {$hColors.f3}">
+            <span class="highlight">✍️</span
             ><br />A Handwriting <br />Monologue
         </h2>
         {#each Object.entries(data) as [id, info]}

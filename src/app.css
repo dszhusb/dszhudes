@@ -6,6 +6,10 @@
 @tailwind utilities;
 
 @layer base {
+    .highlight {
+        background-color: var(--txt-color);
+    }
+
     a {
         @apply hover:underline
     }
@@ -13,17 +17,20 @@
     h1 {
         @apply text-2xl font-bold font-grotesk;
     }
+
     h2 {
         @apply text-2xl uppercase;
     }
+
     h3 {
         @apply text-lg;
     }
+
     p {
         @apply text-base font-light font-grotesk;
     }
 
-    .content a{
+    .content a {
         @apply underline
     }
 
@@ -47,4 +54,3 @@
         @apply pb-4 max-w-3xl mx-auto leading-relaxed px-8
     }
 }
-

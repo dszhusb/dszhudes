@@ -107,9 +107,3 @@
         </h3>
     </div>
 </div>
-
-<style>
-    .highlight {
-        background-color: var(--txt-color);
-    }
-</style>

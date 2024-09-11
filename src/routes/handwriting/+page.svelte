@@ -24,6 +24,8 @@
 
     const spanIndex = writable(1);
     let spans: NodeListOf<HTMLSpanElement>;
+    let highlight = $hColors.f3
+    hColors.subscribe((c) => highlight = c.f3)
 
     onMount(() => {
         spans = document.querySelectorAll(
@@ -71,18 +73,14 @@
     />
 </div>
 <div class="flex flex-row max-w-4xl mx-auto gap-x-24 p-16">
-    <div class="flex flex-1 flex-col gap-12">
-        <h2 style="--txt-color: {$hColors.f3}">
-            <span class="highlight">✍️</span
-            ><br />A Handwriting <br />Monologue
+    <div class="flex flex-1 flex-col gap-12" style="--txt-color: {highlight}">
+        <h2>
+            <span class="highlight">✍️</span><br />A Handwriting <br />Monologue
         </h2>
         {#each Object.entries(data) as [id, info]}
             <p>
                 {#each info.text as snippet, i}
-                    <span
-                        style="--txt-color: {$hColors.f3}"
-                        class="span"
-                        id={`${info.imgId[i]}`}
+                    <span class="span" id={`${info.imgId[i]}`}
                         >{snippet + " "}
                     </span>
                 {/each}

@@ -18,14 +18,28 @@
 <script lang="ts">
     import { hColors } from "$lib/store";
     import { onMount } from "svelte";
+    import { seekIndex, makeTimesList } from "./utilities";
+    import Controls from "$lib/components/audio/Controls.svelte";
     import type { PageData } from "./$types";
     import { writable } from "svelte/store";
     export let data: PageData;
 
+    const times = makeTimesList(data);
     const spanIndex = writable(1);
+    const audioIndex = writable(-1);
     let spans: NodeListOf<HTMLSpanElement>;
-    let highlight = $hColors.f3
-    hColors.subscribe((c) => highlight = c.f3)
+    let audioTime = 0;
+    let highlight = $hColors.f3;
+    hColors.subscribe((c) => (highlight = c.f3));
+
+    audioIndex.subscribe((i) => {
+        if (spans != null) {
+            spans.forEach((span) => span.classList.remove("highlight"));
+            const spanArr = Array.from(spans);
+            spanArr[i].classList.add("highlight");
+            spanArr[i].scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+    });
 
     onMount(() => {
         spans = document.querySelectorAll(
@@ -63,6 +77,8 @@
             spans.forEach((span) => observer.unobserve(span));
         };
     });
+
+    $: audioIndex.set(seekIndex(times, audioTime));
 </script>
 
 <div class="max-w-4xl mx-auto">
@@ -74,13 +90,14 @@
 </div>
 <div class="flex flex-row max-w-4xl mx-auto gap-x-24 p-16">
     <div class="flex flex-1 flex-col gap-12" style="--txt-color: {highlight}">
-        <h2>
-            <span class="highlight">✍️</span><br />A Handwriting <br />Monologue
+        <h2 class="font-semibold">
+            <span style:color={$hColors.f1} class="text-6xl">✍️</span>
+            <br />Handwriting<br />Rambling
         </h2>
         {#each Object.entries(data) as [id, info]}
-            <p>
-                {#each info.text as snippet, i}
-                    <span class="span" id={`${info.imgId[i]}`}
+            <p class="font-mono">
+                {#each info.text as snippet, j}
+                    <span class={`span`} id={`${info.imgId[j]}`}
                         >{snippet + " "}
                     </span>
                 {/each}
@@ -88,7 +105,8 @@
         {/each}
     </div>
     <div class="flex-1 relative">
-        <div class="sticky top-16 flex flex-row gap">
+        <div class="sticky top-16 flex flex-col gap-y-8">
+            <Controls bind:currentTime={audioTime} />
             <enhanced:img
                 class="w-96 h-auto drop-shadow-xl"
                 alt="Highlighted"

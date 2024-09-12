@@ -7,6 +7,7 @@ import mottledPot from "$lib/assets/ceramics/mottledPot.webp"
 import redCup from "$lib/assets/ceramics/redCup.webp"
 import triToneHolder from '$lib/assets/ceramics/triToneHolder.webp'
 import paleLotus from "$lib/assets/ceramics/paleLotus.webp"
+import writingAudio from '$lib/assets/handwriting/handwriting_audio.mp3'
 
 export const cIndex = writable(0);
 export const ceramicInfo = [
@@ -60,3 +61,27 @@ export const handle_one = writable(<Coord>({ x: 150, y: 350 }));
 export const handle_two = writable(<Coord>({ x: 350, y: 150 }));
 export const scaled_handle_one = derived([handle_one, chart_size], ([$handle_one, $chart_size]) => <Coord>({ x: $handle_one.x / $chart_size, y: $handle_one.y / $chart_size }));
 export const scaled_handle_two = derived([handle_two, chart_size], ([$handle_two, $chart_size]) => <Coord>({ x: $handle_two.x / $chart_size, y: $handle_two.y / $chart_size }));
+
+//Audio
+export const audioPlayer = writable<HTMLAudioElement>();
+export const status = writable('default');
+export const isPlaying = writable(false);
+export const index = writable<number>(0);
+export const audioTracks = writable([
+    {
+        title: 'Handwriting Audio',
+        artist: 'Daniel Zhu',
+        file: writingAudio,
+    }
+]);
+
+type Track = {
+    title: string,
+    artist: string,
+    file: string
+}
+
+export const addTrack = (track: Track) => {
+    audioTracks.update(v => [...v, track])
+};
+

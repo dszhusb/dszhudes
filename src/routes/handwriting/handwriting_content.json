@@ -5,31 +5,42 @@
         ],
         "imgId": [
             1
+        ],
+        "timestamps": [
+            0
         ]
     },
     "1": {
         "text": [
-            "In general I'd say I have two. The first is the “font” that I developed over the formative years of my life. Through kindergarten, elementary, first in squiggles",
-            "and scratches on a handheld chalkboard before gradually transforming into the script I use today."
+            "First is the “font” that I developed over the formative years of my life. Through kindergarten, elementary, first in squiggles",
+            "and scratches on a handheld chalkboard before iteratively transforming into the script I use today."
         ],
         "imgId": [
             1,
             2
+        ],
+        "timestamps": [
+            8,
+            16
         ]
     },
     "2": {
         "text": [
-            "Not that it was in any way a smooth and gradual process. At “normal” school and at Chinese school, I learned to write in Chinese and cursive. Skills both now forgotten.",
-            "More than that, I remember taking note of the handwriting of those around me, like that of this pair of Korean twins. They wrote in neat and looping letters, each letter round and tidy, each word deliberate, paragraphs perfectly aligned."
+            "Not that it was in any way a smooth and gradual process. In Elementary and at Chinese school, I learned cursive and Chinese. Skills both now forgotten.",
+            "More than that, I remember taking note of the handwriting of those around me, like that of this pair of twins. They wrote in neat and looping letters, each character round and tidy, each word deliberate, paragraphs perfectly aligned."
         ],
         "imgId": [
             2,
             3
+        ],
+        "timestamps": [
+            22,
+            33
         ]
     },
     "3": {
         "text": [
-            "Though I admired their writing style, ",
+            "Though I admired their writing style,\n",
             "writing like that would have driven me crazy. In some ways, I believe our handwriting is a reflection of our inner lives – something we develop",
             "early and instinctually. While those twins were stately and composed, seemingly both on paper and in life, my handwriting would sprawl across each page, struggling to keep up with my thoughts. I found myself catching and drifting with the currents, racing down one line of thinking before doubling back and back again."
         ],
@@ -37,16 +48,25 @@
             3,
             4,
             5
+        ],
+        "timestamps": [
+            46,
+            49,
+            57
         ]
     },
     "4": {
         "text": [
             "Despite what I just said, I've always found writing to be an anchoring process. While I often wished I could write as fast as my thoughts flow, I found the slowness of writing to be useful in working through the anxious angsty emotions that set my teenage mind awhirl.",
-            "Pen on paper, things slowed down and became tangible and concrete."
+            "Pen on paper, things seemed to slow down and become tangible and concrete."
         ],
         "imgId": [
             6,
             7
+        ],
+        "timestamps": [
+            78,
+            95
         ]
     },
     "5": {
@@ -57,16 +77,24 @@
         "imgId": [
             7,
             8
+        ],
+        "timestamps": [
+            102,
+            111
         ]
     },
     "6": {
         "text": [
             "While the twins' handwriting appeared unwavering no matter the time or occasion. My handwriting, as many others, really fell along a spectrum between extremes. A legible neat(er) script that I wrote for my teachers and the manically scrawled, borderline illegible glyphs",
-            "that were just for myself. Over the course of my junior year, my handwriting began to skew toward the latter. Hand muscles cramping and squeezed out with adrenaline pumping through my veins."
+            "that were just for myself. Over the course of my junior year, my handwriting began to skew toward the latter with muscles cramping and tight with adrenaline pumping through my veins."
         ],
         "imgId": [
             9,
             10
+        ],
+        "timestamps": [
+            133,
+            151
         ]
     },
     "7": {
@@ -77,14 +105,21 @@
         "imgId": [
             10,
             11
+        ],
+        "timestamps": [
+            164,
+            153
         ]
     },
     "8": {
         "text": [
-            "As chaotic as it sounds, those diagrams were some of the most influential artifacts on my way of thinking to this day. They formed a kind of memory map blending visual and phonetic recall methods that felt like dumping my brain out onto a page and spreading it out just comprehensively enough to trigger a cascade of memorized facts. By the time AP exams rolled around I imagined even the twins to have given in."
+            "As chaotic as it sounds, those diagrams were some of the most influential artifacts on my way of thinking to this day. They formed a kind of memory map blending visual and phonetic recall methods that felt like dumping my brain out onto a page and spreading it out just enough to trigger a cascade of memorized facts. By the time AP exams rolled around I imagined even the twins to have given in."
         ],
         "imgId": [
             12
+        ],
+        "timestamps": [
+            193
         ]
     },
     "9": {
@@ -95,6 +130,10 @@
         "imgId": [
             13,
             14
+        ],
+        "timestamps": [
+            221,
+            240
         ]
     },
     "10": {
@@ -105,6 +144,10 @@
         "imgId": [
             14,
             15
+        ],
+        "timestamps": [
+            246,
+            264
         ]
     },
     "11": {
@@ -113,6 +156,9 @@
         ],
         "imgId": [
             15
+        ],
+        "timestamps": [
+            279
         ]
     },
     "12": {
@@ -125,6 +171,11 @@
             15,
             16,
             17
+        ],
+        "timestamps": [
+            290,
+            300,
+            319
         ]
     },
     "13": {
@@ -137,6 +188,11 @@
             17,
             18,
             19
+        ],
+        "timestamps": [
+            325,
+            332,
+            339
         ]
     }
 }

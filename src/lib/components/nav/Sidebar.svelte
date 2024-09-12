@@ -124,6 +124,20 @@
 		</div>
 	</div>
 	<a
+		href="/handwriting"
+		class="experiment"
+		style:text-decoration-color={$c3}
+	>
+		<p
+			style:color={$c3}
+			style:background-color={$c1}
+			style:border-color={$cText}
+			class="p-2 border-b-[1px] w-full"
+		>
+			Article Experiment
+		</p>
+	</a>
+	<a
 		href="/object_gallery"
 		class="experiment"
 		style:text-decoration-color={$cText}
@@ -169,7 +183,7 @@
 	}
 
 	.navA {
-		@apply p-0 m-0
+		@apply p-0 m-0;
 	}
 
 	a[aria-current="page"] {

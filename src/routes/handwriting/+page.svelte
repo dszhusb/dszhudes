@@ -22,6 +22,8 @@
     import Controls from "$lib/components/audio/Controls.svelte";
     import type { PageData } from "./$types";
     import { writable } from "svelte/store";
+    import { fly } from "svelte/transition";
+    import { circOut } from "svelte/easing";
     export let data: PageData;
 
     const times = makeTimesList(data);
@@ -81,21 +83,27 @@
     $: audioIndex.set(seekIndex(times, audioTime));
 </script>
 
-<div class="max-w-4xl mx-auto">
+<div
+    class="max-w-4xl mx-auto"
+    in:fly={{ duration: 300, opacity: 0.8, x: 200, easing: circOut }}
+>
     <enhanced:img
         class="w-full h-auto px-16 py-8 grayscale"
         alt="Highlighted"
         src={images[`/src/lib/assets/handwriting/handhead.webp`]}
     />
 </div>
-<div class="flex flex-row max-w-4xl mx-auto gap-x-24 p-16">
+<div
+    class="flex flex-row max-w-4xl mx-auto gap-x-24 p-16"
+    in:fly={{ duration: 300, opacity: 0.8, y: 200, easing: circOut }}
+>
     <div class="flex flex-1 flex-col gap-12" style="--txt-color: {highlight}">
         <h2 class="font-semibold">
             <span style:color={$hColors.f1} class="text-6xl">✍️</span>
             <br />Handwriting<br />Rambling
         </h2>
         {#each Object.entries(data) as [id, info]}
-            <p class="font-mono">
+            <p>
                 {#each info.text as snippet, j}
                     <span class={`span`} id={`${info.imgId[j]}`}
                         >{snippet + " "}

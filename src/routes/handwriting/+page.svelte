@@ -84,7 +84,7 @@
 </script>
 
 <div
-    class="max-w-4xl mx-auto"
+    class="max-w-4xl mx-auto pb-16"
     in:fly={{ duration: 300, opacity: 0.8, x: 200, easing: circOut }}
 >
     <enhanced:img
@@ -92,6 +92,14 @@
         alt="Highlighted"
         src={images[`/src/lib/assets/handwriting/handhead.webp`]}
     />
+    <p class="px-16" style:color={$hColors.text}>
+        The following is an experiment, exploring how speaking and written
+        mediums can be presented on the web. I started by jotting down some
+        rambling thoughts on handwriting in a notepad, which I read into a mic
+        and transcribed. The two versions of the text are presented side by side
+        with an audio reading. Feel free to scroll along the text and compare
+        the two versions or listen along!
+    </p>
 </div>
 <div
     class="flex flex-row max-w-4xl mx-auto gap-x-24 p-16"
@@ -120,6 +128,7 @@
                 alt="Highlighted"
                 src={images[`/src/lib/assets/handwriting/hw${$spanIndex}.webp`]}
             />
+            <p class="text-right">Original Notepad Script</p>
         </div>
     </div>
 </div>

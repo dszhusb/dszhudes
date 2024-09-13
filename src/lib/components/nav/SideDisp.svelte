@@ -63,13 +63,13 @@
         <div
             style:background-color={$hColors.f2}
             style:border-color={$hColors.f2}
-            class="relative rounded-full w-fit p-2 py-5 mx-auto"
+            class="relative rounded-full w-fit px-2 py-5 mx-auto"
         >
             <div
                 style:border-bottom-color={$hColors.f2}
                 class="arrow-up absolute -top-[13px] -translate-x-1/2 left-1/2"
             />
-            <p style:color={$hColors.text} class="sideways uppercase">
+            <p style:color={$hColors.text} class="w-6 sideways uppercase">
                 Click Me!
             </p>
         </div>

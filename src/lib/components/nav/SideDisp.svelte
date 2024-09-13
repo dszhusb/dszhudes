@@ -45,7 +45,9 @@
     {#if $page.url.pathname === "/projects"}
         <Zhu fill={$hColors.text} />
     {:else}
-        <Back fill={$hColors.text} />
+        <div class="hover:rotate-45 duration-500">
+            <Back fill={$hColors.text} />
+        </div>
     {/if}
     <div class="sideways mx-auto uppercase font-thin text-3xl pt-2">
         {$page.url.pathname.split("/").slice(-1)[0].replace("_", " ")}

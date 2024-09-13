@@ -23,7 +23,9 @@
     in:fly={{ duration: 300, opacity: 0.8, x: 200, easing: circOut }}
 >
     <div class="about py-4 px-12">
-        <h1 class="uppercase">Hi, I'm Daniel Zhu</h1>
+        <h1 class="uppercase hover:-skew-x-6 duration-300">
+            Hi, I'm Daniel Zhu
+        </h1>
         <p>
             I'm a designer and creative technologist hailing from
             <a
@@ -53,19 +55,21 @@
             strengths is the ability to evaluate and learn the technical skills
             I need on the fly to bring the concepts I dream of to life.
         </p>
-        <p>
+        <p class="font-bold" style:color={$hColors.text}>
             Send me an email if you'd like to work together!
         </p>
     </div>
     <div
-        class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-stone-200"
+        class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-stone-200 relative"
     >
-        <img class="w-full" src={Headshot} alt="portrait" />
+        <img
+            class="w-full hover:skew-y-3 duration-1000"
+            src={Headshot}
+            alt="portrait"
+        />
     </div>
     <div class="flex-1">
-        <div
-            class="w-full divide-y-[1px] divide-stone-800 bg-stone-200"
-        >
+        <div class="w-full divide-y-[1px] divide-stone-800 bg-stone-200">
             <a
                 class="button inside bg-stone-800 text-stone-50"
                 href={resume}

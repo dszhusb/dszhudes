@@ -67,7 +67,7 @@
     {/each}
 
     <a
-        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-difference text-center border-white"
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-difference text-center border-white  hover:rotate-2 duration-300"
         href="/projects"
     >
         <div class="flex flex-col md:flex-row md:gap-8 mb-4 md:mb-0">

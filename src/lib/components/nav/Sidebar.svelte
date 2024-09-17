@@ -39,12 +39,15 @@
 </script>
 
 <nav
-	class="sticky top-0 max-h-screen h-full w-60 border-r-[1px] border-stone-800 overscroll-contain"
+	class="sticky top-0 max-h-screen h-full w-60 border-r-[1px] border-stone-800 overscroll-contain flex flex-col gap-y-0"
 >
 	<div class="button mt-4">
 		<a href="/">daniel zhu</a>
 	</div>
-	<a href="/about" class="navA">
+	<a
+		href="/about"
+		class="navA"
+	>
 		<NavIcon />
 	</a>
 	<div class="bg-stone-200">
@@ -123,11 +126,7 @@
 			>
 		</div>
 	</div>
-	<a
-		href="/handwriting"
-		class="experiment"
-		style:text-decoration-color={$c3}
-	>
+	<a href="/handwriting" class="experiment" style:text-decoration-color={$c3}>
 		<p
 			style:color={$c3}
 			style:background-color={$c1}
@@ -161,6 +160,10 @@
 			Easing Experiment
 		</p>
 	</a>
+	<div
+		style:background-image={`linear-gradient(#ffffff, ${$c3} 250%)`}
+		class="w-full h-full"
+	/>
 </nav>
 
 <style lang="postcss">

@@ -47,16 +47,18 @@
 				<div class="linkContainer">
 					{#if documentation !== null}
 						<div class="link" style:background-color={$hColors.f2}>
-							<a href={documentation}>Documentation</a>
+							<a href={documentation} target="_blank">Documentation</a>
 						</div>
 					{/if}
 					{#if site !== null}
 						<div class="link" style:background-color={$hColors.f3}>
-							<a href={site}>Site</a>
+							<a href={site} target="_blank">Site</a>
 						</div>
 					{/if}
 				</div>
-				<div class="h-full px-8 pt-4 pb-8">
+				<div
+					class="h-full px-8 pt-4 pb-8"
+				>
 					<h1 class="uppercase font-bold pb-2">{title}</h1>
 					<p><span class="font-semibold">Role: </span>{role}</p>
 					<p>

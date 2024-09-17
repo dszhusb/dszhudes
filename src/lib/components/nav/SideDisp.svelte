@@ -43,7 +43,7 @@
 
 <main class="w-20 border-r-[1px] border-stone-800 pt-2 sticky top-0 h-screen">
     {#if $page.url.pathname === "/projects"}
-        <Zhu fill={$hColors.text} />
+        <Zhu />
     {:else}
         <div class="hover:rotate-45 duration-500">
             <Back fill={$hColors.text} />

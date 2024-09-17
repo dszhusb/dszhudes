@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let fill: string;
+    // export let fill: string;
     let color = "#292524";
 </script>
 

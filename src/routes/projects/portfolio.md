@@ -5,8 +5,8 @@ role: Design, Development
 collaborators: N/A
 duration: Ongoing
 priority: 0
-documentation:
-site:
+documentation: https://github.com/dszhusb/dszhudes
+site: https://dszhusd.vercel.app/
 categories:
 - 'digital'
 ---

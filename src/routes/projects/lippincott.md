@@ -6,7 +6,7 @@ collaborators: Lippincott
 priority: 2
 duration: Ongoing
 documentation:
-site:
+site: https://www.lippincott.com/
 categories:
 - 'physical'
 - 'digital'

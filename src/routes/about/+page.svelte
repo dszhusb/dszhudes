@@ -62,11 +62,8 @@
     <div
         class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-stone-200 relative"
     >
-        <img
-            class="w-full duration-1000"
-            src={Headshot}
-            alt="portrait"
-        />
+        <img class="w-full duration-1000" src={Headshot} alt="portrait" />
+        <div class="w-full h-full" />
     </div>
     <div class="flex-1">
         <div class="w-full divide-y-[1px] divide-stone-800 bg-stone-200">

@@ -5,7 +5,7 @@ role: Design, Hardware Development
 collaborators: Joseph Kim
 duration: 12 weeks
 priority: 0
-documentation:
+documentation: https://www.josephkim.design/
 site:
 categories:
 - 'physical'

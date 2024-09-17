@@ -46,7 +46,7 @@ TOBI's organs were inspired by work in the soft robotics field. Each organ is a 
 
 With the forms mapped out, I moulded and casted each organ dozens of times to nail the process and create the visceral effects I wanted. I also needed assemble the electronics and physical housings complete TOBI's physical form.
 
-<ImageGrid links={gifs} description="TOBI Organs" type="gif"/>
+<ImageGrid links={gifs} description="TOBI Organs" type=".gif"/>
 
 ## REFLECTION
 

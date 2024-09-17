@@ -63,7 +63,7 @@
         class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-stone-200 relative"
     >
         <img
-            class="w-full hover:skew-y-3 duration-1000"
+            class="w-full duration-1000"
             src={Headshot}
             alt="portrait"
         />

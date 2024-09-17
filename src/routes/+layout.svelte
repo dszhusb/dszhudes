@@ -17,7 +17,6 @@
 <script lang="ts">
     import "../app.css";
     import { page, navigating } from "$app/stores";
-    import { writable } from "svelte/store";
     import { hIcon } from "$lib/store";
     import { fly } from "svelte/transition";
     import { circOut } from "svelte/easing";
@@ -25,10 +24,6 @@
     import TopNav from "$lib/components/nav/TopNav.svelte";
     import Sidebar from "$lib/components/nav/Sidebar.svelte";
     import SideDisp from "$lib/components/nav/SideDisp.svelte";
-
-    const loading = writable<boolean>(false);
-    $: if ($navigating) loading.set(true);
-    $: if (!$navigating) loading.set(false);
 </script>
 
 <svelte:head>
@@ -54,7 +49,7 @@
     {/if}
     <div class="w-full">
         <slot />
-        <!-- {#if $loading}
+        <!-- {#if $navigating}
             <Loading />
         {:else}
             <slot />

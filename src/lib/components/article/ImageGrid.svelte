@@ -17,11 +17,10 @@
 <script>
     export let links;
     export let description = "";
-    export let type;
-
-    let fileType = ".webp";
-    if (type != undefined) {
-        fileType = `.${type}`;
+    export let type = ".webp";
+    
+    if (type[0] != ".") {
+        type = "." + type
     }
 </script>
 
@@ -34,7 +33,7 @@
                 <enhanced:img
                     class="w-full"
                     alt={link}
-                    src={images[`/src/lib/assets/${link}${fileType}`]}
+                    src={images[`/src/lib/assets/${link}${type}`]}
                 />
             </li>
         {/each}

@@ -24,7 +24,7 @@
     class="px-12 py-10 lg:px-24 lg:py-16 relative overflow-hidden bg-stone-50 flex flex-col gap-4"
 >
     <h1
-        class="font-thin text-4xl font-grotesk max-w-[60rem] hover:-skew-x-3 duration-300"
+        class="font-thin text-4xl font-grotesk max-w-[60rem]"
         style:color={$cText}
     >
         Hi, I'm Daniel – designer, developer, and maker building digital and

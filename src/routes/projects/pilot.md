@@ -14,10 +14,12 @@ categories:
 
 <script>
     import ImageGrid from '$lib/components/article/ImageGrid.svelte'
+    import ColumnGrid from '$lib/components/article/ColumnGrid.svelte'
     import YoutubeEmbed from '$lib/components/article/YoutubeEmbed.svelte'
 
     const p = 'pilot/'
     const demo = "4FG9xUcryY8"
+    const hooks = [p + 'steering', p + 'throttle', p + 'brake', p + 'dashboard']
 </script>
 
 # The Pilot Semi-Truck Simulator – an immersive experience built for the 2024 Berkshire Hathaway Shareholder Conference. We converted a real semi-truck into a realistic trucking simulator game.
@@ -29,6 +31,8 @@ categories:
 I worked as a creative technologist on this project with [Nishanth Samala](https://outlandnish.com/) a car enthusiast who had developed a similar system for his car. There were three major components. First a microcontroller decoding the truck's communication through the diagnostic port through the [J1939](https://www.csselectronics.com/pages/j1939-explained-simple-intro-tutorial) protocol, a microcontroller reading dashboard information like engine speed and road speed to send back to the truck, and a separate GPS system implemented mostly by [Bryce Li](https://designbybryce.com/). You can find the code linked under "process documentation" above.
 
 Although I will be talking mostly about the technology for this project, I quickly found my role expanding beyond just developing hardware to production, event planning, and more.
+
+<!-- <ColumnGrid links={hooks} description="Truck Sensor Attachment" /> -->
 
 ## SIMULATOR PERIPHERALS
 

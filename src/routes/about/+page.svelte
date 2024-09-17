@@ -100,7 +100,7 @@
     </div>
 </main>
 
-<style>
+<style lang="postcss">
     h1 {
         @apply pt-2 pb-8;
     }
@@ -110,9 +110,6 @@
     .about a {
         @apply font-semibold;
     }
-    /* b {
-        @apply font-bold;
-    } */
     .button {
         @apply w-full flex place-content-center uppercase p-4;
     }

@@ -79,10 +79,7 @@
 	{/if}
 </article>
 
-<style>
-	Picture {
-		@apply w-full;
-	}
+<style lang="postcss">
 	.linkContainer {
 		@apply w-full flex flex-col border-t-[1px] border-stone-800 bottom-0 divide-y-[1px] divide-stone-800;
 	}

@@ -55,7 +55,7 @@
     </button>
 </div>
 
-<style>
+<style lang="postcss">
     button {
         @apply m-0;
     }

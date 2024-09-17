@@ -35,7 +35,7 @@
     </svg>
 </a>
 
-<style>
+<style lang="postcss">
     svg:active {
         @apply border-0;
     }

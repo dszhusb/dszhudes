@@ -95,7 +95,7 @@
     </a>
 </main>
 
-<style>
+<style lang="postcss">
     img {
         @apply absolute saturate-150 hover:saturate-200 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
     }

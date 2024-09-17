@@ -39,7 +39,7 @@
     </div>
 </main>
 
-<style>
+<style lang="postcss">
     .column {
         @apply divide-y-[1px] divide-stone-800
     }

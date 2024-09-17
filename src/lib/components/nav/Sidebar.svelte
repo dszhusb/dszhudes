@@ -163,7 +163,7 @@
 	</a>
 </nav>
 
-<style>
+<style lang="postcss">
 	.button {
 		@apply w-full flex place-content-center text-stone-800;
 	}

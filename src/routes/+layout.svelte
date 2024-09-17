@@ -20,6 +20,8 @@
     import { hIcon } from "$lib/store";
     import { fly } from "svelte/transition";
     import { circOut } from "svelte/easing";
+    import { navigating } from "$app/stores";
+    import Loading from "$lib/components/nav/Loading.svelte";
     import TopNav from "$lib/components/nav/TopNav.svelte";
     import Sidebar from "$lib/components/nav/Sidebar.svelte";
     import SideDisp from "$lib/components/nav/SideDisp.svelte";
@@ -46,10 +48,12 @@
             <SideDisp />
         </div>
     {/if}
-    <div
-        class="w-full"
-    >
-        <slot />
+    <div class="w-full">
+        {#if $navigating}
+            <Loading />
+        {:else}
+            <slot />
+        {/if}
     </div>
 </main>
 

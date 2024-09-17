@@ -22,7 +22,7 @@
 
 <div class="imageGrid border-t-[1px] border-b-[1px] border-stone-800">
     {#if url !== undefined}
-        <a href={url}>
+        <a href={url} target="_blank">
             <enhanced:img
                 class="w-full"
                 alt={link}

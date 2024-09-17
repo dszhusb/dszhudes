@@ -42,12 +42,13 @@
         <div class="h-24 w-full" />
     {/if}
     <div class="absolute bottom-0 h-8 w-full bg-stone-800" />
-    <button class="w-24 px-4 pt-2 bg-stone-800 rounded-t-full" on:click={goTop}>
+    <button
+        class="w-24 px-4 pt-2 bg-stone-800 rounded-t-full"
+        on:click={goTop}
+        on:mouseover={trigger}
+        on:focus={trigger}
+    >
         <enhanced:img
-            role="button"
-            tabindex={0}
-            on:mouseover={trigger}
-            on:focus={trigger}
             class="icon z-50 saturate-150"
             src={images[`/src/lib/assets/iconShells/${$hIcon}.webp`]}
             alt="foot"

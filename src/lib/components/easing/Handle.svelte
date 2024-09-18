@@ -54,7 +54,7 @@
     style="left: {left}px; top: {top}px;"
     class="absolute select-none cursor-move -translate-y-1/2 -translate-x-1/2"
 >
-    <div class="w-6 h-6 rounded-full" style:background-color={$hColors.f1}/>
+    <div class="w-6 h-6 rounded-full" style:background-color={$hColors.text}/>
 </section>
 
 

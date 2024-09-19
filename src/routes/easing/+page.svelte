@@ -2,7 +2,7 @@
     import { derived } from "svelte/store";
     import { hColors, colorSettings } from "$lib/store";
     import { fly, scale, fade, blur, slide } from "svelte/transition";
-    import { circOut } from "svelte/easing";
+    import { circOut, linear } from "svelte/easing";
     import { plotCubic, cubicRawText, x } from "./cubicBezier";
     import { CodeBlock } from "svhighlight";
     import { tweened } from "svelte/motion";
@@ -38,8 +38,9 @@
 </script>
 
 <main
-    class="flex flex-col md:flex-row py-8 px-12 min-h-screen min-w-fit gap-16"
+    class="flex flex-wrap py-8 px-12 min-h-screen min-w-fit gap-16"
     in:fly={{ duration: 500, opacity: 0.8, y: -200, easing: circOut }}
+    style:background-image={`linear-gradient(#ffffff 75%, ${$c3}80)`}
 >
     <div class="flex flex-col gap-y-4" style:max-width={$chart_size + "px"}>
         <div
@@ -92,54 +93,134 @@
             </div>
         </div>
         <hr class="border-stone-800" />
-        <label class="uppercase">
-            <input type="checkbox" bind:checked={show} /> Show</label
-        >
-        <div class="flex flex-row gap-x-4 min-w-96">
-            {#if show}
-                <div class="w-16 h-full relative">
+        <div class="flex flex-row gap-6">
+            <button
+                class="px-3 py-2 bg-stone-900 text-white w-24 uppercase"
+                on:click={() => (show = !show)}
+            >
+                {#if show}
+                    Play
+                {:else}
+                    Rewind
+                {/if}
+            </button>
+            <div class="flex flex-row items-center">
+                <div
+                    class="w-4 h-4 border-[1px] border-stone-800"
+                    style:background-color={$hColors.f3}
+                />
+                <p class="pl-3 py-2 w-fit uppercase">Linear</p>
+            </div>
+            <div class="flex flex-row items-center">
+                <div
+                    class="w-4 h-4 border-[1px] border-stone-800"
+                    style:background-color={$hColors.text}
+                />
+                <p class="pl-3 py-2 w-fit uppercase">Bezier Curve</p>
+            </div>
+        </div>
+        <div class="flex flex-col gap-y-4 min-w-96">
+            <div class="h-16 w-full relative">
+                {#if show}
                     <div
                         class="w-16 h-16 absolute top-0 left-0"
-                        style:background-color={$hColors.f3}
+                        style:background-color={`${$hColors.f3}A0`}
                         transition:fly={{
-                            y: 200,
+                            x: 200,
                             opacity: 1,
                             duration: 1000,
+                            easing: linear,
                         }}
                     />
                     <div
-                        class="w-16 h-16 bg-stone-800 absolute top-0 left-0"
+                        class="w-16 h-16 absolute top-0 left-0"
+                        style:background-color={`${$hColors.text}A0`}
                         transition:fly={{
-                            y: 200,
+                            x: 200,
                             opacity: 1,
                             duration: 1000,
                             easing: easeBezier,
                         }}
                     />
-                </div>
-                <div
-                    class="w-16 h-16 bg-stone-800"
-                    transition:scale={{
-                        opacity: 1,
-                        duration: 1000,
-                        easing: easeBezier,
-                    }}
-                />
-                <div
-                    class="w-16 h-16 bg-stone-800"
-                    transition:slide={{
-                        duration: 1000,
-                        easing: easeBezier,
-                    }}
-                />
-                <div
-                    class="w-16 h-16 bg-stone-800"
-                    transition:fade={{
-                        duration: 1000,
-                        easing: easeBezier,
-                    }}
-                />
-            {/if}
+                {/if}
+            </div>
+            <h6 class="lowercase text-stone-600 font-grotesk -translate-y-1">
+                Fly
+            </h6>
+            <hr class="border-stone-600" />
+            <div class="h-16 w-full flex flex-row gap-x-4">
+                {#if show}
+                    <div
+                        class="w-16 h-16"
+                        style:background-color={`${$hColors.f3}`}
+                        transition:scale={{
+                            opacity: 1,
+                            duration: 1000,
+                            easing: linear,
+                        }}
+                    />
+                    <div
+                        class="w-16 h-16"
+                        style:background-color={`${$hColors.text}`}
+                        transition:scale={{
+                            opacity: 1,
+                            duration: 1000,
+                            easing: easeBezier,
+                        }}
+                    />
+                {/if}
+            </div>
+            <h6 class="lowercase text-stone-600 font-grotesk -translate-y-1">
+                scale
+            </h6>
+            <hr class="border-stone-600" />
+            <div class="h-16 w-full flex flex-row gap-x-4">
+                {#if show}
+                    <div
+                        class="w-16 h-16"
+                        style:background-color={`${$hColors.f3}`}
+                        transition:slide={{
+                            duration: 1000,
+                            easing: linear,
+                        }}
+                    />
+                    <div
+                        class="w-16 h-16"
+                        style:background-color={`${$hColors.text}`}
+                        transition:slide={{
+                            duration: 1000,
+                            easing: easeBezier,
+                        }}
+                    />
+                {/if}
+            </div>
+            <h6 class="lowercase text-stone-600 font-grotesk -translate-y-1">
+                slide
+            </h6>
+            <hr class="border-stone-600" />
+            <div class="h-16 w-full flex flex-row gap-x-4">
+                {#if show}
+                    <div
+                        class="w-16 h-16"
+                        style:background-color={`${$hColors.f3}`}
+                        transition:fade={{
+                            duration: 1000,
+                            easing: linear,
+                        }}
+                    />
+                    <div
+                        class="w-16 h-16"
+                        style:background-color={`${$hColors.text}`}
+                        transition:fade={{
+                            duration: 1000,
+                            easing: easeBezier,
+                        }}
+                    />
+                {/if}
+            </div>
+            <h6 class="lowercase text-stone-600 font-grotesk -translate-y-1">
+                fade
+            </h6>
         </div>
     </div>
 </main>

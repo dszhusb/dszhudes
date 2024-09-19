@@ -15,6 +15,10 @@
     );
 </script>
 
+<svelte:head>
+	<meta name="description" content="Handwriting Experiment Page" />
+</svelte:head>
+
 <script lang="ts">
     import { hColors } from "$lib/store";
     import { onMount } from "svelte";

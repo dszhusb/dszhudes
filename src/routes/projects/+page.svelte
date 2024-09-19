@@ -5,5 +5,9 @@
     export let data;
 </script>
 
+<svelte:head>
+	<meta name="description" content="All Project Work" />
+</svelte:head>
+
 <ProjectHeader />
 <Posts {data} />

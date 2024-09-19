@@ -20,6 +20,10 @@
     });
 </script>
 
+<svelte:head>
+	<meta name="description" content="Ceramic Gallery Page" />
+</svelte:head>
+
 <div
     class="relative w-full h-full"
     style:background-image={`linear-gradient(#ffffff, ${$hColors.f3})`}

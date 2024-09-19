@@ -14,6 +14,10 @@
 	);
 </script>
 
+<svelte:head>
+	<meta name="description" content="Project Work" />
+</svelte:head>
+
 <script lang="ts">
 	import Footer from "$lib/components/article/Footer.svelte";
 	import { fly } from "svelte/transition";

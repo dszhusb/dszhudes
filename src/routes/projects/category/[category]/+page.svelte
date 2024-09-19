@@ -5,6 +5,10 @@
     export let data;
 </script>
 
+<svelte:head>
+	<meta name="description" content="Project Category" />
+</svelte:head>
+
 <ProjectHeader />
 {#key $page.params.category}
     <Posts {data} />

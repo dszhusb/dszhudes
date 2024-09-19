@@ -18,6 +18,10 @@
     });
 </script>
 
+<svelte:head>
+	<meta name="description" content="About Page" />
+</svelte:head>
+
 <main
     class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full w-full"
     in:fly={{ duration: 300, opacity: 0.8, x: 200, easing: circOut }}

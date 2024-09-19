@@ -37,6 +37,10 @@
     }
 </script>
 
+<svelte:head>
+	<meta name="description" content="Easing Experiment Page" />
+</svelte:head>
+
 <main
     class="flex flex-wrap py-8 px-12 min-h-screen min-w-fit gap-16"
     in:fly={{ duration: 500, opacity: 0.8, y: -200, easing: circOut }}

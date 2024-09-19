@@ -16,7 +16,6 @@
 </script>
 
 <svelte:head>
-    <title>Landing Page</title>
 	<meta name="description" content="Daniel is a designer, creative technologist, and developer graduated from CMU." />
 </svelte:head>
 

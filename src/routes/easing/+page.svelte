@@ -77,6 +77,10 @@
             background="bg-stone-900"
             headerClasses="bg-stone-800"
         />
+        <p class="font-mono w-3/4 text-stone-500">
+            * This bezier tool is half educational, half for my own use. The
+            function above operates the animations to the right.
+        </p>
     </div>
     <div class="flex flex-col gap-y-8">
         <div>

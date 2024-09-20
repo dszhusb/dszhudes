@@ -19,12 +19,13 @@
 </script>
 
 <svelte:head>
-	<meta name="description" content="About Page" />
+    <meta name="description" content="About Page" />
 </svelte:head>
 
 <main
     class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full w-full"
     in:fly={{ duration: 300, opacity: 0.8, x: 200, easing: circOut }}
+    style:background-image={`linear-gradient(#ffffff 50%, ${$hColors.f3}80)`}
 >
     <div class="about py-4 px-12">
         <h1 class="uppercase hover:-skew-x-6 duration-300">
@@ -64,7 +65,7 @@
         </p>
     </div>
     <div
-        class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-stone-200 relative"
+        class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-white/25 relative"
     >
         <img class="w-full duration-1000" src={Headshot} alt="portrait" />
         <div class="w-full h-full" />

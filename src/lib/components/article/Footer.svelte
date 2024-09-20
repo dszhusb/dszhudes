@@ -17,11 +17,11 @@
 <script lang="ts">
     import { gsap } from "gsap";
     import { onMount } from "svelte";
-    import { hIcon } from "$lib/store";
+    import { hIcon, hColors } from "$lib/store";
     export let flush = false;
 
     function goTop() {
-        document.body.scrollIntoView();
+        document.body.scrollIntoView({ behavior: "smooth" });
     }
 
     let tl = gsap.timeline({ repeat: 0 });
@@ -37,13 +37,15 @@
     }
 </script>
 
-<div class="relative w-full flex flex-col items-center overflow-hidden">
+<div
+    class="relative w-full flex flex-col items-center overflow-hidden"
+    style:background-image={`linear-gradient(#ffffff 50%, ${$hColors.f3}80)`}
+>
     {#if !flush}
-        <div class="h-24 w-full" />
+        <div class="h-32 w-full" />
     {/if}
-    <div class="absolute bottom-0 h-8 w-full bg-stone-800" />
     <button
-        class="w-24 px-4 pt-2 bg-stone-800 rounded-t-full"
+        class="w-28 px-4 py-8"
         on:click={goTop}
         on:mouseover={trigger}
         on:focus={trigger}
@@ -53,6 +55,7 @@
             src={images[`/src/lib/assets/iconShells/${$hIcon}.webp`]}
             alt="foot"
         />
+        <p class="text-stone-500 translate-y-1">– to top –</p>
     </button>
 </div>
 

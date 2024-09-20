@@ -43,7 +43,7 @@
             cubicPoints($scaled_handle_one, $scaled_handle_two, resolution),
     );
 
-    curve.subscribe((v) => console.log(v))
+    curve.subscribe((v) => console.log(v));
 
     function easeBezier(t: number): number {
         let y = 0;
@@ -61,9 +61,9 @@
 </svelte:head>
 
 <main
-    class="flex flex-wrap py-8 px-12 min-h-screen min-w-fit gap-16"
+    class="flex flex-wrap pt-8 pb-24 px-12 min-h-screen min-w-fit gap-16"
     in:fly={{ duration: 500, opacity: 0.8, y: -200, easing: circOut }}
-    style:background-image={`linear-gradient(#ffffff 75%, ${$c3}80)`}
+    style:background-image={`linear-gradient(#ffffff 20%, ${$c3}80)`}
 >
     <div class="flex flex-col gap-y-4" style:max-width={$chart_size + "px"}>
         <div
@@ -71,6 +71,13 @@
             style:background-image={`linear-gradient(${$c3}80, #ffffff)`}
         >
             <svg width={$chart_size} height={$chart_size}>
+                <line
+                    x1="0"
+                    y1={$chart_size}
+                    x2={$chart_size}
+                    y2="0"
+                    style={`stroke:${$hColors.f3}80;stroke-width:3`}
+                />
                 <polyline
                     points={$points}
                     style={`fill:none;stroke:${$hColors.text};stroke-width:3`}

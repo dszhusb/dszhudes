@@ -47,7 +47,7 @@
 
     function easeBezier(t: number): number {
         let y = 0;
-        for (let i = 0; i < $curve.length; i++) {
+        for (let i = 0; i < $curve.length - 1; i++) {
             if ($curve[i].x <= t && t <= $curve[i + 1].x) {
                 y = 1 - $curve[i].y;
             }

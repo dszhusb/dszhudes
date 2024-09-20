@@ -1,9 +1,14 @@
 <script lang="ts">
     import { derived } from "svelte/store";
     import { hColors, colorSettings } from "$lib/store";
-    import { fly, scale, fade, blur, slide } from "svelte/transition";
+    import { fly, scale, fade, slide } from "svelte/transition";
     import { circOut, linear } from "svelte/easing";
-    import { plotCubic, cubicRawText, x } from "./cubicBezier";
+    import {
+        plotCubic,
+        cubicPoints,
+        cubicRawText,
+        cubicSvelteText,
+    } from "./cubicBezier";
     import { CodeBlock } from "svhighlight";
     import { tweened } from "svelte/motion";
     import {
@@ -13,12 +18,13 @@
     } from "$lib/store";
     import Handle from "$lib/components/easing/Handle.svelte";
 
+    let show = true;
     const c3 = tweened($hColors.f3, colorSettings);
     hColors.subscribe((value) => {
         c3.set(value.f3);
     });
 
-    const resolution = 50;
+    const resolution = 100;
 
     const points = derived(
         [scaled_handle_one, scaled_handle_two, chart_size],
@@ -31,14 +37,27 @@
             ),
     );
 
-    let show = true;
-    function easeBezier(t: number) {
-        return x(t, $scaled_handle_one.x, $scaled_handle_two.x, 1);
+    const curve = derived(
+        [scaled_handle_one, scaled_handle_two],
+        ([$scaled_handle_one, $scaled_handle_two]) =>
+            cubicPoints($scaled_handle_one, $scaled_handle_two, resolution),
+    );
+
+    curve.subscribe((v) => console.log(v))
+
+    function easeBezier(t: number): number {
+        let y = 0;
+        for (let i = 0; i < $curve.length; i++) {
+            if ($curve[i].x <= t && t <= $curve[i + 1].x) {
+                y = 1 - $curve[i].y;
+            }
+        }
+        return y;
     }
 </script>
 
 <svelte:head>
-	<meta name="description" content="Easing Experiment Page" />
+    <meta name="description" content="Easing Experiment Page" />
 </svelte:head>
 
 <main
@@ -74,16 +93,49 @@
             <Handle parentSize={$chart_size} first={true} />
             <Handle parentSize={$chart_size} first={false} />
         </div>
+        <p>
+            I've included an implementation for a Cubic Bezier Graphing Equation
+            below. To replicate the graph, I drew from the following sources: <a
+                class="font-semibold"
+                href="https://blog.maximeheckel.com/posts/cubic-bezier-from-math-to-motion/"
+                >Maxime Heckel's Blog</a
+            >
+            and
+            <a
+                href="https://www.youtube.com/watch?v=aVwxzDHniEw&t=66s"
+                class="font-semibold"
+            >
+                Freya Holmer's Video</a
+            >, which got me interested in the topic in the first place.
+        </p>
         <CodeBlock
             code={cubicRawText}
             language="javascript"
             rounded="none"
-            background="bg-stone-900"
-            headerClasses="bg-stone-800"
+            background="bg-stone-800"
+            headerClasses="bg-stone-900"
         />
-        <p class="font-mono w-3/4 text-stone-500">
-            * This bezier tool is half educational, half for my own use. The
-            function above operates the animations to the right.
+        <p>
+            At first I simply took a y(t) to get the eased value, but as I
+            played around with the tool I quickly realized that the result only
+            accounted for the y values of the given control points.
+        </p>
+        <p>
+            To remedy this, wrote a function that find the y value for a given x
+            by graphing the function at a given resolution and finding the
+            average y between the two points a given x falls between.
+        </p>
+        <CodeBlock
+            code={cubicSvelteText}
+            language="javascript"
+            rounded="none"
+            background="bg-stone-800"
+            headerClasses="bg-stone-900"
+        />
+        <p>
+            This solution probably is not the ideal solution. But while I do
+            more digging into the math behind finding a the y for a given x
+            value, this is what I'm using for now.
         </p>
     </div>
     <div class="flex flex-col gap-y-8">
@@ -229,6 +281,10 @@
             <h6 class="lowercase text-stone-600 font-grotesk -translate-y-1">
                 fade
             </h6>
+            <p class="font-mono w-full max-w-96 text-stone-500">
+                * This bezier tool is half educational, half for my own use. The
+                function above operates the animations to the above.
+            </p>
         </div>
     </div>
 </main>

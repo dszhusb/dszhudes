@@ -209,6 +209,17 @@
                             easing: easeBezier,
                         }}
                     />
+                {:else}
+                    <div
+                        class="w-16 h-16 absolute top-0 left-[200px]"
+                        in:fade={{ delay: 1000, duration: 0 }}
+                        style:background-color={`${$hColors.f3}A0`}
+                    />
+                    <div
+                        class="w-16 h-16 absolute top-0 left-[200px]"
+                        in:fade={{ delay: 1000, duration: 0 }}
+                        style:background-color={`${$hColors.text}A0`}
+                    />
                 {/if}
             </div>
             <h6 class="lowercase text-stone-600 font-grotesk -translate-y-1">

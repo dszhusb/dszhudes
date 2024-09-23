@@ -2,14 +2,25 @@
 	import { page } from "$app/stores";
 	import { cubicOut } from "svelte/easing";
 	import { tweened } from "svelte/motion";
-	import { hColors, colorSettings, colorSettingsSlow } from "$lib/store";
+	import {
+		hColors,
+		colorSettings,
+		colorSettingsSlow,
+		darkMotif,
+	} from "$lib/store";
 	import NavIcon from "$lib/components/nav/NavIcon.svelte";
 
 	const cDark = "#292524";
 	const cLight = "#e7e5e4";
 	const cWork = tweened(cDark, colorSettingsSlow);
 	const cAbout = tweened(cLight, colorSettingsSlow);
+	let darkThemed = false;
 	page.subscribe((value) => {
+		darkThemed = false;
+		if (value.url.pathname.includes("shell")) {
+			darkThemed = true;
+		}
+
 		if (value.url.pathname.includes("projects")) {
 			cWork.set(cDark);
 			cAbout.set(cLight);
@@ -22,6 +33,7 @@
 	const c1 = tweened($hColors.f1, colorSettings);
 	const c2 = tweened($hColors.f2, colorSettings);
 	const c3 = tweened($hColors.f3, colorSettings);
+	const c4 = tweened(`${$hColors.f3}60`, colorSettings);
 	const cText = tweened($hColors.text, colorSettings);
 
 	const sw = 6.75;
@@ -44,10 +56,7 @@
 	<div class="button mt-4">
 		<a href="/">daniel zhu</a>
 	</div>
-	<a
-		href="/about"
-		class="navA"
-	>
+	<a href="/about" class="navA">
 		<NavIcon />
 	</a>
 	<div class="bg-stone-200">
@@ -79,7 +88,7 @@
 				>
 					<div
 						class="fIndicator physical"
-						style:background-color={$c1}
+						style:background-color={darkThemed ? darkMotif.f1 : $c1}
 						style:width={`${$f1w}%`}
 					/>
 					<a href="/projects/category/physical">physical</a>
@@ -94,7 +103,7 @@
 				>
 					<div
 						class="fIndicator digital"
-						style:background-color={$c2}
+						style:background-color={darkThemed ? darkMotif.f2 : $c2}
 						style:width={`${$f2w}%`}
 					/>
 					<a href="/projects/category/digital">digital</a>
@@ -109,7 +118,7 @@
 				>
 					<div
 						class="fIndicator exploration"
-						style:background-color={$c3}
+						style:background-color={darkThemed ? darkMotif.f3 : $c3}
 						style:width={`${$f3w}%`}
 					/>
 					<a href="/projects/category/exploration">exploration</a>
@@ -126,11 +135,15 @@
 			>
 		</div>
 	</div>
-	<a href="/handwriting" class="experiment" style:text-decoration-color={$c3}>
+	<a
+		href="/handwriting"
+		class="experiment"
+		style:text-decoration-color={darkThemed ? darkMotif.f3 : $c3}
+	>
 		<p
-			style:color={$c3}
-			style:background-color={$c1}
-			style:border-color={$cText}
+			style:color={darkThemed ? darkMotif.f3 : $c3}
+			style:background-color={darkThemed ? darkMotif.f1 : $c1}
+			style:border-color={darkThemed ? darkMotif.text : $cText}
 			class="p-2 border-b-[1px] w-full"
 		>
 			Article Experiment
@@ -139,29 +152,47 @@
 	<a
 		href="/object_gallery"
 		class="experiment"
-		style:text-decoration-color={$cText}
+		style:text-decoration-color={darkThemed ? darkMotif.text : $cText}
 	>
 		<p
-			style:color={$cText}
-			style:background-color={$c2}
-			style:border-color={$cText}
+			style:color={darkThemed ? darkMotif.text : $cText}
+			style:background-color={darkThemed ? darkMotif.f2 : $c2}
+			style:border-color={darkThemed ? darkMotif.text : $cText}
 			class="p-2 border-b-[1px] w-full"
 		>
 			My Ceramics Collection
 		</p>
 	</a>
-	<a href="/easing" class="experiment" style:text-decoration-color={$cText}>
+	<a
+		href="/easing"
+		class="experiment"
+		style:text-decoration-color={darkThemed ? darkMotif.text : $cText}
+	>
 		<p
-			style:color={$cText}
-			style:background-color={$c3}
-			style:border-color={$cText}
+			style:color={darkThemed ? darkMotif.text : $cText}
+			style:background-color={darkThemed ? darkMotif.f3 : $c3}
+			style:border-color={darkThemed ? darkMotif.text : $cText}
 			class="p-2 border-b-[1px] w-full"
 		>
 			Easing Experiment
 		</p>
 	</a>
+	<a
+		href="/shell"
+		class="experiment"
+		style:text-decoration-color={darkThemed ? darkMotif.f3 : $c3}
+	>
+		<p
+			style:color={darkThemed ? darkMotif.text : $cText}
+			style:background-color={darkThemed ? `${darkMotif.f1}20` : $c4}
+			style:border-color={darkThemed ? darkMotif.text : $cText}
+			class="p-2 border-b-[1px] w-full"
+		>
+			Shell Generator
+		</p>
+	</a>
 	<div
-		style:background-image={`linear-gradient(#ffffff, ${$c3} 250%)`}
+		style:background-image={`linear-gradient(#ffffff, ${darkThemed ? darkMotif.f3 : $c3} 250%)`}
 		class="w-full h-full"
 	/>
 </nav>

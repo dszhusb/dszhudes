@@ -1,8 +1,13 @@
 <script lang="ts">
     import { derived } from "svelte/store";
-    import { hColors, colorSettings } from "$lib/store";
-    import { fly, scale, fade, slide } from "svelte/transition";
-    import { circOut, linear } from "svelte/easing";
+    import {
+        hColors,
+        colorSettings,
+        section_size,
+        scaled_handle_one,
+        scaled_handle_two,
+        chart_size,
+    } from "$lib/store";
     import {
         plotCubic,
         cubicPoints,
@@ -11,20 +16,17 @@
     } from "./cubicBezier";
     import { CodeBlock } from "svhighlight";
     import { tweened } from "svelte/motion";
-    import {
-        scaled_handle_one,
-        scaled_handle_two,
-        chart_size,
-    } from "$lib/store";
+    import { fly, scale, fade, slide } from "svelte/transition";
+    import { circOut, linear } from "svelte/easing";
     import Handle from "$lib/components/easing/Handle.svelte";
 
     let show = true;
+    const resolution = 100;
+
     const c3 = tweened($hColors.f3, colorSettings);
     hColors.subscribe((value) => {
         c3.set(value.f3);
     });
-
-    const resolution = 100;
 
     const points = derived(
         [scaled_handle_one, scaled_handle_two, chart_size],
@@ -43,8 +45,6 @@
             cubicPoints($scaled_handle_one, $scaled_handle_two, resolution),
     );
 
-    curve.subscribe((v) => console.log(v));
-
     function easeBezier(t: number): number {
         let y = 0;
         for (let i = 0; i < $curve.length - 1; i++) {
@@ -59,6 +59,8 @@
 <svelte:head>
     <meta name="description" content="Easing Experiment Page" />
 </svelte:head>
+
+<svelte:window bind:innerWidth={$section_size} />
 
 <main
     class="flex flex-wrap pt-8 pb-24 px-12 min-h-screen min-w-fit gap-16"

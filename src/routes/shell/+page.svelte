@@ -1,260 +1,192 @@
 <script lang="ts">
-    // import P5 from "p5-svelte";
-    import p5 from 'p5'
-    // import init, { p5SVG } from 'p5.js-svg'
-    import { Shell } from '$lib/components/shell/shell'
+    import { writable, derived } from "svelte/store";
+    import { fly } from "svelte/transition";
+    import { circOut } from "svelte/easing";
+    import { hColors, chart_size, section_size } from "$lib/store";
+    import {
+        Shell,
+        blendColorToHex,
+        joinColor,
+        interpolateColorPalette,
+    } from "./utilities";
 
-    init(p5)
+    const center = derived(chart_size, ($chart_size) => $chart_size / 2);
+    let name = "My Beautiful Shell";
+    let a = 1.5;
+    let b = 0.1 * Math.random() + 0.25;
+    let c = 1.2;
+    let l = 100;
+    let d = 0.4;
 
-    //Variables
-    let sWidth: number, sHeight: number;
-    let b: number, d: number, l: number;
-    let name = "";
+    const displayLength = writable(0);
+    const shell = writable<Shell>(new Shell(a, b, c, d, l));
+    const colors = derived(shell, ($shell) =>
+        interpolateColorPalette($shell.fc, $shell.bc),
+    );
 
-    //Change Color
-    let sameColor = false;
-    let prevSameColor = false;
-
-    let submit = false
-    let submitted = false
-
-    function handleColor() {
-        sameColor = !prevSameColor;
+    function exportSVG() {
+        // @ts-ignore: Library does not have type definitions
+        svgExport.downloadSvg(
+            document.getElementById("shellsvg"), // SVG DOM Element object to be exported. Alternatively, a string of the serialized SVG can be passed
+            name, // chart title: file name of exported image
+            { width: $chart_size, height: $chart_size },
+        );
     }
-
-    function handleSubmit() {
-        submit = !submit
-    }
-
-    const sketch = (p: p5SVG) => {
-        //Initializing Variables
-        let shell: Shell,
-            position,
-            a: number,
-            c: number,
-            bg: any,
-            sd: any,
-            bc: any,
-            fc: any;
-
-        sWidth = 200;
-        sHeight = 200; //p5.windowHeight;
-        randomizeColor();
-
-        p.setup = () => {
-            //Setting up the Sketch
-            // p.colorMode("RGB", 255);
-            p.createCanvas(sWidth, sHeight, p.SVG);
-            p.frameRate(20);
-
-            //Finding shells
-            a = 1.5;
-            b = p.random(0.15, 0.2);
-            c = 1.2;
-            d = p.random(0.4, 2);
-            l = p.int(p.map(b, 0.15, 0.3, 90, 85));
-
-            prevSameColor = sameColor;
-
-            shell = new Shell(a, b, c, d, l);
-            position = p.createVector(0.5 * sWidth, 0.5 * sHeight, 0);
-
-            bg = p.color("#17110D");
-            sd = p.color("#493121");
-        };
-
-        p.draw = () => {
-            if (prevSameColor != sameColor) {
-                randomizeColor();
-            }
-            prevSameColor = sameColor;
-
-            if (submit != submitted) {
-                submitShell()
-                submitted = submit
-            }
-
-            //Shifting Position
-            position = p.createVector(0.5 * sWidth, 0.5 * sHeight, 0);
-
-            p.background(bg);
-            let sSize = 0;
-
-            p.push();
-            p.translate(position.x, position.y);
-
-            p.push();
-            p.rotate(l / 30);
-            renderShell(shell, 0, 0, sSize, true);
-            renderShell(shell, 0, 0, sSize, false);
-            p.pop();
-
-            p.push();
-            p.translate(-p.textWidth(name) / 2, 10 + l * 1.2);
-            p.noStroke();
-            p.fill(255);
-            p.text(name, 0, 0);
-            p.pop();
-
-            p.pop();
-
-            renderBorder();
-        };
-
-        function randomizeColor() {
-            bc = p.color(
-                p.int(p.random(200, 255)),
-                p.int(p.random(200, 255)),
-                255,
-            );
-            fc = p.color(
-                p.int(p.random(75, 200)),
-                p.int(p.random(75, 200)),
-                p.int(p.random(75, 200)),
-            );
-        }
-
-        function submitShell() {
-            p.save()
-            //Processing Shell Data
-            // shell.d = d;
-            // shell.b = b;
-            // shell.updateGen();
-            // let subShell = JSON.parse(JSON.stringify(shell));
-            // subShell.name = name;
-            // subShell.bc = bc.levels;
-            // subShell.fc = fc.levels;
-            // subShell.growth = subShell.growth.slice(0, l);
-            // subShell.l = l;
-        }
-
-        function renderShell(
-            s: Shell,
-            sx: number,
-            sy: number,
-            sSize: number,
-            isShadow: boolean,
-        ) {
-            let pts = s.retPoints();
-            let mx = sx + sSize / 2;
-            let my = sy + sSize / 2;
-            let wm = d;
-
-            p.push();
-            if (isShadow) {
-                p.translate(5, 5, -5);
-            }
-
-            p.translate(mx, my);
-            for (let i = l - 1; i >= 0; i--) {
-                //Size + Position
-                let theta = pts[i].theta;
-                let p = pts[i].disp;
-                let mc = pts[i].mc;
-                let x = Math.cos(theta) * p;
-                let y = Math.sin(theta) * p;
-
-                //Visual
-                let col = p.lerpColor(bc, fc, mc);
-                p.fill(col);
-                if (isShadow) {
-                    p.fill(sd);
-                }
-                p.noStroke();
-
-                //Draw Section
-                p.push();
-                p.translate(x, y);
-                p.rotate(-p.atan2(x, y));
-                p.ellipse(0, 0, p * wm, 2 * p);
-                p.pop();
-            }
-            p.pop();
-        }
-
-        function renderBorder() {
-            p.stroke(0);
-            p.strokeWeight(2);
-            p.noFill();
-            p.rect(0, 0, sWidth, sHeight);
-        }
-
-        p.windowResized = () => {
-            p.resizeCanvas(sWidth, sHeight);
-        };
-
-        return { randomizeColor };
-    };
-
-    new p5(sketch, document.body)
 </script>
 
-<div class="TakeShell" style="width: 100%; height: 100%">
-    <!-- bind:clientWidth={sWidth} -->
-    <!-- <P5 {sketch} /> -->
+<svelte:head>
+    <!-- https://github.com/sharonchoong/svg-exportJS -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/canvg/3.0.9/umd.js"
+        integrity="sha512-Wu9XXg78PiNE0DI4Z80lFKlEpLq7yGjquc0I35Nz+sYmSs4/oNHaSW8ACStXBoXciqwTLnSINqToeWP3iNDGmQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    ></script>
+    <script
+        src="https://sharonchoong.github.io/svg-exportJS/svg-export.min.js"
+    ></script>
+</svelte:head>
 
-    <div
-        class="handleBar"
-        style="border:0.5px black solid; background-color: white"
-    >
-        <label>
-            Name: <input type="text" bind:value={name} />
-        </label>
-        <label class="sliderContainerContainer">
-            Length: <input
-                class="sliderContainer"
-                type="range"
-                bind:value={l}
-                min="100"
-                max="120"
-                step="1"
-            />
-        </label>
-        <label class="sliderContainerContainer">
-            Roundness: <input
-                class="sliderContainer"
-                type="range"
-                bind:value={d}
-                min="0.4"
-                max="2"
-                step="0.01"
-            />
-        </label>
-        <label>
-            <button on:click={handleColor}>Color</button>
-        </label>
-        <label>
-            <button on:click={handleSubmit}>Submit</button>
-        </label>
+<svelte:window bind:innerWidth={$section_size} />
+
+<main
+    class="flex flex-wrap pt-8 pb-24 px-12 min-h-screen min-w-fit gap-16"
+    in:fly={{ duration: 500, opacity: 0.8, y: -200, easing: circOut }}
+    style:background-image={`linear-gradient(#ffffff 30%, ${$colors.f3}50)`}
+>
+    <div class="flex flex-col gap-y-8" style:max-width={$chart_size + "px"}>
+        <div
+            class="relative overflow-hidden w-fit h-fit border-[1px] border-stone-800"
+            style:background-image={`linear-gradient(rgba(${joinColor($shell.bc)}, 0.2), #ffffff80)`}
+        >
+            <svg width={$chart_size} height={$chart_size} id="shellsvg">
+                <g
+                    transform={`translate(${-$shell.growth[0].cx / 2}, ${-$shell.growth[0].cy / 2})`}
+                >
+                    {#each $shell.growth as p, i}
+                        {#if i > $displayLength}
+                            <ellipse
+                                cx={$center + p.cx}
+                                cy={$center + p.cy}
+                                rx={p.rx}
+                                ry={p.ry}
+                                transform={`rotate(${(p.theta * 180) / Math.PI}, ${$center + p.cx}, ${$center + p.cy})`}
+                                fill={`rgb(${blendColorToHex($shell.bc, $shell.fc, p.mc)})`}
+                            />
+                        {/if}
+                    {/each}
+                </g>
+            </svg>
+            <div
+                class="flex flex-row h-8 w-full border-t-[1px] border-stone-800 divide-x-[1px] divide-stone-800"
+            >
+                {#each Object.values($colors) as c}
+                    <div class="w-full h-full" style:background-color={c} />
+                {/each}
+            </div>
+        </div>
+        <div class="flex flex-col gap-4">
+            <div class="flex flex-row">
+                <button
+                    class="px-3 py-2 border-[1px] border-stone-800 w-fit uppercase mr-3 bg-stone-200"
+                    on:click={() => shell.set(new Shell(a, b, c, d, l))}
+                >
+                    Randomize
+                </button>
+                <label class="uppercase">
+                    <input
+                        type="text"
+                        style:accent-color={$colors.text}
+                        class="bg-stone-50/0 px-3 py-2 border-[1px] border-stone-800"
+                        placeholder="Give it a name!"
+                        bind:value={name}
+                    />
+                </label>
+                <button
+                    class="px-3 py-2 bg-stone-900 text-white w-fit uppercase"
+                    on:click={() => exportSVG()}
+                >
+                    Download
+                </button>
+            </div>
+            <label class="sliderContainerContainer">
+                a: <input
+                    class="sliderContainer"
+                    type="range"
+                    style:accent-color={$colors.text}
+                    bind:value={a}
+                    on:input={() => {
+                        shell.update((s) => s.updateA(a));
+                    }}
+                    min="1"
+                    max="3"
+                    step="0.01"
+                />
+            </label>
+            <label class="sliderContainerContainer">
+                b: <input
+                    class="sliderContainer"
+                    type="range"
+                    style:accent-color={$colors.text}
+                    bind:value={b}
+                    on:input={() => {
+                        shell.update((s) => s.updateB(b));
+                    }}
+                    min="0.25"
+                    max="0.4"
+                    step="0.01"
+                />
+            </label>
+            <label class="sliderContainerContainer">
+                d: <input
+                    class="sliderContainer"
+                    type="range"
+                    style:accent-color={$colors.text}
+                    bind:value={d}
+                    on:input={() => {
+                        shell.update((s) => s.updateD(d));
+                    }}
+                    min="0.25"
+                    max="1.25"
+                    step="0.01"
+                />
+            </label>
+            <!-- <input type="color" /> -->
+        </div>
     </div>
-</div>
+    <div class="flex flex-col gap-y-4 max-w-96">
+        <h1 class="uppercase font-light">What's with the shells?</h1>
+        <p class="text-base">
+            The shell motif first started when I found George R. McGhee Jr's
+            seminal work “Theoretical Morphology” abandoned in a hallway at CMU.
+        </p>
+        <p>
+            It presents a fascinating look into a mathematical perspective
+            behind how the real and speculative models of organism growth.
+        </p>
+        <p>
+            I was particularly struck by how shell morph as you tweak the
+            parameters behind the model behind their construction. Building off
+            of the formula described as well as making my own tweaks from my own
+            experimentation and research, the first shell generator was born in
+            Processing.
+        </p>
+        <p>
+            From the early days in Processing to P5.js and Javacript and finally
+            to SVGs and Typescript. This tool has come a long way.
+        </p>
+        <p class="font-bold">
+            Feel free to play around and download your very own shell!
+        </p>
+    </div>
+</main>
 
-<style>
+<style lang="postcss">
     label {
-        display: inline-block;
-        padding-left: 20px;
+        @apply font-mono;
     }
-    input {
-        margin: 0;
-    }
-    .handleBar {
-        width: 100%;
-        min-height: 100px;
-        position: fixed;
-        bottom: 0;
 
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-    }
-    .sliderContainerContainer {
-        display: flex;
-        flex-direction: row;
-    }
-    .sliderContainer {
-        display: flex;
-        height: auto;
-        align-items: center;
-        justify-content: center;
+    input[type="range"] {
+        @apply w-2/3 flex flex-col;
     }
 </style>

@@ -20,14 +20,8 @@ export const ceramicInfo = [
     { img: paleLotus, blurb: ["This is a tea cup I received as a gift.", "I'm a fan of the petal-like shape and the pale blue green glaze."] },
 ]
 
-//Color Variables
-export const hIcon = writable(0);
-export const hColors = derived(hIcon, $hIcon => shells[$hIcon]);
-export const colorSettings = { duration: 300, interpolate: interpolateLab }
-export const colorSettingsSlow = { duration: 200, interpolate: interpolateLab }
-
 //Shell Values
-export const shells = [
+export const shells = writable<Palette[]>([
     { f1: "#53A8BA", f2: "#A6C6E1", f3: "#EDCDFE", text: "#248399" },
     { f1: "#8FAB82", f2: "#F3C2D2", f3: "#FFE0FF", text: "#3A7D1D" },
     { f1: "#9965B8", f2: "#BEBBF3", f3: "#E2F4FD", text: "#8345A8" },
@@ -52,11 +46,20 @@ export const shells = [
     { f1: "#77A36A", f2: "#ADC3A3", f3: "#E5C4E4", text: "#387127" },
     { f1: "#7C7B79", f2: "#ABB6BB", f3: "#D6ECF9", text: "#6B665C" },
     { f1: "#C1C56E", f2: "#EBD6C1", f3: "#F3E2FF", text: "#747736" }
-];
+]);
+
+//Color Variables
+export const hIcon = writable(0);
+export const hColors = derived([hIcon, shells], ([$hIcon, $shells]) => $shells[$hIcon]);
+export const colorSettings = { duration: 300, interpolate: interpolateLab }
+export const colorSettingsSlow = { duration: 200, interpolate: interpolateLab }
+
+export const darkMotif = <Palette>{ text: "#1c1917", f1: "#3f3f46", f2: "#71717a", f3: "#d4d4d8" }
 
 //Easing Handle Positions
 export interface Coord { x: number, y: number };
-export const chart_size = writable(500);
+export const section_size = writable(0);
+export const chart_size = derived(section_size, ($section_size) => Math.max(Math.min($section_size, 240), 500));
 export const handle_one = writable(<Coord>({ x: 150, y: 350 }));
 export const handle_two = writable(<Coord>({ x: 350, y: 150 }));
 export const scaled_handle_one = derived([handle_one, chart_size], ([$handle_one, $chart_size]) => <Coord>({ x: $handle_one.x / $chart_size, y: $handle_one.y / $chart_size }));

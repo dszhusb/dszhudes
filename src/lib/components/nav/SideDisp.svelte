@@ -17,10 +17,18 @@
 <script lang="ts">
     import { gsap } from "gsap";
     import { onMount } from "svelte";
-    import { hIcon, hColors } from "$lib/store";
+    import { hIcon, hColors, darkMotif } from "$lib/store";
     import { page } from "$app/stores";
     import Zhu from "$lib/components/nav/Zhu.svelte";
     import Back from "$lib/components/nav/Back.svelte";
+
+    let darkThemed = false;
+    page.subscribe((value) => {
+        darkThemed = false;
+        if (value.url.pathname.includes("shell")) {
+            darkThemed = true;
+        }
+    });
 
     let showFlag = true;
 
@@ -46,37 +54,50 @@
         <Zhu />
     {:else}
         <div class="hover:rotate-45 duration-500">
-            <Back fill={$hColors.text} />
+            <Back fill={darkThemed ? darkMotif.text : $hColors.text} />
         </div>
     {/if}
     <div class="sideways mx-auto uppercase font-thin text-3xl pt-2">
         {$page.url.pathname.split("/").slice(-1)[0].replace("_", " ")}
     </div>
     <button on:click={resetIcon} on:click={trigger}>
-        <enhanced:img
-            class="icon w-full p-2 hover:saturate-150"
-            src={images[`/src/lib/assets/iconShells/${$hIcon}.webp`]}
-            alt="shell"
-        />
+        {#if darkThemed}
+            <enhanced:img
+                class="icon w-full p-2 hover:saturate-150 grayscale brightness-75 contrast-125"
+                src={images[`/src/lib/assets/iconShells/${$hIcon}.webp`]}
+                alt="shell"
+            />
+        {:else}
+            <enhanced:img
+                class="icon w-full p-2 hover:saturate-150"
+                src={images[`/src/lib/assets/iconShells/${$hIcon}.webp`]}
+                alt="shell"
+            />
+        {/if}
     </button>
     {#if showFlag}
         <div
-            style:background-color={$hColors.f2}
-            style:border-color={$hColors.f2}
+            style:background-color={darkThemed ? darkMotif.f3 : $hColors.f2}
+            style:border-color={darkThemed ? darkMotif.f3 : $hColors.f2}
             class="relative rounded-full w-fit px-2 py-5 mx-auto"
         >
             <div
-                style:border-bottom-color={$hColors.f2}
+                style:border-bottom-color={darkThemed
+                    ? darkMotif.f3
+                    : $hColors.f2}
                 class="arrow-up absolute -top-[13px] -translate-x-1/2 left-1/2"
             />
-            <p style:color={$hColors.text} class="w-6 sideways uppercase">
+            <p
+                style:color={darkThemed ? darkMotif.text : $hColors.text}
+                class="w-6 sideways uppercase"
+            >
                 Click Me!
             </p>
         </div>
     {/if}
 </main>
 
-<style>
+<style lang="postcss">
     .sideways {
         writing-mode: vertical-rl;
         text-orientation: sideways;

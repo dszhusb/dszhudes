@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { browser } from "$app/environment";
     export let fill: string;
 
     let color = "#292524";
@@ -8,11 +9,15 @@
     function handleMouseOut() {
         color = "#292524";
     }
+
+    function nav_back() {
+        if (browser) window.history.back();
+    }
 </script>
 
 <!-- 625 370 -->
-<a
-    href="/projects"
+<button
+    on:click={() => nav_back()}
     on:mouseover={handleMouseOver}
     on:mouseout={handleMouseOut}
     on:focus={handleMouseOver}
@@ -33,7 +38,7 @@
             tabindex="0"
         />
     </svg>
-</a>
+</button>
 
 <style lang="postcss">
     svg:active {

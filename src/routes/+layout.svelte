@@ -17,13 +17,16 @@
 <script lang="ts">
     import "../app.css";
     import { page, navigating } from "$app/stores";
-    import { hIcon } from "$lib/store";
+    import { hIcon, hColors } from "$lib/store";
     import { fly } from "svelte/transition";
     import { circOut } from "svelte/easing";
     import Loading from "$lib/components/nav/Loading.svelte";
     import TopNav from "$lib/components/nav/TopNav.svelte";
     import Sidebar from "$lib/components/nav/Sidebar.svelte";
     import SideDisp from "$lib/components/nav/SideDisp.svelte";
+
+    let highlight = "#ffccee"
+    hColors.subscribe((c) => highlight = c.f3)
 </script>
 
 <svelte:head>
@@ -34,7 +37,10 @@
     />
 </svelte:head>
 
-<main class="font-mono flex flex-col md:flex-row relative scroll-smooth">
+<main
+    class="font-mono flex flex-col md:flex-row relative scroll-smooth"
+    style="--light:{highlight}"
+>
     {#if $page.route.id != "/"}
         <div class="block md:hidden">
             <TopNav />
@@ -57,7 +63,7 @@
     </div>
 </main>
 
-<style>
+<style lang="postcss">
     /* .cursor {
         @apply absolute w-16 h-16 z-50 pointer-events-none -translate-x-1/2 -translate-y-1/2 saturate-150;
     } */

@@ -6,6 +6,18 @@
 @tailwind utilities;
 
 @layer base {
+    ::-moz-selection {
+        background: var(--light);
+    }
+
+    ::-webkit-selection {
+        background: var(--light);
+    }
+
+    ::selection {
+        background: var(--light);
+    }
+
     .highlight {
         background-color: var(--txt-color);
     }

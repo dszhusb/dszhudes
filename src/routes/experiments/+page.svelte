@@ -8,7 +8,7 @@
     style:background-image={`linear-gradient(#ffffff 30%, ${$hColors.f3}50)`}
 >
     <div class="px-12 py-8">
-        <h2 class="max-w-3xl text-stone-500">
+        <h2 class="max-w-3xl text-stone-600">
             The following is a series of web experiments I've been working on in
             my spare time just having fun exploring interaction on the internet!
         </h2>

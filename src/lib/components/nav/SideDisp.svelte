@@ -53,7 +53,7 @@
     {#if $page.url.pathname === "/projects"}
         <Zhu />
     {:else}
-        <div class="hover:rotate-45 duration-500">
+        <div class="hover:rotate-45 duration-500 w-fit mx-auto">
             <Back fill={darkThemed ? darkMotif.text : $hColors.text} />
         </div>
     {/if}

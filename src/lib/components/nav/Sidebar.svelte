@@ -146,7 +146,7 @@
 	>
 		<p
 			style:color={darkThemed ? darkMotif.text : $cText}
-			class="p-3 w-full"
+			class="p-3 w-full bg-white/70"
 		>
 			Web Experiments
 		</p>

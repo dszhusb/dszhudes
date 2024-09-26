@@ -52,7 +52,7 @@
 
 <main
     class="flex flex-wrap pt-8 pb-24 px-12 min-h-screen min-w-fit gap-16"
-    in:fly={{ duration: 500, opacity: 0.8, y: -200, easing: circOut }}
+    in:fly={{ duration: 500, opacity: 0.8, y: 200, easing: circOut }}
     style:background-image={`linear-gradient(#ffffff 30%, ${$colors.f3}50)`}
 >
     <div class="flex flex-col gap-y-8" style:max-width={$chart_size + "px"}>
@@ -64,7 +64,8 @@
                 class="absolute m-4 py-1 px-2 top-0 left-0 border-[1px] w-28"
                 style:border-color={`${$colors.text}a0`}
                 style:color={`${$colors.text}a0`}
-                on:click={() => (wireframe = !wireframe)}>{wireframe ? "wireframe" : "rendered"}</button
+                on:click={() => (wireframe = !wireframe)}
+                >{wireframe ? "wireframe" : "rendered"}</button
             >
             <svg width={$chart_size} height={$chart_size} id="shellsvg">
                 <g
@@ -164,7 +165,10 @@
             <!-- <input type="color" /> -->
         </div>
     </div>
-    <div class="flex flex-col gap-y-4 max-w-96">
+    <div
+        class="flex flex-col gap-y-4 max-w-96"
+        in:fly={{ duration: 500, opacity: 0.8, x: 200, easing: circOut }}
+    >
         <h1 class="uppercase font-light">What's with the shells?</h1>
         <p class="text-base">
             The shell motif first started when I found George R. McGhee Jr's

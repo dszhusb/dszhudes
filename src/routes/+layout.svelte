@@ -25,8 +25,12 @@
     import Sidebar from "$lib/components/nav/Sidebar.svelte";
     import SideDisp from "$lib/components/nav/SideDisp.svelte";
 
-    let highlight = "#ffccee"
-    hColors.subscribe((c) => highlight = c.f3)
+    let highlight = "#000000";
+    let text = "000000";
+    hColors.subscribe((c) => {
+        highlight = c.f3;
+        text = c.text
+    });
 </script>
 
 <svelte:head>
@@ -39,7 +43,7 @@
 
 <main
     class="font-mono flex flex-col md:flex-row relative scroll-smooth"
-    style="--light:{highlight}"
+    style="--light:{highlight} --text:{text}"
 >
     {#if $page.route.id != "/"}
         <div class="block md:hidden">

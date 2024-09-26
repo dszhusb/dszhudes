@@ -2,6 +2,7 @@
 	import { page } from "$app/stores";
 	import { cubicOut } from "svelte/easing";
 	import { tweened } from "svelte/motion";
+	import { fly } from "svelte/transition";
 	import {
 		hColors,
 		colorSettings,
@@ -42,6 +43,8 @@
 	const f1w = tweened(sw, { duration: 200, easing: cubicOut });
 	const f2w = tweened(sw, { duration: 200, easing: cubicOut });
 	const f3w = tweened(sw, { duration: 200, easing: cubicOut });
+
+	let showExperiments = false;
 
 	hColors.subscribe((value) => {
 		c1.set(value.f1);
@@ -137,21 +140,61 @@
 			>
 		</div>
 	</div>
-	<a
-		href="/experiments"
-		class="experiment flex flex-col content-center w-full border-b-[1px]"
-		style:text-decoration-color={darkThemed ? darkMotif.text : $cText}
-		style:background-color={darkThemed ? darkMotif.f3 : $c4}
-		style:border-color={darkThemed ? darkMotif.text : $cText}
+	<div
+		role="toolbar"
+		tabindex="0"
+		on:mouseenter={() => (showExperiments = true)}
+		on:mouseleave={() => (showExperiments = false)}
 	>
-		<p
-			style:color={darkThemed ? darkMotif.text : $cText}
-			class="p-3 w-full bg-white/70"
+		<a
+			href="/experiments"
+			class="experiment flex flex-col content-center w-full border-b-[1px]"
+			style:text-decoration-color={darkThemed ? darkMotif.text : $cText}
+			style:background-color={darkThemed ? darkMotif.f3 : $c4}
+			style:border-color={darkThemed ? darkMotif.text : $cText}
 		>
-			Web Experiments
-		</p>
-		<!-- <Wireframe fill={$cText} /> -->
-	</a>
+			<p
+				style:color={darkThemed ? darkMotif.text : $cText}
+				style:background-color={"rgba(255,255,255,0.7)"}
+				class="p-3 w-full"
+			>
+				Web Experiments
+			</p>
+			<!-- <Wireframe fill={$cText} /> -->
+		</a>
+		{#if showExperiments}
+			<div
+				transition:fly={{ delay: 300, duration: 500, y: 5, easing: cubicOut }}
+				class="experimentContainer grid grid-cols-2"
+				style="--border-color:{darkThemed ? darkMotif.text : $cText}"
+				style:background-color={`${$hColors.f2}18`}
+				style:text-decoration-color={darkThemed
+					? darkMotif.text
+					: $cText}
+			>
+				<a href="/shell" class="experiment">
+					<p style:color={darkThemed ? darkMotif.text : $cText}>
+						Shells
+					</p>
+				</a>
+				<a href="/easing" class="experiment">
+					<p style:color={darkThemed ? darkMotif.text : $cText}>
+						Easing
+					</p>
+				</a>
+				<a href="/object_gallery" class="experiment">
+					<p style:color={darkThemed ? darkMotif.text : $cText}>
+						Ceramics
+					</p>
+				</a>
+				<a href="/handwriting" class="experiment">
+					<p style:color={darkThemed ? darkMotif.text : $cText}>
+						Article
+					</p>
+				</a>
+			</div>
+		{/if}
+	</div>
 	<div
 		style:background-image={`linear-gradient(#ffffff, ${darkThemed ? darkMotif.f3 : $c3} 250%)`}
 		class="w-full h-full"
@@ -169,8 +212,21 @@
 		@apply bg-stone-100;
 	}
 
+	.experimentContainer {
+		border-color: var(--border-color);
+	}
+
+	.experimentContainer a:nth-child(odd) {
+		@apply border-r-[1px];
+	}
+
+	.experimentContainer p {
+		@apply p-2 w-full text-sm;
+	}
+
 	.experiment {
-		@apply p-0;
+		@apply p-0 border-b-[1px];
+		border-color: var(--border-color);
 	}
 
 	a {

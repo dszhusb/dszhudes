@@ -90,7 +90,7 @@
 <main style:background-image={`linear-gradient(#ffffff 20%, ${$hColors.f3}40)`}>
     <div
         class="max-w-4xl mx-auto pb-16"
-        in:fly={{ duration: 300, opacity: 0.8, x: 200, easing: circOut }}
+        in:fly={{ duration: 300, opacity: 0.8, x: 100, easing: circOut }}
     >
         <enhanced:img
             class="w-full h-auto px-16 py-8 grayscale"

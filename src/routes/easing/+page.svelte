@@ -64,7 +64,7 @@
 
 <main
     class="flex flex-wrap pt-8 pb-24 px-12 min-h-screen min-w-fit gap-16"
-    in:fly={{ duration: 500, opacity: 0.8, y: -200, easing: circOut }}
+    in:fly={{ duration: 500, opacity: 0.8, y: 200, easing: circOut }}
     style:background-image={`linear-gradient(#ffffff 20%, ${$c3}80)`}
 >
     <div class="flex flex-col gap-y-4" style:max-width={$chart_size + "px"}>
@@ -147,7 +147,10 @@
             value, this is what I'm using for now.
         </p>
     </div>
-    <div class="flex flex-col gap-y-8">
+    <div
+        class="flex flex-col gap-y-8"
+        in:fly={{ duration: 500, opacity: 0.8, x: 100, easing: circOut }}
+    >
         <div>
             <h1 class="uppercase font-light mb-4">Cubic Bezier Easing</h1>
             <div>

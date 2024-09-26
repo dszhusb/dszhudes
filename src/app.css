@@ -18,6 +18,10 @@
         background: var(--light);
     }
 
+    html {
+        text-decoration-color: var(--text)
+    }
+
     .highlight {
         background-color: var(--txt-color);
     }

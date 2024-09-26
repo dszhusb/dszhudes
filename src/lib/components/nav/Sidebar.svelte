@@ -22,12 +22,12 @@
 			darkThemed = true;
 		}
 
-		if (value.url.pathname.includes("projects")) {
-			cWork.set(cDark);
-			cAbout.set(cLight);
-		} else {
+		if (value.url.pathname.includes("about")) {
 			cWork.set(cLight);
 			cAbout.set(cDark);
+		} else {
+			cWork.set(cDark);
+			cAbout.set(cLight);
 		}
 	});
 
@@ -73,9 +73,9 @@
 			<a
 				href="/projects"
 				style:background-color={$cWork}
-				aria-current={$page.url.pathname.includes("/projects")
-					? "page"
-					: undefined}>work</a
+				aria-current={$page.url.pathname.includes("/about")
+					? undefined
+					: "page"}>work</a
 			>
 		</button>
 		<div class="indicators">
@@ -131,9 +131,9 @@
 			<a
 				href="/about"
 				style:background-color={$cAbout}
-				aria-current={!$page.url.pathname.includes("/projects")
-					? "page"
-					: undefined}>about</a
+				aria-current={!$page.url.pathname.includes("/about")
+					? undefined
+					: "page"}>about</a
 			>
 		</div>
 	</div>

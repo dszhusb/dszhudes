@@ -9,6 +9,7 @@
 		darkMotif,
 	} from "$lib/store";
 	import NavIcon from "$lib/components/nav/NavIcon.svelte";
+	import Wireframe from "$lib/components/nav/Wireframe.svelte";
 
 	const cDark = "#292524";
 	const cLight = "#e7e5e4";
@@ -33,7 +34,7 @@
 	const c1 = tweened($hColors.f1, colorSettings);
 	const c2 = tweened($hColors.f2, colorSettings);
 	const c3 = tweened($hColors.f3, colorSettings);
-	const c4 = tweened(`${$hColors.f3}60`, colorSettings);
+	const c4 = tweened(`${$hColors.f3}80`, colorSettings);
 	const cText = tweened($hColors.text, colorSettings);
 
 	const sw = 6.75;
@@ -46,6 +47,7 @@
 		c1.set(value.f1);
 		c2.set(value.f2);
 		c3.set(value.f3);
+		c4.set(value.f3);
 		cText.set(value.text);
 	});
 </script>
@@ -136,60 +138,19 @@
 		</div>
 	</div>
 	<a
-		href="/handwriting"
-		class="experiment"
-		style:text-decoration-color={darkThemed ? darkMotif.f3 : $c3}
-	>
-		<p
-			style:color={darkThemed ? darkMotif.f3 : $c3}
-			style:background-color={darkThemed ? darkMotif.f1 : $c1}
-			style:border-color={darkThemed ? darkMotif.text : $cText}
-			class="p-2 border-b-[1px] w-full"
-		>
-			Article Experiment
-		</p>
-	</a>
-	<a
-		href="/object_gallery"
-		class="experiment"
+		href="/experiments"
+		class="experiment flex flex-col content-center w-full border-b-[1px]"
 		style:text-decoration-color={darkThemed ? darkMotif.text : $cText}
+		style:background-color={darkThemed ? darkMotif.f3 : $c4}
+		style:border-color={darkThemed ? darkMotif.text : $cText}
 	>
 		<p
 			style:color={darkThemed ? darkMotif.text : $cText}
-			style:background-color={darkThemed ? darkMotif.f2 : $c2}
-			style:border-color={darkThemed ? darkMotif.text : $cText}
-			class="p-2 border-b-[1px] w-full"
+			class="p-3 w-full"
 		>
-			My Ceramics Collection
+			Web Experiments
 		</p>
-	</a>
-	<a
-		href="/easing"
-		class="experiment"
-		style:text-decoration-color={darkThemed ? darkMotif.text : $cText}
-	>
-		<p
-			style:color={darkThemed ? darkMotif.text : $cText}
-			style:background-color={darkThemed ? darkMotif.f3 : $c3}
-			style:border-color={darkThemed ? darkMotif.text : $cText}
-			class="p-2 border-b-[1px] w-full"
-		>
-			Easing Experiment
-		</p>
-	</a>
-	<a
-		href="/shell"
-		class="experiment"
-		style:text-decoration-color={darkThemed ? darkMotif.f3 : $c3}
-	>
-		<p
-			style:color={darkThemed ? darkMotif.text : $cText}
-			style:background-color={darkThemed ? `${darkMotif.f1}20` : $c4}
-			style:border-color={darkThemed ? darkMotif.text : $cText}
-			class="p-2 border-b-[1px] w-full"
-		>
-			Shell Generator
-		</p>
+		<!-- <Wireframe fill={$cText} /> -->
 	</a>
 	<div
 		style:background-image={`linear-gradient(#ffffff, ${darkThemed ? darkMotif.f3 : $c3} 250%)`}

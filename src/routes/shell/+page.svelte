@@ -17,6 +17,7 @@
     let c = 1.2;
     let l = 100;
     let d = 0.4;
+    let wireframe = false;
 
     const displayLength = writable(0);
     const shell = writable<Shell>(new Shell(a, b, c, d, l));
@@ -59,6 +60,12 @@
             class="relative overflow-hidden w-fit h-fit border-[1px] border-stone-800"
             style:background-image={`linear-gradient(rgba(${joinColor($shell.bc)}, 0.2), #ffffff80)`}
         >
+            <button
+                class="absolute m-4 py-1 px-2 top-0 left-0 border-[1px] w-28"
+                style:border-color={`${$colors.text}a0`}
+                style:color={`${$colors.text}a0`}
+                on:click={() => (wireframe = !wireframe)}>{wireframe ? "wireframe" : "rendered"}</button
+            >
             <svg width={$chart_size} height={$chart_size} id="shellsvg">
                 <g
                     transform={`translate(${-$shell.growth[0].cx / 2}, ${-$shell.growth[0].cy / 2})`}
@@ -71,7 +78,10 @@
                                 rx={p.rx}
                                 ry={p.ry}
                                 transform={`rotate(${(p.theta * 180) / Math.PI}, ${$center + p.cx}, ${$center + p.cy})`}
-                                fill={`rgb(${blendColorToHex($shell.bc, $shell.fc, p.mc)})`}
+                                fill={wireframe
+                                    ? "none"
+                                    : `rgb(${blendColorToHex($shell.bc, $shell.fc, p.mc)})`}
+                                stroke={wireframe ? $colors.text : "none"}
                             />
                         {/if}
                     {/each}
@@ -119,7 +129,7 @@
                         shell.update((s) => s.updateA(a));
                     }}
                     min="1"
-                    max="3"
+                    max="5"
                     step="0.01"
                 />
             </label>

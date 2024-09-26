@@ -24,7 +24,7 @@
 
 <main
     class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full w-full"
-    in:fly={{ duration: 300, opacity: 0.8, x: 200, easing: circOut }}
+    in:fly={{ duration: 300, opacity: 0.8, y: 200, easing: circOut }}
     style:background-image={`linear-gradient(#ffffff 50%, ${$hColors.f3}80)`}
 >
     <div class="about py-4 px-12">

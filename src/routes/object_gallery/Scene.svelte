@@ -1,6 +1,6 @@
 <script lang="ts">
     import { T, useThrelte } from "@threlte/core";
-    import { Suspense, Environment, transitions } from "@threlte/extras";
+    import { Suspense, transitions } from "@threlte/extras";
     import { cIndex } from "$lib/store";
     import Camera from "./Camera.svelte";
 

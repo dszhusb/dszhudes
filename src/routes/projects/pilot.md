@@ -5,7 +5,7 @@ role: Design, Hardware Development, Production
 collaborators: Landing Gear
 duration: 6 weeks
 priority: 0
-documentation: https://github.com/landing-gear-production
+documentation:
 site:
 categories:
 - 'physical'
@@ -18,13 +18,13 @@ categories:
     import YoutubeEmbed from '$lib/components/article/YoutubeEmbed.svelte'
 
     const p = 'pilot/'
-    const demo = "4FG9xUcryY8"
+    // const demo = "4FG9xUcryY8"
     const hooks = [p + 'steering', p + 'throttle', p + 'brake', p + 'dashboard']
 </script>
 
 # The Pilot Semi-Truck Simulator – an immersive experience built for the 2024 Berkshire Hathaway Shareholder Conference. We converted a real semi-truck into a realistic trucking simulator game.
 
-<YoutubeEmbed url={demo} />
+<!-- <YoutubeEmbed url={demo} /> -->
 
 ## PROJECT OVERVIEW
 

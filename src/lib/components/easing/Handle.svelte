@@ -36,7 +36,7 @@
         if (moving) {
             const touch = e instanceof TouchEvent ? e.touches[0] : e;
             left = clamp(left + touch.clientX, 0, parentSize);
-            top = clamp(top + touch.clientX, 0, parentSize);
+            top = clamp(top + touch.clientY, 0, parentSize);
         }
     }
 

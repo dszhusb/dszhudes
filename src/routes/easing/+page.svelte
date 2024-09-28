@@ -60,7 +60,7 @@
     <meta name="description" content="Easing Experiment Page" />
 </svelte:head>
 
-<svelte:window bind:innerWidth={$section_size} />
+<svelte:window bind:outerWidth={$section_size} />
 
 <main
     class="flex flex-wrap pt-8 pb-24 px-8 sm:px-12 min-h-screen min-w-fit gap-16"
@@ -77,6 +77,7 @@
                     x1="0"
                     y1={$chart_size}
                     x2={$chart_size}
+                    viewBox={`0 0 ${$chart_size} ${$chart_size}`}
                     y2="0"
                     style={`stroke:${$hColors.f3}80;stroke-width:3`}
                 />

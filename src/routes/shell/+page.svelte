@@ -2,7 +2,7 @@
     import { writable, derived } from "svelte/store";
     import { fly } from "svelte/transition";
     import { circOut } from "svelte/easing";
-    import { hColors, chart_size, section_size } from "$lib/store";
+    import { chart_size, section_size } from "$lib/store";
     import {
         Shell,
         blendColorToHex,
@@ -33,6 +33,8 @@
             { width: $chart_size, height: $chart_size },
         );
     }
+
+    chart_size.subscribe((c) => console.log(c));
 </script>
 
 <svelte:head>
@@ -48,10 +50,10 @@
     ></script>
 </svelte:head>
 
-<svelte:window bind:innerWidth={$section_size} />
+<svelte:window bind:outerWidth={$section_size} />
 
 <main
-    class="flex flex-wrap pt-8 pb-24 px-12 min-h-screen min-w-fit gap-16"
+    class="flex flex-wrap pt-8 pb-24 px-8 sm:px-12 min-h-screen w-full gap-16"
     in:fly={{ duration: 500, opacity: 0.8, y: 200, easing: circOut }}
     style:background-image={`linear-gradient(#ffffff 30%, ${$colors.f3}50)`}
 >
@@ -97,28 +99,30 @@
             </div>
         </div>
         <div class="flex flex-col gap-4">
-            <div class="flex flex-row">
+            <div class="flex flex-col-reverse sm:flex-row gap-y-4 w-full">
                 <button
                     class="px-3 py-2 border-[1px] border-stone-800 w-fit uppercase mr-3 bg-stone-200"
                     on:click={() => shell.set(new Shell(a, b, c, d, l))}
                 >
                     Randomize
                 </button>
-                <label class="uppercase">
-                    <input
-                        type="text"
-                        style:accent-color={$colors.text}
-                        class="bg-stone-50/0 px-3 py-2 border-[1px] border-stone-800"
-                        placeholder="Give it a name!"
-                        bind:value={name}
-                    />
-                </label>
-                <button
-                    class="px-3 py-2 bg-stone-900 text-white w-fit uppercase"
-                    on:click={() => exportSVG()}
-                >
-                    Download
-                </button>
+                <div class="flex flex-row">
+                    <label class="uppercase">
+                        <input
+                            type="text"
+                            style:accent-color={$colors.text}
+                            class="bg-stone-50/0 px-3 py-2 border-[1px] border-stone-800"
+                            placeholder="Give it a name!"
+                            bind:value={name}
+                        />
+                    </label>
+                    <button
+                        class="px-3 py-2 bg-stone-900 text-white w-fit uppercase"
+                        on:click={() => exportSVG()}
+                    >
+                        Download
+                    </button>
+                </div>
             </div>
             <label class="sliderContainerContainer">
                 a: <input

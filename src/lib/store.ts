@@ -58,8 +58,8 @@ export const darkMotif = <Palette>{ text: "#1c1917", f1: "#3f3f46", f2: "#71717a
 
 //Easing Handle Positions
 export interface Coord { x: number, y: number };
-export const section_size = writable(0);
-export const chart_size = derived(section_size, ($section_size) => Math.max(Math.min($section_size, 240), 500));
+export const section_size = writable<number>(0);
+export const chart_size = derived(section_size, ($section_size) => Math.max(Math.min($section_size - 64, 500), 240));
 export const handle_one = writable(<Coord>({ x: 150, y: 350 }));
 export const handle_two = writable(<Coord>({ x: 350, y: 150 }));
 export const scaled_handle_one = derived([handle_one, chart_size], ([$handle_one, $chart_size]) => <Coord>({ x: $handle_one.x / $chart_size, y: $handle_one.y / $chart_size }));

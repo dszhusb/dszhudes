@@ -63,7 +63,7 @@
 <svelte:window bind:innerWidth={$section_size} />
 
 <main
-    class="flex flex-wrap pt-8 pb-24 px-12 min-h-screen min-w-fit gap-16"
+    class="flex flex-wrap pt-8 pb-24 px-8 sm:px-12 min-h-screen min-w-fit gap-16"
     in:fly={{ duration: 500, opacity: 0.8, y: 200, easing: circOut }}
     style:background-image={`linear-gradient(#ffffff 20%, ${$c3}80)`}
 >

@@ -79,8 +79,8 @@ export class Shell {
         this.l = mt;
         this.name = "";
         this.growth = this.genShell()
-        this.bc = randomColor(200, 255);
-        this.fc = randomColor(75, 200);
+        this.bc = randomColor(160, 255);
+        this.fc = randomColor(75, 160);
     }
 
     getCoords(theta: number) {

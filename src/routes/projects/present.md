@@ -5,8 +5,8 @@ role: Design, Development
 collaborators: Hayoon Choi, Richard Zhou
 duration: Ongoing
 priority: 0
-documentation: https://github.com/dszhusb/present-website
-site: https://present-staging.netlify.app/
+documentation:
+site:
 categories:
 - 'digital'
 ---

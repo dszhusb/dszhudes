@@ -16,6 +16,7 @@
 
 <script lang="ts">
     import "../app.css";
+    import { inject } from "@vercel/analytics";
     import { page, navigating } from "$app/stores";
     import { hIcon, hColors } from "$lib/store";
     import { fly } from "svelte/transition";
@@ -29,8 +30,10 @@
     let text = "000000";
     hColors.subscribe((c) => {
         highlight = c.f3;
-        text = c.text
+        text = c.text;
     });
+
+    inject();
 </script>
 
 <svelte:head>

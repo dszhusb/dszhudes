@@ -6,7 +6,7 @@ collaborators: Hayoon Choi, Richard Zhou
 duration: Ongoing
 priority: 0
 documentation:
-site:
+site: https://nowpresent.co
 categories:
 - 'digital'
 ---

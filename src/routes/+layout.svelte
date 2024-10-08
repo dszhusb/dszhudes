@@ -49,7 +49,7 @@
     style="--light:{highlight} --text:{text}"
 >
     {#if $page.route.id != "/"}
-        <div class="block md:hidden">
+        <div class="block md:hidden sticky top-0 z-[999] ">
             <TopNav />
         </div>
         <div
@@ -61,12 +61,12 @@
         </div>
     {/if}
     <div class="w-full">
-        <slot />
-        <!-- {#if $navigating}
+        <!-- <slot /> -->
+        {#if $navigating}
             <Loading />
         {:else}
             <slot />
-        {/if} -->
+        {/if}
     </div>
 </main>
 

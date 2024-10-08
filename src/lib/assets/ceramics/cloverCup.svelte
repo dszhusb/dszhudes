@@ -6,9 +6,6 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
 <script lang="ts">
   import type * as THREE from "three";
   import { Group } from "three";
-  import { createTransition } from "@threlte/extras";
-  import type { Mesh } from "three";
-  import { cubicOut } from "svelte/easing";
   import {
     T,
     type Props,
@@ -17,7 +14,7 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
     forwardEventHandlers,
   } from "@threlte/core";
   import { useGltf } from "@threlte/extras";
-  import Loading from './loading.svelte'
+  import Loading from "./loading.svelte";
 
   type $$Props = Props<THREE.Group>;
   type $$Events = Events<THREE.Group>;
@@ -34,18 +31,6 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
 
   const gltf = useGltf<GLTFResult>("/cloverCup.glb");
   const component = forwardEventHandlers();
-
-  const scale = createTransition<Mesh>((ref) => {
-    return {
-      tick(t) {
-        // t is [0,1] and needs to be converted to [0.5,1]
-        t = 0.5 + t * 3.5;
-        ref.scale.set(t, t, t);
-      },
-      easing: cubicOut,
-      duration: 100,
-    };
-  });
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
@@ -55,8 +40,6 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
     </slot>
   {:then gltf}
     <T.Mesh
-      in={scale}
-      out={scale}
       geometry={gltf.nodes.mesh_0.geometry}
       material={gltf.nodes.mesh_0.material}
       scale={4}

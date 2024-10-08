@@ -27,8 +27,8 @@
 </script>
 
 <!-- <Grid /> -->
-<Camera />
 <Suspense>
+    <Camera />
     {#if index === 0}
         <CloverCup />
     {/if}
@@ -50,6 +50,6 @@
     {#if index === 6}
         <PaleLotus />
     {/if}
+    <T.AmbientLight intensity={6} color="#fffceb" />
+    <T.DirectionalLight position={[1, 5, 2]} intensity={1} />
 </Suspense>
-<T.AmbientLight intensity={6} color="#fffceb" />
-<T.DirectionalLight position={[1, 5, 2]} intensity={1} />

@@ -14,9 +14,6 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
     forwardEventHandlers,
   } from "@threlte/core";
   import { useGltf } from "@threlte/extras";
-  import { createTransition } from "@threlte/extras";
-  import type { Mesh } from "three";
-  import { cubicOut } from "svelte/easing";
   import Loading from "./loading.svelte";
 
   type $$Props = Props<THREE.Group>;
@@ -34,19 +31,6 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
 
   const gltf = useGltf<GLTFResult>("/peaPot.glb");
   const component = forwardEventHandlers();
-
-  const scale = createTransition<Mesh>((ref) => {
-    return {
-      tick(t) {
-        // t is [0,1] and needs to be converted to [0.5,1]
-        t = 0.5 + t * 0.75;
-        ref.scale.set(t, t, t);
-        ref.position.set(0, -1.7, 0);
-      },
-      easing: cubicOut,
-      duration: 200,
-    };
-  });
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
@@ -56,11 +40,9 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
     </slot>
   {:then gltf}
     <T.Mesh
-      in={scale}
-      out={scale}
       geometry={gltf.nodes.mesh_0.geometry}
       material={gltf.nodes.mesh_0.material}
-      scale={1.5}
+      scale={1.1}
       position={[0, -1, 0]}
     />
   {:catch error}

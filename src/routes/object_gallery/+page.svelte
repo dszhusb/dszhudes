@@ -8,7 +8,7 @@
     import { LinearSRGBColorSpace } from "three";
 
     let moreInfo = false;
-    const limit = 6;
+    const limit = 7;
 
     let info = ceramicInfo[$cIndex];
     cIndex.subscribe((v) => {
@@ -21,7 +21,7 @@
 </script>
 
 <svelte:head>
-	<meta name="description" content="Ceramic Gallery Page" />
+    <meta name="description" content="Ceramic Gallery Page" />
 </svelte:head>
 
 <div
@@ -30,7 +30,7 @@
     in:fly={{ duration: 400, y: 100, easing: circOut }}
 >
     <div id="int-target" class="absolute w-full h-full left-0 top-0">
-        <Canvas colorSpace={LinearSRGBColorSpace}>
+        <Canvas colorSpace={LinearSRGBColorSpace} renderMode="on-demand">
             <Scene />
         </Canvas>
     </div>
@@ -89,8 +89,9 @@
             style:background-color={$hColors.f1}
             style:border-color={$hColors.text}
             class="pointer-events-auto uppercase py-2 px-4 rounded-l-full border-[1px] border-r-0"
-            >Prev</button
         >
+            Prev
+        </button>
         <button
             on:click={() => {
                 cIndex.update((n) => (n + 1) % limit);
@@ -98,7 +99,8 @@
             style:background-color={$hColors.f1}
             style:border-color={$hColors.text}
             class="pointer-events-auto uppercase py-2 px-4 rounded-r-full border-[1px]"
-            >Next</button
         >
+            Next
+        </button>
     </div>
 </div>

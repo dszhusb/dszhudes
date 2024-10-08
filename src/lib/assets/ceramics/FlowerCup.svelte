@@ -6,9 +6,6 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
 <script lang="ts">
   import type * as THREE from "three";
   import { Group } from "three";
-  import { createTransition } from "@threlte/extras";
-  import type { Mesh } from "three";
-  import { cubicOut } from "svelte/easing";
   import {
     T,
     type Props,
@@ -34,18 +31,6 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
 
   const gltf = useGltf<GLTFResult>("/flowerCup.glb");
   const component = forwardEventHandlers();
-
-  const scale = createTransition<Mesh>((ref) => {
-    return {
-      tick(t) {
-        // t is [0,1] and needs to be converted to [0.5,1]
-        t = 0.5 + t * 3.5;
-        ref.scale.set(t, t, t);
-      },
-      easing: cubicOut,
-      duration: 100,
-    };
-  });
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
@@ -55,12 +40,10 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/src/lib/ass
     </slot>
   {:then gltf}
     <T.Mesh
-      in={scale}
-      out={scale}
       geometry={gltf.nodes.mesh_0.geometry}
       material={gltf.nodes.mesh_0.material}
       position={[0, 0, 0.5]}
-      scale={5}
+      scale={4}
     />
   {:catch error}
     <slot name="error" {error} />

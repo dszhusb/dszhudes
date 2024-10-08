@@ -5,9 +5,6 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/static/pale
 
 <script lang="ts">
   import type * as THREE from "three";
-  import { createTransition } from "@threlte/extras";
-  import type { Mesh } from "three";
-  import { cubicOut } from "svelte/easing";
   import { Group } from "three";
   import {
     T,
@@ -32,18 +29,6 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/static/pale
     materials: {};
   };
 
-  const scale = createTransition<Mesh>((ref) => {
-    return {
-      tick(t) {
-        // t is [0,1] and needs to be converted to [0.5,1]
-        t = 0.5 + t * 5;
-        ref.scale.set(t, t, t);
-      },
-      easing: cubicOut,
-      duration: 100,
-    };
-  });
-
   const gltf = useGltf<GLTFResult>("/paleLotus.glb");
   const component = forwardEventHandlers();
 </script>
@@ -55,8 +40,6 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/static/pale
     </slot>
   {:then gltf}
     <T.Mesh
-      in={scale}
-      out={scale}
       geometry={gltf.nodes.mesh_0.geometry}
       material={gltf.nodes.mesh_0.material}
       scale={5.5}

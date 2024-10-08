@@ -77,14 +77,14 @@
     </button>
     {#if showFlag}
         <div
-            style:background-color={darkThemed ? darkMotif.f3 : $hColors.f2}
-            style:border-color={darkThemed ? darkMotif.f3 : $hColors.f2}
+            style:background-color={darkThemed ? darkMotif.f3 : $hColors.f3}
+            style:border-color={darkThemed ? darkMotif.f3 : $hColors.f3}
             class="relative rounded-full w-fit px-2 py-5 mx-auto"
         >
             <div
                 style:border-bottom-color={darkThemed
                     ? darkMotif.f3
-                    : $hColors.f2}
+                    : $hColors.f3}
                 class="arrow-up absolute -top-[13px] -translate-x-1/2 left-1/2"
             />
             <p

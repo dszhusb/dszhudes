@@ -46,5 +46,11 @@
             image="ceramics"
             description="A 3D gallery providing a glimpse into my ceramic collection and the stories behind each piece. Made through photogrammetry, Three.js, and more."
         />
+        <ExperimentBlock
+            title="Media Tapestry"
+            link="media"
+            image="media"
+            description="A collection of some of the media I love including music from Spotify's API and others."
+        />
     </ul>
 </div>

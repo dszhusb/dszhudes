@@ -45,11 +45,11 @@
 </svelte:head>
 
 <main
-    class="font-mono flex flex-col md:flex-row relative scroll-smooth"
+    class="font-mono flex flex-col md:flex-row relative scroll-smooth w-full"
     style="--light:{highlight} --text:{text}"
 >
     {#if $page.route.id != "/"}
-        <div class="block md:hidden sticky top-0 z-[999] ">
+        <div class="block md:hidden sticky top-0 z-[999]">
             <TopNav />
         </div>
         <div
@@ -61,7 +61,6 @@
         </div>
     {/if}
     <div class="w-full">
-        <!-- <slot /> -->
         {#if $navigating}
             <Loading />
         {:else}

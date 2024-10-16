@@ -15,11 +15,15 @@
 </script>
 
 <script lang="ts">
-    import { fade } from 'svelte/transition'
-    import { hIcon } from "$lib/store";
+    import { fade } from "svelte/transition";
+    import { hIcon, hColors } from "$lib/store";
 </script>
 
-<div class="w-full h-full min-h-screen flex items-center justify-center" transition:fade>
+<div
+    class="w-full h-full min-h-screen flex items-center justify-center"
+    transition:fade
+    style:background-image={`linear-gradient(#ffffff, ${$hColors.f3})`}
+>
     <enhanced:img
         class="spin max-w-64 saturate-150"
         src={images[`/src/lib/assets/iconShells/${$hIcon}.webp`]}

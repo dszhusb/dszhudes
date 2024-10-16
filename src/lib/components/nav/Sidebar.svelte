@@ -192,6 +192,11 @@
 						Article
 					</p>
 				</a>
+				<a href="/media" class="experiment col-span-2">
+					<p style:color={darkThemed ? darkMotif.text : $cText}>
+						Media Tapestry
+					</p>
+				</a>
 			</div>
 		{/if}
 	</div>
@@ -218,6 +223,10 @@
 
 	.experimentContainer a:nth-child(odd) {
 		@apply border-r-[1px];
+	}
+
+	.experimentContainer a:last-child {
+		@apply border-r-0;
 	}
 
 	.experimentContainer p {

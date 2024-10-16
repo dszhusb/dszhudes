@@ -20,9 +20,9 @@
         moving = true;
     }
 
-    function touchStart() {
-        moving = true;
-    }
+    // function touchStart() {
+    //     moving = true;
+    // }
 
     function onMouseMove(e: MouseEvent) {
         if (moving) {
@@ -32,21 +32,21 @@
         }
     }
 
-    function touchMove(e: TouchEvent) {
-        if (moving) {
-            const touch = e instanceof TouchEvent ? e.touches[0] : e;
-            left = clamp(left + touch.clientX, 0, parentSize);
-            top = clamp(top + touch.clientY, 0, parentSize);
-        }
-    }
+    // function touchMove(e: TouchEvent) {
+    //     if (moving) {
+    //         const touch = e instanceof TouchEvent ? e.touches[0] : e;
+    //         left = clamp(left + touch.clientX, 0, parentSize);
+    //         top = clamp(top + touch.clientY, 0, parentSize);
+    //     }
+    // }
 
     function onMouseUp() {
         moving = false;
     }
 
-    function touchEnd() {
-        moving = false;
-    }
+    // function touchEnd() {
+    //     moving = false;
+    // }
 
     function clamp(n: number, min: number, max: number) {
         return Math.min(Math.max(n, min), max);
@@ -67,16 +67,18 @@
     role="button"
     tabindex="0"
     on:mousedown={onMouseDown}
-    on:touchstart={touchStart}
     style="left: {left}px; top: {top}px;"
     class="absolute select-none cursor-move -translate-y-1/2 -translate-x-1/2"
 >
     <div class="w-6 h-6 rounded-full" style:background-color={$hColors.text} />
 </section>
 
+<!-- on:touchstart={touchStart} -->
+
 <svelte:window
     on:mouseup={onMouseUp}
     on:mousemove={onMouseMove}
-    on:touchend={touchEnd}
-    on:touchmove={touchMove}
 />
+
+<!-- on:touchend={touchEnd}
+on:touchmove={touchMove} -->

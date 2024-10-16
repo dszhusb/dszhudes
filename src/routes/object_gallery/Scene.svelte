@@ -1,6 +1,6 @@
 <script lang="ts">
     import { T, useThrelte } from "@threlte/core";
-    import { Suspense, transitions } from "@threlte/extras";
+    import { transitions } from "@threlte/extras";
     import { cIndex } from "$lib/store";
     import Camera from "./Camera.svelte";
 
@@ -27,29 +27,27 @@
 </script>
 
 <!-- <Grid /> -->
-<Suspense>
-    <Camera />
-    {#if index === 0}
-        <CloverCup />
-    {/if}
-    {#if index === 1}
-        <FlowerCup />
-    {/if}
-    {#if index === 2}
-        <PeaPot />
-    {/if}
-    {#if index === 3}
-        <MottledPot />
-    {/if}
-    {#if index === 4}
-        <RedCup />
-    {/if}
-    {#if index === 5}
-        <TriToneHolder />
-    {/if}
-    {#if index === 6}
-        <PaleLotus />
-    {/if}
-    <T.AmbientLight intensity={6} color="#fffceb" />
-    <T.DirectionalLight position={[1, 5, 2]} intensity={1} />
-</Suspense>
+<Camera />
+{#if index === 0}
+    <CloverCup />
+{/if}
+{#if index === 1}
+    <FlowerCup />
+{/if}
+{#if index === 2}
+    <PeaPot />
+{/if}
+{#if index === 3}
+    <MottledPot />
+{/if}
+{#if index === 4}
+    <RedCup />
+{/if}
+{#if index === 5}
+    <TriToneHolder />
+{/if}
+{#if index === 6}
+    <PaleLotus />
+{/if}
+<T.AmbientLight intensity={6} color="#fffceb" />
+<T.DirectionalLight position={[1, 5, 2]} intensity={1} />

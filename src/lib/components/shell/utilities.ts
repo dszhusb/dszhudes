@@ -7,10 +7,89 @@ type Point = {
     theta: number
 }
 
-type RgbColor = {
+export type range = {
+    high: number,
+    low: number
+}
+
+export const ranges = {
+    a: <range>{ low: 1, high: 5 },
+    b: <range>{ low: 0.25, high: 0.4 },
+    d: <range>{ low: 0.25, high: 1.25 },
+    fc: <range>{ low: 75, high: 160 },
+    bc: <range>{ low: 160, high: 255 }
+}
+
+export type RgbColor = {
     r: number,
     g: number,
     b: number
+}
+
+export type HslColor = {
+    h: number,
+    s: number,
+    l: number
+}
+
+export const rgbToHsl = (color: RgbColor): HslColor => { // https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
+    let c: RgbColor = { r: color.r / 255, g: color.g / 255, b: color.b / 255 }
+    const vmax = Math.max(c.r, c.g, c.b), vmin = Math.min(c.r, c.g, c.b);
+    const average = (vmax + vmin) / 2;
+    let hsl = <HslColor>{ h: average, s: average, l: average }
+
+    if (vmax === vmin) {
+        hsl.h = 0
+        hsl.s = 0
+        return hsl; // achromatic
+    }
+
+    const d = vmax - vmin;
+    hsl.s = hsl.l > 0.5 ? d / (2 - vmax - vmin) : d / (vmax + vmin);
+    if (vmax === c.r) hsl.h = (c.g - c.b) / d + (c.g < c.b ? 6 : 0);
+    if (vmax === c.g) hsl.h = (c.b - c.r) / d + 2;
+    if (vmax === c.b) hsl.h = (c.r - c.g) / d + 4;
+    hsl.h /= 6;
+
+    return hsl;
+}
+
+export const hslToRgb = (c: HslColor) => {
+    let rgb = <RgbColor>{ r: 0, g: 0, b: 0 }
+    if (c.s === 0) {
+        rgb.r = rgb.g = rgb.b = c.l; // achromatic
+    } else {
+        const q = c.l < 0.5 ? c.l * (1 + c.s) : c.l + c.s - c.l * c.s;
+        const p = 2 * c.l - q;
+        rgb.r = hueToRgb(p, q, c.h + 1 / 3);
+        rgb.g = hueToRgb(p, q, c.h);
+        rgb.b = hueToRgb(p, q, c.h - 1 / 3);
+    }
+
+    rgb.r *= 255; rgb.g *= 255; rgb.b *= 255
+    rgb.r = Math.round(rgb.r); rgb.g = Math.round(rgb.g); rgb.b = Math.round(rgb.b)
+    return rgb;
+}
+
+const hueToRgb = (p: number, q: number, t: number) => {
+    if (t < 0) t += 1;
+    if (t > 1) t -= 1;
+    if (t < 1 / 6) return p + (q - p) * 6 * t;
+    if (t < 1 / 2) return q;
+    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+    return p;
+}
+
+export type Parameters = {
+    a: number,
+    b: number,
+    c?: number,
+    d: number,
+    l: number
+}
+
+export const valueInRange = (low: number, high: number, weight: number = 1) => {
+    return (high - low) * weight * Math.random() + low
 }
 
 export function interpolateColorPalette(in1: RgbColor, in2: RgbColor): Palette {
@@ -30,7 +109,7 @@ export function rgbToHex(c: RgbColor): string {
 }
 
 function darkenColor(c: RgbColor) {
-    return <RgbColor>{ r: Math.max(c.r - 80, 0), g: Math.max(c.g - 80, 0), b: Math.max(c.b - 80, 0)}
+    return <RgbColor>{ r: Math.max(c.r - 80, 0), g: Math.max(c.g - 80, 0), b: Math.max(c.b - 80, 0) }
 }
 
 function randomColorDigit(start: number, end: number): number {
@@ -39,7 +118,7 @@ function randomColorDigit(start: number, end: number): number {
     return Math.floor((end - start) * Math.random()) + start;
 }
 
-function randomColor(start: number, end: number) {
+export function randomColor(start: number, end: number) {
     return <RgbColor>{ r: randomColorDigit(start, end), g: randomColorDigit(start, end), b: randomColorDigit(start, end) }
 }
 
@@ -71,21 +150,22 @@ export class Shell {
     bc: RgbColor;
     fc: RgbColor;
 
-    constructor(ia: number, ib: number, ic: number, id: number, mt: number) {
-        this.a = ia;
-        this.b = ib;
-        this.c = ic;
-        this.d = id;
-        this.l = mt;
+    constructor(p: Parameters, f: RgbColor, b: RgbColor) {
+        this.a = p.a;
+        this.b = p.b;
+        this.c = (p.c || 0);
+        this.d = p.d;
+        this.l = p.l;
         this.name = "";
         this.growth = this.genShell()
-        this.bc = randomColor(160, 255);
-        this.fc = randomColor(75, 160);
+        this.bc = b;
+        this.fc = f;
     }
 
     getCoords(theta: number) {
-        let x = this.a * Math.cos(theta) * Math.pow(Math.E, this.b * theta);
-        let y = this.a * Math.sin(theta) * Math.pow(Math.E, this.b * theta);
+        const mult = Math.pow(Math.E, this.b * theta)
+        let x = this.a * Math.cos(theta) * mult;
+        let y = this.a * Math.sin(theta) * mult;
         let disp = Math.sqrt(x * x + y * y)
         let rx = 1.5 * disp;
         let ry = this.d * disp;
@@ -142,6 +222,16 @@ export class Shell {
         }
         this.growth = newGrowth;
         return this;
+    }
+
+    updateBc(c: RgbColor) {
+        this.bc = c;
+        return this
+    }
+
+    updateFc(c: RgbColor) {
+        this.fc = c;
+        return this
     }
 
     genShell() {

@@ -3,27 +3,59 @@
     import { fly } from "svelte/transition";
     import { circOut } from "svelte/easing";
     import { chart_size, section_size } from "$lib/store";
+    import ColorSelector from "$lib/components/shell/ColorSelector.svelte";
+    import Folder from "$lib/components/shell/Folder.svelte";
+    import Dropdown from "$lib/components/Dropdown.svelte";
     import {
         Shell,
         blendColorToHex,
         joinColor,
         interpolateColorPalette,
-    } from "./utilities";
+        valueInRange,
+        randomColor,
+        ranges,
+    } from "$lib/components/shell/utilities";
+    import type { RgbColor, Parameters } from "$lib/components/shell/utilities";
 
     const center = derived(chart_size, ($chart_size) => $chart_size / 2);
     let name = "My Beautiful Shell";
-    let a = 1.5;
-    let b = 0.1 * Math.random() + 0.25;
-    let c = 1.2;
-    let l = 100;
-    let d = 0.4;
+    const parameters = writable<Parameters>({
+        a: 1.5,
+        b: 0.1 * Math.random() + 0.25,
+        c: 1.2,
+        d: 0.4,
+        l: 100,
+    });
+    const bc = writable<RgbColor>(randomColor(ranges.bc.low, ranges.bc.high));
+    const fc = writable<RgbColor>(randomColor(ranges.fc.low, ranges.fc.high));
     let wireframe = false;
+    const colorMode = writable<string>("rgb");
 
     const displayLength = writable(0);
-    const shell = writable<Shell>(new Shell(a, b, c, d, l));
+    const shell = writable<Shell>(new Shell($parameters, $fc, $bc));
     const colors = derived(shell, ($shell) =>
         interpolateColorPalette($shell.fc, $shell.bc),
     );
+
+    bc.subscribe((c) => {
+        shell.update((s) => s.updateBc(c));
+    });
+
+    fc.subscribe((c) => {
+        shell.update((s) => s.updateFc(c));
+    });
+
+    parameters.subscribe((p) => {
+        if (p.a != $shell.a) {
+            shell.update((s) => s.updateA(p.a));
+        }
+        if (p.b != $shell.b) {
+            shell.update((s) => s.updateB(p.b));
+        }
+        if (p.d != $shell.d) {
+            shell.update((s) => s.updateD(p.d));
+        }
+    });
 
     function exportSVG() {
         // @ts-ignore: Library does not have type definitions
@@ -34,7 +66,20 @@
         );
     }
 
-    chart_size.subscribe((c) => console.log(c));
+    function randomize() {
+        parameters.set({
+            a: valueInRange(ranges.a.low, ranges.a.high, 0.7),
+            b: valueInRange(ranges.b.low, ranges.b.high, 0.5),
+            d: valueInRange(ranges.d.low, ranges.d.high, 0.5),
+            l: 100,
+        });
+        bc.set(randomColor(ranges.bc.low, ranges.bc.high));
+        fc.set(randomColor(ranges.fc.low, ranges.fc.high));
+    }
+
+    const setColorMode = (mode: string) => {
+        colorMode.set(mode);
+    };
 </script>
 
 <svelte:head>
@@ -55,7 +100,7 @@
 <main
     class="flex flex-wrap pt-8 pb-24 px-8 sm:px-12 min-h-screen w-full gap-16"
     in:fly={{ duration: 500, opacity: 0.8, y: 200, easing: circOut }}
-    style:background-image={`linear-gradient(#ffffff 30%, ${$colors.f3}50)`}
+    style:background-image={`linear-gradient(#ffffff 30%, ${$colors.f3}20)`}
 >
     <div class="flex flex-col gap-y-8" style:max-width={$chart_size + "px"}>
         <div
@@ -98,11 +143,12 @@
                 {/each}
             </div>
         </div>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-8">
             <div class="flex flex-col-reverse sm:flex-row gap-y-4 w-full">
                 <button
-                    class="px-3 py-2 border-[1px] border-stone-800 w-fit uppercase mr-3 bg-stone-200"
-                    on:click={() => shell.set(new Shell(a, b, c, d, l))}
+                    class="px-3 py-2 border-[1px] border-stone-800 w-fit uppercase mr-3"
+                    style:background-color={`${$colors.f2}40`}
+                    on:click={() => randomize()}
                 >
                     Randomize
                 </button>
@@ -124,87 +170,133 @@
                     </button>
                 </div>
             </div>
-            <label class="sliderContainerContainer">
-                a: <input
-                    class="sliderContainer"
-                    type="range"
-                    style:accent-color={$colors.text}
-                    bind:value={a}
-                    on:input={() => {
-                        shell.update((s) => s.updateA(a));
-                    }}
-                    min="1"
-                    max="5"
-                    step="0.01"
-                />
-            </label>
-            <label class="sliderContainerContainer">
-                b: <input
-                    class="sliderContainer"
-                    type="range"
-                    style:accent-color={$colors.text}
-                    bind:value={b}
-                    on:input={() => {
-                        shell.update((s) => s.updateB(b));
-                    }}
-                    min="0.25"
-                    max="0.4"
-                    step="0.01"
-                />
-            </label>
-            <label class="sliderContainerContainer">
-                d: <input
-                    class="sliderContainer"
-                    type="range"
-                    style:accent-color={$colors.text}
-                    bind:value={d}
-                    on:input={() => {
-                        shell.update((s) => s.updateD(d));
-                    }}
-                    min="0.25"
-                    max="1.25"
-                    step="0.01"
-                />
-            </label>
-            <!-- <input type="color" /> -->
+            <article>
+                <h1 class="uppercase font-light">What's with the shells?</h1>
+                <p class="text-base">
+                    The shell motif first started when I found George R. McGhee
+                    Jr's seminal work “Theoretical Morphology” abandoned in a
+                    hallway at CMU.
+                </p>
+                <p>
+                    It presents a fascinating look into a mathematical
+                    perspective behind how the real and speculative models of
+                    organism growth.
+                </p>
+                <p>
+                    I was particularly struck by how shell morph as you tweak
+                    the parameters behind the model behind their construction.
+                    Building off of the formula described as well as making my
+                    own tweaks from my own experimentation and research, the
+                    first shell generator was born in Processing.
+                </p>
+                <p>
+                    From the early days in Processing to P5.js and Javacript and
+                    finally to SVGs and Typescript. This tool has come a long
+                    way.
+                </p>
+                <p class="font-bold">
+                    Feel free to play around and download your very own shell!
+                </p>
+            </article>
         </div>
     </div>
     <div
-        class="flex flex-col gap-y-4 max-w-96"
+        class="flex flex-col gap-y-4 flex-1"
         in:fly={{ duration: 500, opacity: 0.8, x: 200, easing: circOut }}
     >
-        <h1 class="uppercase font-light">What's with the shells?</h1>
-        <p class="text-base">
-            The shell motif first started when I found George R. McGhee Jr's
-            seminal work “Theoretical Morphology” abandoned in a hallway at CMU.
-        </p>
-        <p>
-            It presents a fascinating look into a mathematical perspective
-            behind how the real and speculative models of organism growth.
-        </p>
-        <p>
-            I was particularly struck by how shell morph as you tweak the
-            parameters behind the model behind their construction. Building off
-            of the formula described as well as making my own tweaks from my own
-            experimentation and research, the first shell generator was born in
-            Processing.
-        </p>
-        <p>
-            From the early days in Processing to P5.js and Javacript and finally
-            to SVGs and Typescript. This tool has come a long way.
-        </p>
-        <p class="font-bold">
-            Feel free to play around and download your very own shell!
+        <Folder name="Shell Generation Parameters" color={$colors.f2}>
+            <div class="column">
+                <label>
+                    a: <input
+                        type="range"
+                        style:accent-color={$colors.text}
+                        bind:value={$parameters.a}
+                        min={ranges.a.low}
+                        max={ranges.a.high}
+                        step="0.01"
+                    />
+                </label>
+                <label>
+                    b: <input
+                        type="range"
+                        style:accent-color={$colors.text}
+                        bind:value={$parameters.b}
+                        min={ranges.b.low}
+                        max={ranges.b.high}
+                        step="0.01"
+                    />
+                </label>
+                <label>
+                    d: <input
+                        type="range"
+                        style:accent-color={$colors.text}
+                        bind:value={$parameters.d}
+                        min={ranges.d.low}
+                        max={ranges.d.high}
+                        step="0.01"
+                    />
+                </label>
+            </div>
+        </Folder>
+        <Folder name="Colors" color={$colors.f2}>
+            <div class="column">
+                <Dropdown
+                    color={$colors.f2}
+                    states={["rgb", "hsl"]}
+                    state={$colorMode}
+                    setState={setColorMode}
+                />
+                <div class="row">
+                    <ColorSelector
+                        colorMode={$colorMode}
+                        label="Primary"
+                        colors={$colors}
+                        ranges={{
+                            low: ranges.fc.low,
+                            high: ranges.fc.high,
+                        }}
+                        color={fc}
+                    />
+                    <ColorSelector
+                        colorMode={$colorMode}
+                        label="Secondary"
+                        colors={$colors}
+                        ranges={{
+                            low: ranges.bc.low,
+                            high: ranges.bc.high,
+                        }}
+                        color={bc}
+                    />
+                </div>
+            </div>
+        </Folder>
+        <p class="font-mono w-full max-w-lg text-stone-500 mt-4">
+            * The parameters a, b, d are related to shell growth. "a" is related
+            to shell size. "b" is related to growth rate. "d" is related to
+            cross-section dimension. Shell section colors are interpolated
+            between the selected primary and secondary colors.
         </p>
     </div>
 </main>
 
 <style lang="postcss">
     label {
-        @apply font-mono;
+        @apply font-mono font-light flex flex-row items-center;
     }
 
     input[type="range"] {
-        @apply w-2/3 flex flex-col;
+        @apply w-full bg-transparent;
+    }
+
+    .row {
+        @apply flex flex-row gap-6;
+    }
+
+    .column {
+        @apply flex flex-col gap-2;
+    }
+
+    article {
+        @apply flex flex-col gap-4 mr-6;
     }
 </style>

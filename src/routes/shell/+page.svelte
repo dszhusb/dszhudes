@@ -6,6 +6,7 @@
     import ColorSelector from "$lib/components/shell/ColorSelector.svelte";
     import Folder from "$lib/components/shell/Folder.svelte";
     import Dropdown from "$lib/components/Dropdown.svelte";
+    import Article from "./ShellArticle.svelte";
     import {
         Shell,
         blendColorToHex,
@@ -170,34 +171,9 @@
                     </button>
                 </div>
             </div>
-            <article>
-                <h1 class="uppercase font-light">What's with the shells?</h1>
-                <p class="text-base">
-                    The shell motif first started when I found George R. McGhee
-                    Jr's seminal work “Theoretical Morphology” abandoned in a
-                    hallway at CMU.
-                </p>
-                <p>
-                    It presents a fascinating look into a mathematical
-                    perspective behind how the real and speculative models of
-                    organism growth.
-                </p>
-                <p>
-                    I was particularly struck by how shell morph as you tweak
-                    the parameters behind the model behind their construction.
-                    Building off of the formula described as well as making my
-                    own tweaks from my own experimentation and research, the
-                    first shell generator was born in Processing.
-                </p>
-                <p>
-                    From the early days in Processing to P5.js and Javacript and
-                    finally to SVGs and Typescript. This tool has come a long
-                    way.
-                </p>
-                <p class="font-bold">
-                    Feel free to play around and download your very own shell!
-                </p>
-            </article>
+            <div class="hidden sm:block">
+                <Article />
+            </div>
         </div>
     </div>
     <div
@@ -270,12 +246,15 @@
                 </div>
             </div>
         </Folder>
-        <p class="font-mono w-full max-w-lg text-stone-500 mt-4">
+        <p class="font-mono w-full max-w-lg text-stone-500 my-4">
             * The parameters a, b, d are related to shell growth. "a" is related
             to shell size. "b" is related to growth rate. "d" is related to
             cross-section dimension. Shell section colors are interpolated
             between the selected primary and secondary colors.
         </p>
+        <div class="block sm:hidden">
+            <Article />
+        </div>
     </div>
 </main>
 
@@ -294,9 +273,5 @@
 
     .column {
         @apply flex flex-col gap-2;
-    }
-
-    article {
-        @apply flex flex-col gap-4 mr-6;
     }
 </style>

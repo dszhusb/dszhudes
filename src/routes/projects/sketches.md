@@ -13,9 +13,10 @@ categories:
 ---
 
 <script>
-    import Masonry from '$lib/components/article/Masonry.svelte'
+    // import Masonry from '$lib/components/article/Masonry.svelte'
+    import ClickScrollGallery from "$lib/components/article/ClickScrollGallery.svelte"
     const folder = 'sketches'
 </script>
 
-<Masonry folder={folder} />
+<ClickScrollGallery folder={folder} />
 

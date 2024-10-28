@@ -9,6 +9,10 @@ export default {
       fontFamily: {
         mono: ['IBM Plex Mono', 'monospace'],
         grotesk: ['Space Grotesk']
+      },
+
+      blur: {
+        xs: "0.5px"
       }
     },
   },

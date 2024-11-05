@@ -3,7 +3,7 @@ type Closest = {
     error: number
 }
 
-export const splitText = (str: string) => {
+export const splitText = (str: string): string[] => {
     return str.split(" ")
 }
 
@@ -18,48 +18,151 @@ export const prefixWords = (words: string[]): number[] => {
     return [-1]
 }
 
-export const buildCircular = (text: string) => {
+export const buildCircular = (text: string, ratio: number): string[] => {
     const words = splitText(text)
     const prefix = prefixWords(words)
-    const radius = seekCircleRadius(text.length)
-    const paragraphs = approximateCircle(words, prefix, radius)
-    return paragraphs
-}
+    const radius = seekCircleRadius(text.length, ratio)
 
-const approximateCircle = (words: string[], prefix: number[], radius: number) => {
     let paragraphs: string[] = []
-    let left = 0, line = 1
-    while (left <= words.length - 1) {
-        const target = circleSegment(line, radius)
-        const closest = nextClosest(words, prefix, target, left)
-        paragraphs.push(words.slice(left, closest.index).join(" "))
-        left = closest.index
-        line++
+    let best = Number.MAX_SAFE_INTEGER;
+    const searchRange = 4, searchDetail = 0.5;
+    for (let i = -searchRange; i < searchRange; i += searchDetail) {
+        const approximation = approximateCircle(words, prefix, radius + i, ratio)
+        if (approximation.error < best) {
+            best = approximation.error
+            paragraphs = approximation.paragraphs
+        }
     }
+
     return paragraphs
 }
 
-export const nextClosest = (words: string[], prefix: number[], target: number, left: number): Closest => {
+export const buildTriangular = (text: string, ratio: number): string[] => {
+    const words = splitText(text)
+    const prefix = prefixWords(words)
+
+    let paragraphs: string[] = []
+    let best = Number.MAX_SAFE_INTEGER;
+    const increment = Math.PI / 12
+    for (let i = increment; i < Math.PI / 2 - increment; i += increment) {
+        const approximation = approximateTriangle(words, prefix, i, ratio)
+        if (approximation.error < best) {
+            best = approximation.error
+            paragraphs = approximation.paragraphs
+        }
+    }
+
+    return paragraphs
+}
+
+export const buildSquare = (text: string, ratio: number): string[] => {
+    const words = splitText(text)
+    const prefix = prefixWords(words)
+
+    let paragraphs: string[] = []
+    let best = Number.MAX_SAFE_INTEGER;
+    for (let i = 0; i < text.length; i += 1) {
+        const approximation = approximateSquare(words, prefix, i, ratio)
+        const error = Math.abs(approximation.average * ratio - approximation.paragraphs.length)
+        if (approximation.average < best) {
+            best = error
+            paragraphs = approximation.paragraphs
+        }
+    }
+
+    return paragraphs
+}
+
+const approximateSquare = (words: string[], prefix: number[], length: number, ratio: number) => {
+    let paragraphs: string[] = []
+    let left = 0, line = 1, count = 0, average = 0
+    while (left <= words.length - 1 && count < 100) {
+        const closest = nextClosest(words, prefix, length, left, ratio)
+        const phrase = words.slice(left, closest.index + 1).join(" ")
+        average += phrase.length
+        paragraphs.push(phrase)
+        left = closest.index + 1
+        line++
+        count++
+    }
+
+    if (left < words.length) {
+        const phrase = words.slice(left).join(" ")
+        paragraphs.push(phrase)
+        average += phrase.length
+    }
+
+    return { paragraphs: paragraphs, average: average / paragraphs.length }
+}
+
+const approximateTriangle = (words: string[], prefix: number[], theta: number, ratio: number) => {
+    let paragraphs: string[] = []
+    let left = 0, line = 1, count = 0, error = 0
+    while (left <= words.length - 1 && count < 100) {
+        const target = triangleSegment(line, theta)
+        const closest = nextClosest(words, prefix, target, left, ratio)
+        const phrase = words.slice(left, closest.index + 1).join(" ")
+        error += Math.abs(phrase.length / 2 * ratio - target)
+        paragraphs.push(phrase)
+        left = closest.index + 1
+        line++
+        count++
+    }
+
+    if (left < words.length) {
+        const phrase = words.slice(left).join(" ")
+        paragraphs.push(phrase)
+    }
+
+    return { paragraphs: paragraphs, error: error }
+}
+
+const approximateCircle = (words: string[], prefix: number[], radius: number, ratio: number) => {
+    let paragraphs: string[] = []
+    let left = 0, line = 1, count = 0, error = 0
+    while (left <= words.length - 1 && count < 100 && line < 2 * radius) {
+        const target = circleSegment(line, radius)
+        const closest = nextClosest(words, prefix, target, left, ratio)
+        const phrase = words.slice(left, closest.index + 1).join(" ")
+        error += Math.abs(phrase.length * ratio - target)
+        paragraphs.push(phrase)
+        left = closest.index + 1
+        line++
+        count++
+    }
+
+    if (left < words.length) {
+        const phrase = words.slice(left).join(" ")
+        paragraphs.push(phrase)
+        error += phrase.length
+    }
+
+    return { paragraphs: paragraphs, error: error }
+}
+
+export const nextClosest = (words: string[], prefix: number[], target: number, left: number, ratio: number): Closest => {
     const base = prefix[left - 1] || 0
     let closest: number = Number.MAX_SAFE_INTEGER
-    for (let i = left; i < words.length; i++) {
-        const distance = prefix[i] - base
+    while (left < words.length) {
+        const distance = (prefix[left] - base) * ratio
         const error = Math.abs(target - distance)
         if (error < closest) {
             closest = error
         } else {
-            return <Closest>{ index: i - 1, error: closest }
+            return <Closest>{ index: left - 1, error: closest }
         }
+        left++
     }
-    return <Closest>{ index: left, error: -1 }
+    const error = Math.abs(target - (prefix[prefix.length - 1] - base) * ratio)
+    return <Closest>{ index: words.length - 1, error: error }
 }
 
-export const seekCircleRadius = (length: number): number => {
+export const seekCircleRadius = (length: number, ratio: number): number => {
     let maxTries = length / 2;
     let prev = Number.MAX_SAFE_INTEGER
     for (let r = 0; r < maxTries; r += 0.1) {
         const sum = circleSum(r)
-        const diff = Math.abs(length - sum)
+        const diff = Math.abs(length - sum * ratio)
         if (diff > prev) {
             return r - 1
         }
@@ -90,15 +193,4 @@ export const double = (words: string[]): string[] => {
     } else {
         return double(words.slice(0, Math.floor(words.length / 2))).concat([words.slice(Math.floor(words.length / 2)).join(" ")])
     }
-}
-
-export const pyramidize = (words: string[], angle: number, iteration: number = 0): string[] => {
-    for (let i = 0; i < words.length; i++) {
-        const segment = words.slice(i).join(" ")
-        console.log(2 * iteration * Math.tan(angle))
-        if (segment.length > iteration * Math.tan(angle)) {
-            return pyramidize(words.slice(0, i), angle, iteration + 1).concat(segment)
-        }
-    }
-    return [words.join(" ")]
 }

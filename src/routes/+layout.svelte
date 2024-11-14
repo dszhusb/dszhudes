@@ -18,22 +18,27 @@
     import "../app.css";
     import { inject } from "@vercel/analytics";
     import { page, navigating } from "$app/stores";
-    import { hIcon, hColors } from "$lib/store";
+    import { hIcon, hColors, colorSettings } from "$lib/store";
+    import { tweened } from "svelte/motion";
     import { fly } from "svelte/transition";
     import { circOut } from "svelte/easing";
     import Loading from "$lib/components/nav/Loading.svelte";
     import TopNav from "$lib/components/nav/TopNav.svelte";
     import Sidebar from "$lib/components/nav/Sidebar.svelte";
     import SideDisp from "$lib/components/nav/SideDisp.svelte";
-
-    let highlight = "#000000";
-    let text = "000000";
-    hColors.subscribe((c) => {
-        highlight = c.f3;
-        text = c.text;
-    });
-
     inject();
+
+    const ctext = tweened($hColors.text, colorSettings);
+    const c1 = tweened($hColors.f1, colorSettings);
+    const c2 = tweened($hColors.f2, colorSettings);
+    const c3 = tweened($hColors.f3, colorSettings);
+
+    hColors.subscribe((value) => {
+        ctext.set(value.text);
+        c1.set(value.f1);
+        c2.set(value.f2);
+        c3.set(value.f3);
+    });
 </script>
 
 <svelte:head>
@@ -45,8 +50,8 @@
 </svelte:head>
 
 <main
-    class="font-mono flex flex-col md:flex-row relative scroll-smooth w-full"
-    style="--light:{highlight} --text:{text}"
+    class="font-mono relative scroll-smooth w-screen flex flex-col md:flex-row"
+    style="--select-color:{$c3}c0; --text:{$ctext}; --c1: {$c1}; --c2: {$c2}; --c3: {$c3};"
 >
     {#if $page.route.id != "/"}
         <div class="block md:hidden sticky top-0 z-[999]">
@@ -60,7 +65,7 @@
             <SideDisp />
         </div>
     {/if}
-    <div class="w-full">
+    <div class="w-full overflow-auto">
         {#if $navigating}
             <Loading />
         {:else}

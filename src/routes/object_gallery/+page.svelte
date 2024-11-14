@@ -1,5 +1,5 @@
 <script land="ts">
-    import { hColors, cIndex, ceramicInfo } from "$lib/store";
+    import { cIndex, ceramicInfo } from "$lib/store";
     import { fly } from "svelte/transition";
     import { circOut } from "svelte/easing";
     import { Canvas, extend } from "@threlte/core";
@@ -26,7 +26,7 @@
 
 <div
     class="relative w-full h-full"
-    style:background-image={`linear-gradient(#ffffff, ${$hColors.f3})`}
+    style:background-image={`linear-gradient(#ffffff, var(--c3))`}
     in:fly={{ duration: 400, y: 100, easing: circOut }}
 >
     <div id="int-target" class="absolute w-full h-full left-0 top-0">
@@ -41,8 +41,8 @@
             on:click={() => {
                 moreInfo = !moreInfo;
             }}
-            style:background-color={$hColors.f1}
-            style:border-color={$hColors.text}
+            style:background-color="var(--c1)"
+            style:border-color="var(--text)"
             class="pointer-events-auto py-2 px-4 rounded-full border-[1px]"
         >
             {#if moreInfo}
@@ -53,13 +53,13 @@
         </button>
         {#if moreInfo}
             <div
-                style:background-color={$hColors.f1}
-                style:border-color={$hColors.text}
-                style:color={$hColors.f3}
+                style:background-color="var(--c1)"
+                style:border-color="var(--text)"
+                style:color="var(--c3)"
                 class="my-4 p-2 rounded-lg border-[1px] flex flex-col md:flex-row gap-2"
             >
                 <img
-                    style:border-color={$hColors.text}
+                    style:border-color="var(--text)"
                     class="max-w-80 rounded-lg border-[1px]"
                     src={info.img}
                     alt="img"
@@ -86,8 +86,8 @@
                     return nn;
                 });
             }}
-            style:background-color={$hColors.f1}
-            style:border-color={$hColors.text}
+            style:background-color="var(--c1)"
+            style:border-color="var(--text)"
             class="pointer-events-auto uppercase py-2 px-4 rounded-l-full border-[1px] border-r-0"
         >
             Prev
@@ -96,8 +96,8 @@
             on:click={() => {
                 cIndex.update((n) => (n + 1) % limit);
             }}
-            style:background-color={$hColors.f1}
-            style:border-color={$hColors.text}
+            style:background-color="var(--c1)"
+            style:border-color="var(--text)"
             class="pointer-events-auto uppercase py-2 px-4 rounded-r-full border-[1px]"
         >
             Next

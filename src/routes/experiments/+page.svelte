@@ -52,5 +52,11 @@
             image="media"
             description="A collection of some of the media I love including music from Spotify's API and others."
         />
+        <ExperimentBlock
+            title="Shaped Paragraphs"
+            link="paragraphs"
+            image="paragraphs"
+            description="Developing line splitting algorithms that make any given paragraph resemble a given shape by adjusting the rag."
+        />
     </ul>
 </div>

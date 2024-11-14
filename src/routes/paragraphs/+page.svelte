@@ -1,5 +1,7 @@
 <script lang="ts">
     import { writable, derived } from "svelte/store";
+    import { hColors } from "$lib/store";
+    import Dropdown from "$lib/components/Dropdown.svelte";
     import { buildCircular, buildTriangular, buildSquare } from "./utilities";
     import type { PageData } from "./$types";
 
@@ -14,7 +16,17 @@
             ) / 100,
     );
 
-    const inputText = writable<string>(Object.values(data.paragraphs)[0]);
+    const paragraphs = new Map(Object.entries(data.paragraphs));
+    const baseParagraph = writable<string>(paragraphs.keys().next().value);
+    const setBaseParagraph = (mode: string) => {
+        baseParagraph.set(mode);
+    };
+
+    const inputText = writable<string>(paragraphs.get($baseParagraph));
+    baseParagraph.subscribe((key) =>
+        inputText.set(paragraphs.get(key) || data.paragraphs.short),
+    );
+
     const circular = derived([inputText, ratio], ([$inputText, $ratio]) =>
         buildCircular($inputText, $ratio),
     );
@@ -78,8 +90,16 @@
         </section>
     </div>
     <div class="blurbContainer">
-        <div class="blurb large">
-            <h3>Paragraph</h3>
+        <div class="blurb areaSizing">
+            <div class="w-full flex justify-between">
+                <h3>Paragraph</h3>
+                <Dropdown
+                    color={$hColors.f2}
+                    states={[...paragraphs.keys()]}
+                    state={$baseParagraph}
+                    setState={setBaseParagraph}
+                />
+            </div>
             <textarea bind:value={$inputText} class="area" />
         </div>
         <div class="blurb">
@@ -152,7 +172,7 @@
 
 <style lang="postcss">
     .fullContainer {
-        @apply relative flex flex-col divide-y-[1.5px] divide-[var(--text)] bg-stone-100 text-stone-900;
+        @apply relative flex flex-col divide-y-[1.5px] divide-[var(--text)] text-stone-900 bg-gradient-to-t from-[var(--c3)] from-[-200%] to-transparent;
     }
 
     .paragraphContainer {
@@ -166,7 +186,7 @@
     }
 
     .blurbContainer {
-        @apply w-full flex flex-col gap-12 flex-wrap px-12 pt-8 pb-16;
+        @apply w-full flex flex-row gap-x-16 gap-y-8 flex-wrap px-12 pt-8 pb-16;
     }
 
     .blurb {
@@ -177,12 +197,12 @@
         @apply flex flex-col gap-2;
     }
 
-    .large {
-        @apply max-w-lg;
+    .areaSizing {
+        @apply max-w-[24rem] md:max-w-[40rem] w-full;
     }
 
     .area {
-        @apply border-[1.25px] border-stone-500 rounded-sm px-4 py-2 w-[24rem] md:w-[40rem] h-[10rem] bg-inherit;
+        @apply border-[1.25px] border-stone-500 rounded-sm px-4 py-2 mt-2 h-[10rem] bg-inherit w-full;
     }
 
     .shapeSpan {
@@ -207,7 +227,7 @@
 
     section {
         flex: 0 0 auto;
-        @apply flex flex-col w-[40rem] bg-white;
+        @apply flex flex-col w-[40rem] min-h-[30rem] bg-stone-50;
     }
 
     h3 {

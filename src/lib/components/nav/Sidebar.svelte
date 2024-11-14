@@ -192,9 +192,14 @@
 						Article
 					</p>
 				</a>
-				<a href="/media" class="experiment col-span-2">
+				<a href="/media" class="experiment">
 					<p style:color={darkThemed ? darkMotif.text : $cText}>
-						Media Tapestry
+						Media
+					</p>
+				</a>
+				<a href="/paragraphs" class="experiment">
+					<p style:color={darkThemed ? darkMotif.text : $cText}>
+						Paragraphs
 					</p>
 				</a>
 			</div>

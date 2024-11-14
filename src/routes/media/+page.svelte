@@ -1,7 +1,6 @@
 <script lang="ts">
     import { fly } from "svelte/transition";
     import { circOut } from "svelte/easing";
-    import { hColors } from "$lib/store";
     import { writable } from "svelte/store";
     import {
         mixLists,
@@ -32,7 +31,6 @@
 >
     <div
         class="w-full px-12 pt-8 pb-10 flex flex-col lg:flex-row place-content-between lg:items-center gap-6"
-        style:background-image={`linear-gradient(${$hColors.f3}80, #ffffff)`}
     >
         <h1 class="uppercase font-mono font-light">the media on my mind...</h1>
         <div class="filters">

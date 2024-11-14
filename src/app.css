@@ -7,15 +7,15 @@
 
 @layer base {
     ::-moz-selection {
-        background: var(--light);
+        background: var(--select-color);
     }
 
     ::-webkit-selection {
-        background: var(--light);
+        background: var(--select-color);
     }
 
     ::selection {
-        background: var(--light);
+        background: var(--select-color);
     }
 
     html {
@@ -23,7 +23,8 @@
     }
 
     .highlight {
-        background-color: var(--txt-color);
+        background-color: var(--c3);
+        color: var(--text);
     }
 
     a {

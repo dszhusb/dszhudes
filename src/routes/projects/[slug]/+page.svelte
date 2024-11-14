@@ -22,8 +22,6 @@
 	import Footer from "$lib/components/article/Footer.svelte";
 	import { fly } from "svelte/transition";
 	import { circOut } from "svelte/easing";
-	import { hColors } from "$lib/store";
-
 	export let data;
 	const {
 		title,
@@ -50,12 +48,12 @@
 			<div class="flex flex-col-reverse w-full md:w-1/3">
 				<div class="linkContainer">
 					{#if documentation !== null}
-						<div class="link" style:background-color={$hColors.f2}>
+						<div class="link" style:background-color="var(--c2)">
 							<a href={documentation} target="_blank">Documentation</a>
 						</div>
 					{/if}
 					{#if site !== null}
-						<div class="link" style:background-color={$hColors.f3}>
+						<div class="link" style:background-color="var(--c3)">
 							<a href={site} target="_blank">Site</a>
 						</div>
 					{/if}

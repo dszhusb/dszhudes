@@ -52,16 +52,16 @@
         alt="bust"
     />
     {#each shells as s, index}
-        <button on:click={() => randomizeShell(ranges, index)}>
+        <button
+            on:click={() => randomizeShell(ranges, index)}
+            class="shell"
+            style="--rotation: {s.rotation}deg; --h-rotation: {s.rotation +
+                30}deg; --x: {s.position.x}%; --y: {s.position
+                .y}%; --size: {s.size}rem; --z: {index >= threshold ? 20 : 0}"
+        >
             <enhanced:img
                 src={images[`/src/lib/assets/iconShells/${$hIcon}.webp`]}
-                class="shell"
                 alt="shell"
-                style="--rotation: {s.rotation}deg; --h-rotation: {s.rotation +
-                    30}deg; --x: {s.position.x}%; --y: {s.position
-                    .y}%; --size: {s.size}rem; --z: {index >= threshold
-                    ? 20
-                    : 0}"
             />
         </button>
     {/each}
@@ -76,5 +76,9 @@
 
     .shell:hover {
         @apply saturate-200 scale-125 rotate-[var(--h-rotation)] duration-300;
+    }
+
+    button {
+        @apply p-0 m-0;
     }
 </style>

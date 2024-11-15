@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { gsap } from "gsap";
-    import { onMount } from "svelte";
     import headshot from '$lib/assets/icons/headshot.webp'
 </script>
 

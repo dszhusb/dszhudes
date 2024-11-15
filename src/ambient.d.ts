@@ -6,6 +6,19 @@ declare global {
         text: string
     };
 
+    type RgbColor = {
+        r: number,
+        g: number,
+        b: number,
+        a?: number,
+    }
+
+    type HslColor = {
+        h: number,
+        s: number,
+        l: number
+    }
+
     type Vector = {
         x: number,
         y: number

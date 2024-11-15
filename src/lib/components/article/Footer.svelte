@@ -17,7 +17,7 @@
 <script lang="ts">
     import { gsap } from "gsap";
     import { onMount } from "svelte";
-    import { hIcon, hColors } from "$lib/store";
+    import { hIcon } from "$lib/store";
     export let flush = false;
 
     function goTop() {
@@ -38,8 +38,7 @@
 </script>
 
 <div
-    class="relative w-full flex flex-col items-center overflow-hidden"
-    style:background-image={`linear-gradient(#ffffff 50%, ${$hColors.f3}80)`}
+    class="relative w-full flex flex-col items-center overflow-hidden bg-gradient-to-b from-transparent from-[50%] to-[var(--c3)]"
 >
     {#if !flush}
         <div class="h-32 w-full" />

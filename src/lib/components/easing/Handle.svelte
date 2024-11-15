@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { hColors, handle_one, handle_two } from "$lib/store";
+    import { handle_one, handle_two } from "$lib/store";
     import type { Coord } from "$lib/store";
 
     export let left = 0;
@@ -59,8 +59,6 @@
             handle_two.set(<Coord>{ x: x, y: y });
         }
     }
-
-    // 	$: console.log(moving);
 </script>
 
 <section
@@ -70,7 +68,7 @@
     style="left: {left}px; top: {top}px;"
     class="absolute select-none cursor-move -translate-y-1/2 -translate-x-1/2"
 >
-    <div class="w-6 h-6 rounded-full" style:background-color={$hColors.text} />
+    <div class="w-6 h-6 rounded-full bg-[var(--text)]" />
 </section>
 
 <!-- on:touchstart={touchStart} -->

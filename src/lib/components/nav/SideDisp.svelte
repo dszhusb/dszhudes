@@ -77,18 +77,18 @@
     </button>
     {#if showFlag}
         <div
-            style:background-color={darkThemed ? darkMotif.f3 : $hColors.f3}
-            style:border-color={darkThemed ? darkMotif.f3 : $hColors.f3}
+            style:background-color={darkThemed ? darkMotif.f3 : "var(--c3)"}
+            style:border-color={darkThemed ? darkMotif.f3 : "var(--c3)"}
             class="relative rounded-full w-fit px-2 py-5 mx-auto"
         >
             <div
                 style:border-bottom-color={darkThemed
                     ? darkMotif.f3
-                    : $hColors.f3}
+                    : "var(--c3)"}
                 class="arrow-up absolute -top-[13px] -translate-x-1/2 left-1/2"
             />
             <p
-                style:color={darkThemed ? darkMotif.text : $hColors.text}
+                style:color={darkThemed ? darkMotif.text : "var(--text)"}
                 class="w-6 sideways uppercase"
             >
                 Click Me!

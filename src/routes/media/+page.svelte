@@ -30,7 +30,7 @@
     in:fly={{ duration: 500, opacity: 0.8, y: -100, easing: circOut }}
 >
     <div
-        class="w-full px-12 pt-8 pb-10 flex flex-col lg:flex-row place-content-between lg:items-center gap-6"
+        class="w-full px-12 pt-8 pb-10 flex flex-col lg:flex-row place-content-between lg:items-center gap-6 bg-gradient-to-b from-[var(--c3)] to-transparent to-[75%]"
     >
         <h1 class="uppercase font-mono font-light">the media on my mind...</h1>
         <div class="filters">

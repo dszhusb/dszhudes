@@ -1,21 +1,8 @@
 <script lang="ts">
-    import { tweened } from "svelte/motion";
-    import { hColors, colorSettings } from "$lib/store";
     import { fly } from "svelte/transition";
     import { circOut } from "svelte/easing";
     import Headshot from "$lib/assets/icons/headshot.webp";
     import resume from "$lib/assets/DanielZhu.pdf";
-
-    const c1 = tweened($hColors.f1, colorSettings);
-    const c2 = tweened($hColors.f2, colorSettings);
-    const c3 = tweened($hColors.f3, colorSettings);
-    const cText = tweened($hColors.text, colorSettings);
-    hColors.subscribe((value) => {
-        c1.set(value.f1);
-        c2.set(value.f2);
-        c3.set(value.f3);
-        cText.set(value.text);
-    });
 </script>
 
 <svelte:head>
@@ -24,7 +11,7 @@
 
 <main
     class="flex flex-col lg:flex-row divide-x-[1px] divide-stone-800 h-full w-full"
-    style:background-image={`linear-gradient(#ffffff 50%, ${$hColors.f3}80)`}
+    style:background-image={`linear-gradient(#ffffff 50%,  var(--t50))`}
 >
     <div
         class="about py-4 px-12"
@@ -35,14 +22,9 @@
         </h1>
         <p>
             I'm a designer and creative technologist hailing from
+            <a href="https://design.cmu.edu/content/environments-1">Design</a>,
+            <a href="https://www.hcii.cmu.edu/">HCI</a>, and
             <a
-                style:color={$cText}
-                href="https://design.cmu.edu/content/environments-1">Design</a
-            >,
-            <a style:color={$cText} href="https://www.hcii.cmu.edu/">HCI</a>,
-            and
-            <a
-                style:color={$cText}
                 href="https://ideate.cmu.edu/undergraduate-programs/physical-computing/"
                 >Physical Computing</a
             > at Carnegie Mellon University.
@@ -62,7 +44,7 @@
             strengths is the ability to evaluate and learn the technical skills
             I need on the fly to bring the concepts I dream of to life.
         </p>
-        <p class="font-bold" style:color={$hColors.text}>
+        <p class="font-bold text-[var(--text)]">
             Send me an email if you'd like to work together!
         </p>
     </div>
@@ -86,22 +68,20 @@
             <a
                 href="http://www.linkedin.com/in/danielszhu"
                 target="_blank"
-                style:background-color={$c1}
-                class="button text-stone-800"
+                class="button text-stone-800 bg-[var(--c1)]"
                 on:click={() => {}}>LinkedIn</a
             >
             <a
                 href="https://github.com/dszhusb"
                 target="_blank"
-                style:background-color={$c2}
-                class="button text-stone-800"
+                class="button text-stone-800 bg-[var(--c2)]"
                 on:click={() => {}}>Github</a
             >
             <a
                 href="mailto:dszhu.design@gmail.com"
                 target="_top"
-                style:background-color={$c3}
-                class="button text-stone-800">dszhu.design@gmail.com</a
+                class="button text-stone-800 bg-[var(--c3)]"
+                >dszhu.design@gmail.com</a
             >
             <div />
         </div>
@@ -114,6 +94,10 @@
     }
     p {
         @apply pb-6 max-w-md leading-relaxed;
+    }
+
+    p a {
+        @apply text-[var(--text)];
     }
     .about a {
         @apply font-semibold;

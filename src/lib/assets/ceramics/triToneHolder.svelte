@@ -31,8 +31,6 @@ Command: npx @threlte/gltf@2.0.3 /Users/danielzhu/Documents/dszhudes/static/triT
 
   const gltf = useGltf<GLTFResult>("/triToneHolder.glb");
   const component = forwardEventHandlers();
-
-  $: console.log($gltf);
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>

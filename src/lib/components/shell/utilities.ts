@@ -20,66 +20,6 @@ export const ranges = {
     bc: <range>{ low: 160, high: 255 }
 }
 
-export type RgbColor = {
-    r: number,
-    g: number,
-    b: number
-}
-
-export type HslColor = {
-    h: number,
-    s: number,
-    l: number
-}
-
-export const rgbToHsl = (color: RgbColor): HslColor => { // https://stackoverflow.com/questions/2353211/hsl-to-rgb-color-conversion
-    let c: RgbColor = { r: color.r / 255, g: color.g / 255, b: color.b / 255 }
-    const vmax = Math.max(c.r, c.g, c.b), vmin = Math.min(c.r, c.g, c.b);
-    const average = (vmax + vmin) / 2;
-    let hsl = <HslColor>{ h: average, s: average, l: average }
-
-    if (vmax === vmin) {
-        hsl.h = 0
-        hsl.s = 0
-        return hsl; // achromatic
-    }
-
-    const d = vmax - vmin;
-    hsl.s = hsl.l > 0.5 ? d / (2 - vmax - vmin) : d / (vmax + vmin);
-    if (vmax === c.r) hsl.h = (c.g - c.b) / d + (c.g < c.b ? 6 : 0);
-    if (vmax === c.g) hsl.h = (c.b - c.r) / d + 2;
-    if (vmax === c.b) hsl.h = (c.r - c.g) / d + 4;
-    hsl.h /= 6;
-
-    return hsl;
-}
-
-export const hslToRgb = (c: HslColor) => {
-    let rgb = <RgbColor>{ r: 0, g: 0, b: 0 }
-    if (c.s === 0) {
-        rgb.r = rgb.g = rgb.b = c.l; // achromatic
-    } else {
-        const q = c.l < 0.5 ? c.l * (1 + c.s) : c.l + c.s - c.l * c.s;
-        const p = 2 * c.l - q;
-        rgb.r = hueToRgb(p, q, c.h + 1 / 3);
-        rgb.g = hueToRgb(p, q, c.h);
-        rgb.b = hueToRgb(p, q, c.h - 1 / 3);
-    }
-
-    rgb.r *= 255; rgb.g *= 255; rgb.b *= 255
-    rgb.r = Math.round(rgb.r); rgb.g = Math.round(rgb.g); rgb.b = Math.round(rgb.b)
-    return rgb;
-}
-
-const hueToRgb = (p: number, q: number, t: number) => {
-    if (t < 0) t += 1;
-    if (t > 1) t -= 1;
-    if (t < 1 / 6) return p + (q - p) * 6 * t;
-    if (t < 1 / 2) return q;
-    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-    return p;
-}
-
 export type Parameters = {
     a: number,
     b: number,
@@ -90,53 +30,6 @@ export type Parameters = {
 
 export const valueInRange = (low: number, high: number, weight: number = 1) => {
     return (high - low) * weight * Math.random() + low
-}
-
-export function interpolateColorPalette(in1: RgbColor, in2: RgbColor): Palette {
-    const cText = rgbToHex(darkenColor(in1))
-    const c1 = rgbToHex(in1)
-    const c2 = rgbToHex(blendColor(in1, in2, 0.5))
-    const c3 = rgbToHex(in2)
-    return <Palette>{ text: cText, f1: c1, f2: c2, f3: c3 }
-}
-
-export function rgbToHex(c: RgbColor): string {
-    const toHex = (n: number) => n.toString(16).padStart(2, '0');
-    const rHex = toHex(c.r);
-    const gHex = toHex(c.g);
-    const bHex = toHex(c.b);
-    return `#${rHex}${gHex}${bHex}`;
-}
-
-function darkenColor(c: RgbColor) {
-    return <RgbColor>{ r: Math.max(c.r - 80, 0), g: Math.max(c.g - 80, 0), b: Math.max(c.b - 80, 0) }
-}
-
-function randomColorDigit(start: number, end: number): number {
-    start = Math.max(0, start);
-    end = Math.min(end, 255);
-    return Math.floor((end - start) * Math.random()) + start;
-}
-
-export function randomColor(start: number, end: number) {
-    return <RgbColor>{ r: randomColorDigit(start, end), g: randomColorDigit(start, end), b: randomColorDigit(start, end) }
-}
-
-function lerp(a: number, b: number, alpha: number) {
-    return Math.floor(a + alpha * (b - a))
-}
-
-function blendColor(c1: RgbColor, c2: RgbColor, alpha: number) {
-    return <RgbColor>{ r: lerp(c1.r, c2.r, alpha), g: lerp(c1.g, c2.g, alpha), b: lerp(c1.b, c2.b, alpha) }
-}
-
-export function joinColor(c: RgbColor) {
-    return Object.values(c).join(",")
-}
-
-export function blendColorToHex(c1: RgbColor, c2: RgbColor, alpha: number) {
-    const c = blendColor(c1, c2, alpha);
-    return Object.values(c).join(",")
 }
 
 export class Shell {

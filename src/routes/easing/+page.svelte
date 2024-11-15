@@ -1,8 +1,6 @@
 <script lang="ts">
     import { derived } from "svelte/store";
     import {
-        hColors,
-        colorSettings,
         section_size,
         scaled_handle_one,
         scaled_handle_two,
@@ -22,11 +20,6 @@
 
     let show = true;
     const resolution = 100;
-
-    const c3 = tweened($hColors.f3, colorSettings);
-    hColors.subscribe((value) => {
-        c3.set(value.f3);
-    });
 
     const points = derived(
         [scaled_handle_one, scaled_handle_two, chart_size],
@@ -65,12 +58,12 @@
 <main
     class="flex flex-wrap pt-8 pb-24 px-8 sm:px-12 min-h-screen min-w-fit gap-16"
     in:fly={{ duration: 500, opacity: 0.8, y: 200, easing: circOut }}
-    style:background-image={`linear-gradient(#ffffff 20%, ${$c3}80)`}
+    style:background-image={`linear-gradient(#ffffff 20%, var(--t50))`}
 >
     <div class="flex flex-col gap-y-4" style:max-width={$chart_size + "px"}>
         <div
             class="relative overflow-hidden w-fit h-fit border-[1px] border-stone-800 bg-white/33"
-            style:background-image={`linear-gradient(${$c3}80, #ffffff)`}
+            style:background-image={`linear-gradient(var(--t50), #ffffff)`}
         >
             <svg width={$chart_size} height={$chart_size}>
                 <line
@@ -79,25 +72,25 @@
                     x2={$chart_size}
                     viewBox={`0 0 ${$chart_size} ${$chart_size}`}
                     y2="0"
-                    style={`stroke:${$hColors.f3}80;stroke-width:3`}
+                    style={`stroke:var(--t50);stroke-width:3`}
                 />
                 <polyline
                     points={$points}
-                    style={`fill:none;stroke:${$hColors.text};stroke-width:3`}
+                    style={`fill:none;stroke:var(--text);stroke-width:3`}
                 />
                 <line
                     x1="0"
                     y1={$chart_size}
                     x2={$scaled_handle_one.x * $chart_size}
                     y2={$scaled_handle_one.y * $chart_size}
-                    style={`stroke:${$hColors.f2};stroke-width:3`}
+                    style={`stroke:var(--c2);stroke-width:3`}
                 />
                 <line
                     x1={$chart_size}
                     y1="0"
                     x2={$scaled_handle_two.x * $chart_size}
                     y2={$scaled_handle_two.y * $chart_size}
-                    style={`stroke:${$hColors.f2};stroke-width:3`}
+                    style={`stroke:var(--c2);stroke-width:3`}
                 />
             </svg>
             <Handle parentSize={$chart_size} first={true} />
@@ -179,15 +172,13 @@
             </button>
             <div class="flex flex-row items-center">
                 <div
-                    class="w-4 h-4 border-[1px] border-stone-800"
-                    style:background-color={$hColors.f3}
+                    class="w-4 h-4 border-[1px] border-stone-800 bg-[var(--c3)]"
                 />
                 <p class="pl-3 py-2 w-fit uppercase">Linear</p>
             </div>
             <div class="flex flex-row items-center">
                 <div
-                    class="w-4 h-4 border-[1px] border-stone-800"
-                    style:background-color={$hColors.text}
+                    class="w-4 h-4 border-[1px] border-stone-800 bg-[var(--text)]"
                 />
                 <p class="pl-3 py-2 w-fit uppercase">Bezier Curve</p>
             </div>
@@ -196,8 +187,7 @@
             <div class="h-16 w-full relative">
                 {#if show}
                     <div
-                        class="w-16 h-16 absolute top-0 left-0"
-                        style:background-color={`${$hColors.f3}A0`}
+                        class="w-16 h-16 absolute top-0 left-0 bg-[var(--c3)] opacity-70"
                         transition:fly={{
                             x: 200,
                             opacity: 1,
@@ -206,8 +196,7 @@
                         }}
                     />
                     <div
-                        class="w-16 h-16 absolute top-0 left-0"
-                        style:background-color={`${$hColors.text}A0`}
+                        class="w-16 h-16 absolute top-0 left-0 bg-[var(--text)] opacity-70"
                         transition:fly={{
                             x: 200,
                             opacity: 1,
@@ -217,14 +206,12 @@
                     />
                 {:else}
                     <div
-                        class="w-16 h-16 absolute top-0 left-[200px]"
+                        class="w-16 h-16 absolute top-0 left-[200px] bg-[var(--c3)] opacity-70"
                         in:fade={{ delay: 1000, duration: 0 }}
-                        style:background-color={`${$hColors.f3}A0`}
                     />
                     <div
-                        class="w-16 h-16 absolute top-0 left-[200px]"
+                        class="w-16 h-16 absolute top-0 left-[200px] bg-[var(--text)] opacity-70"
                         in:fade={{ delay: 1000, duration: 0 }}
-                        style:background-color={`${$hColors.text}A0`}
                     />
                 {/if}
             </div>
@@ -235,8 +222,7 @@
             <div class="h-16 w-full flex flex-row gap-x-4">
                 {#if show}
                     <div
-                        class="w-16 h-16"
-                        style:background-color={`${$hColors.f3}`}
+                        class="w-16 h-16 bg-[var(--c3)]"
                         transition:scale={{
                             opacity: 1,
                             duration: 1000,
@@ -244,8 +230,7 @@
                         }}
                     />
                     <div
-                        class="w-16 h-16"
-                        style:background-color={`${$hColors.text}`}
+                        class="w-16 h-16 bg-[var(--text)]"
                         transition:scale={{
                             opacity: 1,
                             duration: 1000,
@@ -261,16 +246,14 @@
             <div class="h-16 w-full flex flex-row gap-x-4">
                 {#if show}
                     <div
-                        class="w-16 h-16"
-                        style:background-color={`${$hColors.f3}`}
+                        class="w-16 h-16 bg-[var(--c3)]"
                         transition:slide={{
                             duration: 1000,
                             easing: linear,
                         }}
                     />
                     <div
-                        class="w-16 h-16"
-                        style:background-color={`${$hColors.text}`}
+                        class="w-16 h-16 bg-[var(--text)]"
                         transition:slide={{
                             duration: 1000,
                             easing: easeBezier,
@@ -285,16 +268,14 @@
             <div class="h-16 w-full flex flex-row gap-x-4">
                 {#if show}
                     <div
-                        class="w-16 h-16"
-                        style:background-color={`${$hColors.f3}`}
+                        class="w-16 h-16 bg-[var(--c3)]"
                         transition:fade={{
                             duration: 1000,
                             easing: linear,
                         }}
                     />
                     <div
-                        class="w-16 h-16"
-                        style:background-color={`${$hColors.text}`}
+                        class="w-16 h-16 var(--text)"
                         transition:fade={{
                             duration: 1000,
                             easing: easeBezier,

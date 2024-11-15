@@ -1,8 +1,7 @@
 <script lang="ts">
-    import type { RgbColor, HslColor, Shell } from "./utilities";
-    import { rgbToHsl, hslToRgb } from "$lib/components/shell/utilities";
+    import { rgbToHsl, hslToRgb } from "$lib/components/color/utilities";
     import { writable } from "svelte/store";
-    import { log } from "three/examples/jsm/nodes/Nodes.js";
+    import type { Writable } from "svelte/store";
     export let label: string;
     export let colors: Palette;
     export let ranges: { low: number; high: number };

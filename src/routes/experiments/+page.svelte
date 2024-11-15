@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { hColors } from "$lib/store";
     import { fly } from "svelte/transition";
     import { circOut } from "svelte/easing";
     import ExperimentBlock from "$lib/components/nav/ExperimentBlock.svelte";
@@ -7,7 +6,7 @@
 
 <div
     class="w-full h-full"
-    style:background-image={`linear-gradient(#ffffff 30%, ${$hColors.f3}50)`}
+    style:background-image={`linear-gradient(#ffffff 30%, var(--t50))`}
 >
     <div
         class="px-12 py-8"

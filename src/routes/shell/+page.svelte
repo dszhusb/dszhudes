@@ -8,15 +8,17 @@
     import Dropdown from "$lib/components/Dropdown.svelte";
     import Article from "./ShellArticle.svelte";
     import {
-        Shell,
         blendColorToHex,
         joinColor,
         interpolateColorPalette,
-        valueInRange,
         randomColor,
+    } from "$lib/components/color/utilities";
+    import {
+        Shell,
+        valueInRange,
         ranges,
     } from "$lib/components/shell/utilities";
-    import type { RgbColor, Parameters } from "$lib/components/shell/utilities";
+    import type { Parameters } from "$lib/components/shell/utilities";
 
     const center = derived(chart_size, ($chart_size) => $chart_size / 2);
     let name = "My Beautiful Shell";

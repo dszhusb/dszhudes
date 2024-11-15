@@ -1,6 +1,5 @@
 <script>
     import { onMount } from "svelte";
-    import { hColors } from "$lib/store";
     import { format } from "./utilities";
     import PlayButton from "./PlayButton.svelte";
     import {

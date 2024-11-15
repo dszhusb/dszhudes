@@ -3,14 +3,8 @@
 	import { cubicOut } from "svelte/easing";
 	import { tweened } from "svelte/motion";
 	import { fly } from "svelte/transition";
-	import {
-		hColors,
-		colorSettings,
-		colorSettingsSlow,
-		darkMotif,
-	} from "$lib/store";
+	import { colorSettingsSlow, darkMotif } from "$lib/store";
 	import NavIcon from "$lib/components/nav/NavIcon.svelte";
-	import Wireframe from "$lib/components/nav/Wireframe.svelte";
 
 	const cDark = "#292524";
 	const cLight = "#e7e5e4";
@@ -32,12 +26,6 @@
 		}
 	});
 
-	const c1 = tweened($hColors.f1, colorSettings);
-	const c2 = tweened($hColors.f2, colorSettings);
-	const c3 = tweened($hColors.f3, colorSettings);
-	const c4 = tweened(`${$hColors.f3}80`, colorSettings);
-	const cText = tweened($hColors.text, colorSettings);
-
 	const sw = 6.75;
 	const ew = 100.25;
 	const f1w = tweened(sw, { duration: 200, easing: cubicOut });
@@ -45,19 +33,9 @@
 	const f3w = tweened(sw, { duration: 200, easing: cubicOut });
 
 	let showExperiments = false;
-
-	hColors.subscribe((value) => {
-		c1.set(value.f1);
-		c2.set(value.f2);
-		c3.set(value.f3);
-		c4.set(value.f3);
-		cText.set(value.text);
-	});
 </script>
 
-<nav
-	class="sticky top-0 max-h-screen h-full w-60 border-r-[1px] border-stone-800 overscroll-contain flex flex-col gap-y-0"
->
+<nav>
 	<div class="button mt-4">
 		<a href="/">daniel zhu</a>
 	</div>
@@ -93,7 +71,9 @@
 				>
 					<div
 						class="fIndicator physical"
-						style:background-color={darkThemed ? darkMotif.f1 : $c1}
+						style:background-color={darkThemed
+							? darkMotif.f1
+							: "var(--c1)"}
 						style:width={`${$f1w}%`}
 					/>
 					<a href="/projects/category/physical">physical</a>
@@ -108,7 +88,9 @@
 				>
 					<div
 						class="fIndicator digital"
-						style:background-color={darkThemed ? darkMotif.f2 : $c2}
+						style:background-color={darkThemed
+							? darkMotif.f2
+							: "var(--c2)"}
 						style:width={`${$f2w}%`}
 					/>
 					<a href="/projects/category/digital">digital</a>
@@ -123,7 +105,9 @@
 				>
 					<div
 						class="fIndicator exploration"
-						style:background-color={darkThemed ? darkMotif.f3 : $c3}
+						style:background-color={darkThemed
+							? darkMotif.f3
+							: "var(--c3)"}
 						style:width={`${$f3w}%`}
 					/>
 					<a href="/projects/category/exploration">exploration</a>
@@ -140,78 +124,78 @@
 			>
 		</div>
 	</div>
-	<div
-		role="toolbar"
-		tabindex="0"
-		on:mouseenter={() => (showExperiments = true)}
-		on:mouseleave={() => (showExperiments = false)}
-	>
-		<a
-			href="/experiments"
-			class="experiment flex flex-col content-center w-full border-b-[1px]"
-			style:text-decoration-color={darkThemed ? darkMotif.text : $cText}
-			style:background-color={darkThemed ? darkMotif.f3 : $c4}
-			style:border-color={darkThemed ? darkMotif.text : $cText}
+	<div class="relative h-full w-full">
+		<div
+			class="w-full h-full bg-gradient-to-b from-transparent to-[var(--t50)] absolute top-0 pointer-events-none"
+		/>
+		<div
+			role="toolbar"
+			tabindex="0"
+			on:mouseenter={() => (showExperiments = true)}
+			on:mouseleave={() => (showExperiments = false)}
 		>
-			<p
-				style:color={darkThemed ? darkMotif.text : $cText}
-				style:background-color={"rgba(255,255,255,0.7)"}
-				class="p-3 w-full"
-			>
-				Web Experiments
-			</p>
-			<!-- <Wireframe fill={$cText} /> -->
-		</a>
-		{#if showExperiments}
-			<div
-				transition:fly={{ delay: 300, duration: 500, y: 5, easing: cubicOut }}
-				class="experimentContainer grid grid-cols-2"
-				style="--border-color:{darkThemed ? darkMotif.text : $cText}"
-				style:background-color={`${$hColors.f2}18`}
+			<a
+				href="/experiments"
+				class="experiment flex flex-col content-center w-full border-b-[1px]"
 				style:text-decoration-color={darkThemed
 					? darkMotif.text
-					: $cText}
+					: "var(--text)"}
+				style:background-color={darkThemed ? darkMotif.f3 : "var(--c3)"}
+				style:border-color={darkThemed ? darkMotif.text : "var(--text)"}
 			>
-				<a href="/shell" class="experiment">
-					<p style:color={darkThemed ? darkMotif.text : $cText}>
-						Shells
-					</p>
-				</a>
-				<a href="/easing" class="experiment">
-					<p style:color={darkThemed ? darkMotif.text : $cText}>
-						Easing
-					</p>
-				</a>
-				<a href="/object_gallery" class="experiment">
-					<p style:color={darkThemed ? darkMotif.text : $cText}>
-						Ceramics
-					</p>
-				</a>
-				<a href="/handwriting" class="experiment">
-					<p style:color={darkThemed ? darkMotif.text : $cText}>
-						Article
-					</p>
-				</a>
-				<a href="/media" class="experiment">
-					<p style:color={darkThemed ? darkMotif.text : $cText}>
-						Media
-					</p>
-				</a>
-				<a href="/paragraphs" class="experiment">
-					<p style:color={darkThemed ? darkMotif.text : $cText}>
-						Paragraphs
-					</p>
-				</a>
-			</div>
-		{/if}
+				<p
+					style:color={darkThemed ? darkMotif.text : "var(--text)"}
+					style:background-color={"rgba(255,255,255,0.7)"}
+					class="p-3 w-full"
+				>
+					Web Experiments
+				</p>
+			</a>
+			{#if showExperiments}
+				<div
+					transition:fly={{
+						delay: 300,
+						duration: 500,
+						y: 5,
+						easing: cubicOut,
+					}}
+					class="experimentContainer"
+					style="--border-color:{darkThemed
+						? darkMotif.text
+						: 'var(--text)'}"
+					style:background-color="var(--t5)"
+					style:text-decoration-color={darkThemed
+						? darkMotif.text
+						: "var(--text)"}
+				>
+					<a href="/shell" class="experiment">
+						<p>Shells</p>
+					</a>
+					<a href="/easing" class="experiment">
+						<p>Easing</p>
+					</a>
+					<a href="/object_gallery" class="experiment">
+						<p>Ceramics</p>
+					</a>
+					<a href="/handwriting" class="experiment">
+						<p>Article</p>
+					</a>
+					<a href="/media" class="experiment">
+						<p>Media</p>
+					</a>
+					<a href="/paragraphs" class="experiment">
+						<p>Paragraphs</p>
+					</a>
+				</div>
+			{/if}
+		</div>
 	</div>
-	<div
-		style:background-image={`linear-gradient(#ffffff, ${darkThemed ? darkMotif.f3 : $c3} 250%)`}
-		class="w-full h-full"
-	/>
 </nav>
 
 <style lang="postcss">
+	nav {
+		@apply sticky top-0 max-h-screen h-full w-60 border-r-[1px] border-stone-800 overscroll-contain flex flex-col gap-y-0;
+	}
 	.button {
 		@apply w-full flex place-content-center text-stone-800;
 	}
@@ -223,7 +207,8 @@
 	}
 
 	.experimentContainer {
-		border-color: var(--border-color);
+		@apply grid grid-cols-2;
+		@apply text-[var(--text)] border-[var(--border-color)];
 	}
 
 	.experimentContainer a:nth-child(odd) {

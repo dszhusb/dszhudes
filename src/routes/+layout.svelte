@@ -17,7 +17,9 @@
 <script lang="ts">
     import "../app.css";
     import { inject } from "@vercel/analytics";
+    import { derived } from "svelte/store";
     import { page, navigating } from "$app/stores";
+    import { createHexTransparency } from "$lib/components/color/utilities";
     import { hIcon, hColors, colorSettings } from "$lib/store";
     import { tweened } from "svelte/motion";
     import { fly } from "svelte/transition";
@@ -32,6 +34,22 @@
     const c1 = tweened($hColors.f1, colorSettings);
     const c2 = tweened($hColors.f2, colorSettings);
     const c3 = tweened($hColors.f3, colorSettings);
+
+    const t50 = derived(hColors, ($hColors) =>
+        createHexTransparency($hColors.f3, 0.5),
+    );
+
+    const t25 = derived(hColors, ($hColors) =>
+        createHexTransparency($hColors.f3, 0.25),
+    );
+
+    const t15 = derived(hColors, ($hColors) =>
+        createHexTransparency($hColors.f3, 0.15),
+    );
+
+    const t5 = derived(hColors, ($hColors) =>
+        createHexTransparency($hColors.f3, 0.05),
+    );
 
     hColors.subscribe((value) => {
         ctext.set(value.text);
@@ -51,7 +69,7 @@
 
 <main
     class="font-mono relative scroll-smooth w-screen flex flex-col md:flex-row"
-    style="--select-color:{$c3}c0; --text:{$ctext}; --c1: {$c1}; --c2: {$c2}; --c3: {$c3};"
+    style="--select-color:{$c3}c0; --text:{$ctext}; --c1: {$c1}; --c2: {$c2}; --c3: {$c3}; --t50: {$t50}; --t25: {$t25}; --t15: {$t15}; --t5: {$t5}"
 >
     {#if $page.route.id != "/"}
         <div class="block md:hidden sticky top-0 z-[999]">

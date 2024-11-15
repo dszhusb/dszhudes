@@ -77,7 +77,6 @@
     >
         <button
             on:click={() => {
-                console.log("clicked");
                 cIndex.update((n) => {
                     let nn = n - 1;
                     if (nn < 0) {

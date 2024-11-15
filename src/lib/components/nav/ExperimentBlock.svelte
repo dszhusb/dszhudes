@@ -15,32 +15,18 @@
 </script>
 
 <script lang="ts">
-    import { tweened } from "svelte/motion";
-    import { hColors, colorSettings } from "$lib/store";
     export let title: string = "";
     export let link: string = "";
     export let description: string = "";
     export let image: string = "";
-
-    const c3 = tweened($hColors.f3, colorSettings);
-    const cText = tweened($hColors.text, colorSettings);
-
-    hColors.subscribe((value) => {
-        c3.set(value.f3);
-        cText.set(value.text);
-    });
 </script>
 
 <li class="w-fit h-full mb-8 xl:basis-[47%]">
     <a
         class="flex flex-col gap-12 w-fit h-full place-content-between"
         href={`/${link}`}
-        style:color={$cText}
-        style:text-decoration-color={$cText}
     >
-        <h3 style:background-color={$c3} class="uppercase px-2 w-fit">
-            {title}
-        </h3>
+        <h3>{title}</h3>
         <div class="flex flex-col gap-8">
             <p class="w-4/5">
                 {description}
@@ -60,7 +46,11 @@
 
 <style lang="postcss">
     a {
-        @apply hover:no-underline;
+        @apply hover:no-underline text-[var(--text)] decoration-[var(--text)];
+    }
+
+    h3 {
+        @apply bg-[var(--c3)] uppercase px-2 w-fit;
     }
 
     a:hover h3 {

@@ -41,12 +41,11 @@
 <div class="fullContainer">
     <div class="paragraphContainer">
         <section>
-            <div class="sectionBar" style:background-color="var(--c1)" />
+            <div class="sectionBar bg-[var(--c1)]" />
             <div class="sectionContent">
                 <h3>
                     <span
-                        class="h-4 w-4 rounded-full shapeSpan"
-                        style:background-color="var(--c1)"
+                        class="h-4 w-4 rounded-full shapeSpan bg-[var(--c1)]"
                     /> Circular Paragraph
                 </h3>
                 <div class="centered">
@@ -57,7 +56,7 @@
             </div>
         </section>
         <section>
-            <div class="sectionBar" style:background-color="var(--c2)" />
+            <div class="sectionBar bg-[var(--c2)]" />
             <div class="sectionContent">
                 <h3>
                     <span
@@ -73,7 +72,7 @@
             </div>
         </section>
         <section>
-            <div class="sectionBar" style:background-color="var(--c3)" />
+            <div class="sectionBar bg-[var(--c3)]" />
             <div class="sectionContent">
                 <h3>
                     <span
@@ -94,7 +93,7 @@
             <div class="w-full flex justify-between">
                 <h3>Paragraph</h3>
                 <Dropdown
-                    color={$hColors.f2}
+                    color={$hColors.f1}
                     states={[...paragraphs.keys()]}
                     state={$baseParagraph}
                     setState={setBaseParagraph}
@@ -130,7 +129,7 @@
                     These current algorithms are a work in progress. If you'd
                     like to see how they work or make suggestions for
                     improvement you can check out the code <a
-                        href="https://github.com/dszhusb/dszhudes/tree/main/src"
+                        href="https://github.com/dszhusb/dszhudes/blob/main/src/routes/paragraphs/utilities.ts"
                         >here</a
                     >
                 </p>
@@ -172,7 +171,7 @@
 
 <style lang="postcss">
     .fullContainer {
-        @apply relative flex flex-col divide-y-[1.5px] divide-[var(--text)] text-stone-900 bg-gradient-to-t from-[var(--c3)] from-[-200%] to-transparent;
+        @apply relative flex flex-col divide-y-[1.5px] divide-[var(--text)] text-stone-900 bg-gradient-to-t from-[var(--t5)] to-transparent;
     }
 
     .paragraphContainer {

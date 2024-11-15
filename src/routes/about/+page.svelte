@@ -1,7 +1,7 @@
 <script lang="ts">
     import { fly } from "svelte/transition";
     import { circOut } from "svelte/easing";
-    import Headshot from "$lib/assets/icons/headshot.webp";
+    import Portrait from "./Portrait.svelte";
     import resume from "$lib/assets/DanielZhu.pdf";
 </script>
 
@@ -49,10 +49,10 @@
         </p>
     </div>
     <div
-        class="flex-initial lg:w-96 divide-y-[1px] divide-stone-800 lg:h-screen overflow-hidden bg-white/25 relative"
+        class="flex-initial lg:w-96 lg:h-screen overflow-hidden bg-white/25 relative"
         in:fly={{ duration: 500, opacity: 0.8, y: -50, easing: circOut }}
     >
-        <img class="w-full duration-1000" src={Headshot} alt="portrait" />
+        <Portrait />
         <div class="w-full h-full" />
     </div>
     <div

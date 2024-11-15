@@ -7,11 +7,6 @@ type Point = {
     theta: number
 }
 
-export type range = {
-    high: number,
-    low: number
-}
-
 export const ranges = {
     a: <range>{ low: 1, high: 5 },
     b: <range>{ low: 0.25, high: 0.4 },

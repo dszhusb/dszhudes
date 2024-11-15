@@ -24,6 +24,11 @@ declare global {
         y: number
     }
 
+    type range = {
+        high: number,
+        low: number
+    }
+
     type Book = {
         title: string,
         author: string,

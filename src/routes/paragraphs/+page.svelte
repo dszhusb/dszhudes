@@ -1,5 +1,7 @@
 <script lang="ts">
     import { writable, derived } from "svelte/store";
+    import { fly } from "svelte/transition";
+    import { circOut } from "svelte/easing";
     import { hColors } from "$lib/store";
     import Dropdown from "$lib/components/Dropdown.svelte";
     import { buildCircular, buildTriangular, buildSquare } from "./utilities";
@@ -38,7 +40,10 @@
     );
 </script>
 
-<div class="fullContainer">
+<div
+    class="fullContainer"
+    in:fly={{ duration: 500, opacity: 0.8, y: -100, easing: circOut }}
+>
     <div class="paragraphContainer">
         <section>
             <div class="sectionBar bg-[var(--c1)]" />

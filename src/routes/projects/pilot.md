@@ -18,10 +18,12 @@ categories:
     import YoutubeEmbed from '$lib/components/article/YoutubeEmbed.svelte'
 
     const p = 'pilot/'
-    // const demo = "4FG9xUcryY8"
+    const demo = "HCxdYT4lEYw"
     const hooks = [p + 'steering', p + 'throttle', p + 'brake', p + 'dashboard']
 </script>
 
 ## A Brief Summary of my role in the project
 
-Built a semi-truck simulator experience for the 2024 Berkshire Hathaway shareholders meeting, engaging 300+ visitors over 2 days. Designed and fabricated a web and embedded hardware system to convert a semi-truck into an interactive simulator. Researched and installed displays, sound, and haptic feedback for sensory immersion. Acted as the technical lead for production implementation. Designed the UX journey for visitors and acted as a brand ambassador guiding visitors through the experience.
+Built a semi-truck simulator experience for the 2024 Berkshire Hathaway shareholders conference, engaging 300+ visitors over 2 days. Designed and fabricated a web and embedded hardware system to convert a semi-truck into an interactive simulator. Researched and installed displays, sound, and haptic feedback for sensory immersion. Acted as the technical lead for production implementation. Designed the UX journey for visitors and acted as a brand ambassador guiding visitors through the experience.
+
+<YoutubeEmbed url={demo} />

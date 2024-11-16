@@ -109,9 +109,7 @@
         class="flex flex-col sm:flex-row max-w-4xl mx-auto gap-x-24 p-16"
         in:fly={{ duration: 300, opacity: 0.8, y: 200, easing: circOut }}
     >
-        <div
-            class="flex flex-1 flex-col gap-12"
-        >
+        <div class="flex flex-1 flex-col gap-12">
             <h2 class="font-semibold">
                 <span style:color="var(--c1)" class="text-6xl">✍️</span>
                 <br />Handwriting<br />Rambling
@@ -126,8 +124,10 @@
                 </p>
             {/each}
         </div>
-        <div class="flex-1 relative">
-            <div class="fixed bottom-8 sm:sticky sm:top-16 flex flex-col-reverse sm:flex-col gap-y-8">
+        <div class="flex-1 relative overflow-visible">
+            <div
+                class="fixed bottom-8 sm:sticky sm:top-16 flex flex-col-reverse sm:flex-col gap-y-8"
+            >
                 <Controls bind:currentTime={audioTime} />
                 <enhanced:img
                     class="w-96 h-auto drop-shadow-xl hidden sm:block"
@@ -136,7 +136,9 @@
                         `/src/lib/assets/handwriting/hw${$spanIndex}.webp`
                     ]}
                 />
-                <p class="text-right hidden sm:block">Original Notepad Script</p>
+                <p class="text-right hidden sm:block">
+                    Original Notepad Script
+                </p>
             </div>
         </div>
     </div>

@@ -96,7 +96,12 @@
             <SideDisp />
         </div>
     {/if}
-    <div class="w-full overflow-auto">
+    <div
+        class="w-full"
+        style:overflow={$page.route.id?.includes("paragraphs")
+            ? "auto"
+            : "visible"}
+    >
         {#if $navigating}
             <Loading />
         {:else}

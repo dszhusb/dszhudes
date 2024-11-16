@@ -23,8 +23,7 @@
     }
 
     .highlight {
-        background-color: var(--c3);
-        color: var(--text);
+        background-color: var(--t50);
     }
 
     a {

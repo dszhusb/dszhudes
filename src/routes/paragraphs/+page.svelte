@@ -176,7 +176,8 @@
 
 <style lang="postcss">
     .fullContainer {
-        @apply relative flex flex-col divide-y-[1.5px] divide-[var(--text)] text-stone-900 bg-gradient-to-t from-[var(--t5)] to-transparent;
+        @apply relative flex flex-col;
+        @apply divide-y-[1.5px] divide-[var(--text)] text-stone-900 bg-gradient-to-t from-[var(--t5)] to-transparent;
     }
 
     .paragraphContainer {

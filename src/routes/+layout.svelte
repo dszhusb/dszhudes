@@ -35,27 +35,40 @@
     const c2 = tweened($hColors.f2, colorSettings);
     const c3 = tweened($hColors.f3, colorSettings);
 
-    const t50 = derived(hColors, ($hColors) =>
-        createHexTransparency($hColors.f3, 0.5),
-    );
+    const rawT50 = derived(hColors, ($hColors) => {
+        const color = createHexTransparency($hColors.f3, 0.5);
+        return color ? color : $hColors.f3;
+    });
 
-    const t25 = derived(hColors, ($hColors) =>
-        createHexTransparency($hColors.f3, 0.25),
-    );
+    const rawT25 = derived(hColors, ($hColors) => {
+        const color = createHexTransparency($hColors.f3, 0.25);
+        return color ? color : $hColors.f3;
+    });
 
-    const t15 = derived(hColors, ($hColors) =>
-        createHexTransparency($hColors.f3, 0.15),
-    );
+    const rawT15 = derived(hColors, ($hColors) => {
+        const color = createHexTransparency($hColors.f3, 0.15);
+        return color ? color : $hColors.f3;
+    });
 
-    const t5 = derived(hColors, ($hColors) =>
-        createHexTransparency($hColors.f3, 0.05),
-    );
+    const rawT5 = derived(hColors, ($hColors) => {
+        const color = createHexTransparency($hColors.f3, 0.05);
+        return color ? color : $hColors.f3;
+    });
+
+    const t50 = tweened($rawT50, colorSettings);
+    const t25 = tweened($rawT25, colorSettings);
+    const t15 = tweened($rawT15, colorSettings);
+    const t5 = tweened($rawT5, colorSettings);
 
     hColors.subscribe((value) => {
         ctext.set(value.text);
         c1.set(value.f1);
         c2.set(value.f2);
         c3.set(value.f3);
+        t50.set($rawT50);
+        t25.set($rawT25);
+        t15.set($rawT15);
+        t5.set($rawT5);
     });
 </script>
 

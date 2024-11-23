@@ -6,6 +6,10 @@ declare global {
         text: string
     };
 
+    type GenericColor = {
+        [index: string]: number
+    }
+
     type RgbColor = {
         r: number,
         g: number,
@@ -17,6 +21,13 @@ declare global {
         h: number,
         s: number,
         l: number
+    }
+
+    type CmykColor = {
+        c: number,
+        m: number,
+        y: number,
+        k: number
     }
 
     type Vector = {

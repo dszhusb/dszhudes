@@ -13,7 +13,6 @@
         cubicSvelteText,
     } from "./cubicBezier";
     import { CodeBlock } from "svhighlight";
-    import { tweened } from "svelte/motion";
     import { fly, scale, fade, slide } from "svelte/transition";
     import { circOut, linear } from "svelte/easing";
     import Handle from "$lib/components/easing/Handle.svelte";

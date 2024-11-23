@@ -35,7 +35,13 @@
 	let showExperiments = false;
 </script>
 
-<nav>
+<nav
+	style="--nav-text: {darkThemed ? darkMotif.text : 'var(--text)'};
+		   --nav-c1: {darkThemed ? darkMotif.f1 : 'var(--c1'};
+		   --nav-c2: {darkThemed ? darkMotif.f2 : 'var(--c2'};
+		   --nav-c3: {darkThemed ? darkMotif.f3 : 'var(--c3'};
+		   --nav-t50: {darkThemed ? darkMotif.f3 + '60' : 'var(--t50)'};"
+>
 	<div class="button mt-4">
 		<a href="/">daniel zhu</a>
 	</div>
@@ -70,10 +76,7 @@
 					}}
 				>
 					<div
-						class="fIndicator physical"
-						style:background-color={darkThemed
-							? darkMotif.f1
-							: "var(--c1)"}
+						class="fIndicator physical bg-[var(--nav-c1)]"
 						style:width={`${$f1w}%`}
 					/>
 					<a href="/projects/category/physical">physical</a>
@@ -87,10 +90,7 @@
 					}}
 				>
 					<div
-						class="fIndicator digital"
-						style:background-color={darkThemed
-							? darkMotif.f2
-							: "var(--c2)"}
+						class="fIndicator digital bg-[var(--nav-c2)]"
 						style:width={`${$f2w}%`}
 					/>
 					<a href="/projects/category/digital">digital</a>
@@ -104,10 +104,7 @@
 					}}
 				>
 					<div
-						class="fIndicator exploration"
-						style:background-color={darkThemed
-							? darkMotif.f3
-							: "var(--c3)"}
+						class="fIndicator exploration bg-[var(--nav-c3)]"
 						style:width={`${$f3w}%`}
 					/>
 					<a href="/projects/category/exploration">exploration</a>
@@ -126,7 +123,7 @@
 	</div>
 	<div class="relative h-full w-full">
 		<div
-			class="w-full h-full bg-gradient-to-b from-transparent to-[var(--t50)] absolute top-0 pointer-events-none"
+			class="w-full h-full bg-gradient-to-b from-transparent to-[var(--nav-t50)] absolute top-0 pointer-events-none"
 		/>
 		<div
 			role="toolbar"
@@ -136,18 +133,9 @@
 		>
 			<a
 				href="/experiments"
-				class="experiment flex flex-col content-center w-full border-b-[1px]"
-				style:text-decoration-color={darkThemed
-					? darkMotif.text
-					: "var(--text)"}
-				style:background-color={darkThemed ? darkMotif.f3 : "var(--c3)"}
-				style:border-color={darkThemed ? darkMotif.text : "var(--text)"}
+				class="experiment flex flex-col content-center w-full bg-[var(--nav-c3)]"
 			>
-				<p
-					style:color={darkThemed ? darkMotif.text : "var(--text)"}
-					style:background-color={"rgba(255,255,255,0.7)"}
-					class="p-3 w-full"
-				>
+				<p class="p-3 w-full bg-[rgba(255,255,255,0.7)]">
 					Web Experiments
 				</p>
 			</a>
@@ -160,13 +148,6 @@
 						easing: cubicOut,
 					}}
 					class="experimentContainer"
-					style="--border-color:{darkThemed
-						? darkMotif.text
-						: 'var(--text)'}"
-					style:background-color="var(--t5)"
-					style:text-decoration-color={darkThemed
-						? darkMotif.text
-						: "var(--text)"}
 				>
 					<a href="/shell" class="experiment">
 						<p>Shells</p>
@@ -208,11 +189,12 @@
 
 	.experimentContainer {
 		@apply grid grid-cols-2;
-		@apply text-[var(--text)] border-[var(--border-color)];
+		@apply text-[var(--nav-text)] border-[var(--nav-text)];
 	}
 
 	.experimentContainer a:nth-child(odd) {
 		@apply border-r-[1px];
+		@apply bg-[var(--t5)];
 	}
 
 	.experimentContainer a:last-child {
@@ -225,7 +207,7 @@
 
 	.experiment {
 		@apply p-0 border-b-[1px];
-		border-color: var(--border-color);
+		@apply text-[var(--nav-text)] border-[var(--nav-text)];
 	}
 
 	a {

@@ -85,6 +85,22 @@ export function hexToRgba(hex: string): RgbColor | null {
     }
 }
 
+/* RGB <-> CMYK*/
+
+export const rgbaToCmyk = (c: RgbColor): CmykColor => {
+    const r = c.r / 255
+    const g = c.g / 255
+    const b = c.b / 255
+    const k = 1 - Math.max(r, g, b)
+    const divisor = 1 - k
+    return { c: (1 - r - k) / divisor, m: (1 - g - k) / divisor, y: (1 - r - b) / divisor, k }
+}
+
+export const cmykToRgba = (c: CmykColor): RgbColor => {
+    const factor = (1 - c.k) * 255
+    return { r: (1 - c.c) * factor, g: (1 - c.m) * factor, b: (1 - c.y) * factor }
+}
+
 /* BLENDING */
 
 function blendColor(c1: RgbColor, c2: RgbColor, alpha: number) {
@@ -125,4 +141,24 @@ export const createHexTransparency = (hex: string, alpha: number): string | null
         return rgbaToHex(rgba)
     }
     return null
+}
+
+export const invertRgbColor = (rgb: RgbColor): RgbColor => {
+
+    return { r: 255 - rgb.r, g: 255 - rgb.g, b: 255 - rgb.b }
+}
+
+/* Other */
+
+export const calculateError = (answer: GenericColor, guess: GenericColor): number => {
+    console.log(answer, guess)
+    let score = 0
+    for (let key of Object.keys(answer)) {
+        score += Math.abs(answer[key] - guess[key])
+    }
+    return score
+}
+
+export const calculateMatch = (answer: number, guess: number): number => {
+    return Math.floor(Math.abs(answer - guess) / answer * 100)
 }

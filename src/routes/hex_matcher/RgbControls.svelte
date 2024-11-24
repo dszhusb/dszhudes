@@ -4,18 +4,18 @@
     import Selector from "./Selector.svelte";
     export let rgb;
     export let match: number;
-    export let guessed: Writable<boolean>;
+    export let guess: Writable<number>;
 
     const range: range = { low: 0, high: 255 };
     const step = 1;
 </script>
 
-<Controls name="rgb" {guessed} {match}>
+<Controls name="rgb" {guess} {match}>
     <Selector
         name="red"
         {step}
         {range}
-        guessed={$guessed}
+        guess={$guess}
         writableNum={rgb}
         key="r"
         fill="rgb(255 {255 - $rgb.r} {255 - $rgb.r})"
@@ -25,7 +25,7 @@
         name="green"
         {step}
         {range}
-        guessed={$guessed}
+        guess={$guess}
         writableNum={rgb}
         key="g"
         fill="rgb({255 - $rgb.g} 255 {255 - $rgb.g})"
@@ -35,7 +35,7 @@
         name="blue"
         {step}
         {range}
-        guessed={$guessed}
+        guess={$guess}
         writableNum={rgb}
         key="b"
         fill="rgb({255 - $rgb.b} {255 - $rgb.b} 255)"

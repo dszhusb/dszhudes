@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { Writable } from "svelte/store";
-    export let guessed: Writable<boolean>;
+    import { isDisabled } from "$lib/components/color/utilities";
+    export let guess: Writable<number>;
     export let name: string;
     export let match: number;
 </script>
@@ -9,7 +10,9 @@
     <div class="flex w-full justify-between p-2 pr-4">
         <div class="flex flex-col px-2">
             <h3>{name}</h3>
-            <p class="text-sm">Match: {$guessed ? `${match}%` : "???"}</p>
+            <p class="text-sm">
+                Match: {isDisabled($guess) ? "???" : `${match}%`}
+            </p>
         </div>
         <div class="flex flex-row">
             <div class="w-16 h-16 bg-[var(--mystery-color)]" />
@@ -18,8 +21,12 @@
     </div>
     <slot />
     <div class="w-full px-4">
-        <button on:click={() => guessed.set(!$guessed)}
-            >{$guessed ? "reset" : "guess"}</button
+        <button disabled={$guess > 3} on:click={() => guess.set($guess + 0.5)}
+            >{isDisabled($guess)
+                ? `submit (${Math.floor($guess)}/3)`
+                : $guess > 3
+                  ? `done (${Math.floor($guess)}/3)`
+                  : "next guess"}</button
         >
     </div>
 </div>

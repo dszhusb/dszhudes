@@ -6,7 +6,7 @@
     import Selector from "./Selector.svelte";
     export let cmyk: Writable<CmykColor>;
     export let match: number;
-    export let guessed: Writable<boolean>;
+    export let guess: Writable<number>;
 
     const rgb = derived(cmyk, ($cmyk) => cmykToRgba($cmyk));
     const c = derived(cmyk, ($cmyk) =>
@@ -25,12 +25,12 @@
     const step = 0.01;
 </script>
 
-<Controls name="cmyk" {guessed} {match}>
+<Controls name="cmyk" {guess} {match}>
     <Selector
         name="cyan"
         {step}
         {range}
-        guessed={$guessed}
+        guess={$guess}
         writableNum={cmyk}
         key="c"
         fill="rgb({$c.r} {$c.g} {$c.b})"
@@ -40,7 +40,7 @@
         name="magenta"
         {step}
         {range}
-        guessed={$guessed}
+        guess={$guess}
         writableNum={cmyk}
         key="m"
         fill="rgb({$m.r} {$m.g} {$m.b})"
@@ -50,7 +50,7 @@
         name="yellow"
         {step}
         {range}
-        guessed={$guessed}
+        guess={$guess}
         writableNum={cmyk}
         key="y"
         fill="rgb({$y.r} {$y.g} {$y.b})"
@@ -60,7 +60,7 @@
         name="key"
         {step}
         {range}
-        guessed={$guessed}
+        guess={$guess}
         writableNum={cmyk}
         key="k"
         fill="rgb({$k.r} {$k.g} {$k.b})"

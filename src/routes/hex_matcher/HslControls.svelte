@@ -4,43 +4,42 @@
     import Selector from "./Selector.svelte";
     export let hsl;
     export let match: number;
-    export let guessed: Writable<boolean>;
+    export let guess: Writable<number>;
 
-    const hueRange: range = { low: 0, high: 360 };
-    const range: range = { low: 0, high: 100 };
-    const step = 1;
+    const range: range = { low: 0, high: 1 };
+    const step = 0.01;
 </script>
 
-<Controls name="hsl" {guessed} {match}>
+<Controls name="hsl" {guess} {match}>
     <Selector
         name="hue"
         {step}
-        range={hueRange}
-        guessed={$guessed}
+        {range}
+        guess={$guess}
         writableNum={hsl}
         key="h"
-        fill="hsl({$hsl.h} 100 50)"
+        fill="hsl({$hsl.h}turn 100 50)"
         offset={1}
     />
     <Selector
         name="saturation"
         {step}
         {range}
-        guessed={$guessed}
+        guess={$guess}
         writableNum={hsl}
         key="s"
-        fill="hsl(180 {$hsl.s} 50)"
+        fill="hsl(180 {$hsl.s * 100} 50)"
         offset={2}
     />
     <Selector
         name="lightness"
         {step}
         {range}
-        guessed={$guessed}
+        guess={$guess}
         writableNum={hsl}
         key="l"
-        fill="hsl(0 0 {$hsl.l})"
-        final="hsl({$hsl.h} {$hsl.s} {$hsl.l})"
+        fill="hsl(0 0 {$hsl.l * 100})"
+        final="hsl({$hsl.h * 360} {$hsl.s * 100} {$hsl.l * 100})"
         offset={3}
     />
 </Controls>

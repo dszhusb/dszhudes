@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { fly, scale, fade, slide } from "svelte/transition";
-    import { circOut, linear } from "svelte/easing";
+    import { fly } from "svelte/transition";
+    import { isDisabled } from "$lib/components/color/utilities";
+    import { circOut } from "svelte/easing";
     export let writableNum;
     export let key: string;
     export let step: number;
@@ -9,18 +10,20 @@
     export let fill: string;
     export let final: string = fill;
     export let offset: number;
-    export let guessed: boolean;
+    export let guess: number;
 </script>
 
 <div class="outer">
     <label class="inner">
         <div class="w-full flex justify-between">
             <p>{name}</p>
-            <p class="text-xs">{$writableNum[key]}</p>
+            <p class="text-xs">
+                {$writableNum[key]}
+            </p>
         </div>
         <input
             type="range"
-            disabled={guessed}
+            disabled={!isDisabled(guess)}
             bind:value={$writableNum[key]}
             min={range.low}
             max={range.high}
@@ -28,7 +31,7 @@
         />
     </label>
     <div class="container">
-        {#if !guessed}
+        {#if guess === Math.ceil(guess)}
             <div
                 class="box top-0 mix-blend-multiply"
                 style="--fill: {fill}"

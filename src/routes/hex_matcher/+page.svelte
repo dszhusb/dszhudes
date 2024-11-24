@@ -12,9 +12,14 @@
         invertRgbColor,
         calculateError,
         calculateMatch,
+        sumMatches,
+        isDisabled,
+        getColorFromDate,
+        isDaily,
     } from "$lib/components/color/utilities";
 
-    const real_color = writable<RgbColor>(randomColor(0, 255));
+    const dateColor = getColorFromDate(new Date());
+    const real_color = writable<RgbColor>(dateColor);
     const inverted_hex: Readable<string> = derived(real_color, ($real_color) =>
         rgbaToHex(invertRgbColor($real_color)),
     );
@@ -30,7 +35,7 @@
 
     const rgb = writable({ r: 127, g: 127, b: 127 });
     const cmyk = writable({ c: 0.5, m: 0.5, y: 0.5, k: 0.5 });
-    const hsl = writable({ h: 50, s: 50, l: 50 });
+    const hsl = writable({ h: 0.5, s: 0.5, l: 0.5 });
 
     const rgb_score = derived([rgb, real_color], ([$rgb, $real_color]) =>
         calculateMatch(765, calculateError($real_color, $rgb)),
@@ -38,51 +43,44 @@
     const cmyk_score = derived([cmyk, real_cmyk], ([$cmyk, $real_cmyk]) =>
         Math.floor(calculateMatch(4, calculateError($real_cmyk, $cmyk))),
     );
-    const hsl_score = derived([hsl, real_hsl], ([$hsl, $real_hsl]) =>
-        calculateMatch(560, Math.floor(calculateError($real_hsl, $hsl))),
-    );
+    const hsl_score = derived([hsl, real_hsl], ([$hsl, $real_hsl]) => {
+        return Math.floor(calculateMatch(3, calculateError($real_hsl, $hsl)));
+    });
 
-    const rgbGuessed = writable(false);
-    const cmykGuessed = writable(false);
-    const hslGuessed = writable(false);
+    const buttonColor: Readable<string> = derived(real_hsl, ($real_hsl) => {
+        return `hsl(${$real_hsl.h}turn 100 ${$real_hsl.l > 0.5 ? 10 : 90})`;
+    });
+
+    const rgbGuess = writable(1);
+    const cmykGuess = writable(1);
+    const hslGuess = writable(1);
     const total_score = derived(
-        [rgbGuessed, cmykGuessed, hslGuessed, rgb_score, cmyk_score, hsl_score],
+        [rgbGuess, cmykGuess, hslGuess, rgb_score, cmyk_score, hsl_score],
         ([
-            $rgbGuessed,
-            $cmykGuessed,
-            $hslGuessed,
+            $rgbGuess,
+            $cmykGuess,
+            $hslGuess,
             $rgb_score,
             $cmyk_score,
             $hsl_score,
-        ]) => {
-            let divisor = 0;
-            let sum = 0;
-            if ($rgbGuessed) {
-                sum += $rgb_score;
-                divisor++;
-            }
-            if ($hslGuessed) {
-                sum += $hsl_score;
-                divisor++;
-            }
-            if ($cmykGuessed) {
-                sum += $cmyk_score;
-                divisor++;
-            }
-            return divisor === 0 ? "???" : `${sum / divisor}%`;
-        },
+        ]) =>
+            sumMatches([
+                { guess: $rgbGuess, percent: $rgb_score },
+                { guess: $cmykGuess, percent: $cmyk_score },
+                { guess: $hslGuess, percent: $hsl_score },
+            ]),
     );
 
     const resetGuesses = () => {
-        rgbGuessed.set(false);
-        cmykGuessed.set(false);
-        hslGuessed.set(false);
+        rgbGuess.set(1);
+        cmykGuess.set(1);
+        hslGuess.set(1);
     };
 </script>
 
 <div
     class="mainContainer"
-    style="--mystery-color: {$real_hex}; --inverted-mystery-color: {$inverted_hex};"
+    style="--mystery-color: {$real_hex}; --inverted-mystery-color: {$inverted_hex}; --button-text: {$buttonColor};"
 >
     <div class="infoContainer antiScroll">
         <div class="titleContainer">
@@ -92,34 +90,45 @@
             </p>
         </div>
         <div class="swatch">
-            <button
-                on:click={() => {
-                    real_color.set(randomColor(0, 255));
-                    resetGuesses();
-                }}
-            >
-                next problem
-            </button>
+            <div class="flex flex-row gap-2 m-4">
+                <button
+                    on:click={() => {
+                        real_color.set(randomColor(0, 255));
+                        resetGuesses();
+                    }}
+                >
+                    random
+                </button>
+                <button on:click={() => real_color.set(dateColor)}>
+                    daily
+                </button>
+            </div>
             <div class="annotationContainer">
                 <p class="annotation">{$real_hex}</p>
             </div>
         </div>
         <div class="innerInfoContainer">
             <div class="flex justify-between">
-                <h3>Match</h3>
-                <p>Total: {$total_score}</p>
+                <h3>{isDaily($real_color, dateColor) ? "Daily " : ""}Match</h3>
+                <p>Combined: {$total_score}</p>
             </div>
             <div class="flex flex-col gap-1">
-                <p>RGB: {$rgbGuessed ? `${$rgb_score}%` : "???"}</p>
-                <p>HSL: {$hslGuessed ? `${$hsl_score}%` : "???"}</p>
-                <p>CMYK: {$cmykGuessed ? `${$cmyk_score}%` : "???"}</p>
+                <p>
+                    RGB: {!isDisabled($rgbGuess) ? `${$rgb_score}%` : "???"}
+                </p>
+                <p>
+                    HSL: {!isDisabled($hslGuess) ? `${$hsl_score}%` : "???"}
+                </p>
+                <p>
+                    CMYK: {!isDisabled($cmykGuess) ? `${$cmyk_score}%` : "???"}
+                </p>
             </div>
         </div>
     </div>
     <div class="guessContainer">
-        <RgbControls {rgb} match={$rgb_score} guessed={rgbGuessed} />
-        <HslControls {hsl} match={$hsl_score} guessed={hslGuessed} />
-        <CmykControls {cmyk} match={$cmyk_score} guessed={cmykGuessed} />
+        <RgbControls {rgb} match={$rgb_score} guess={rgbGuess} />
+        <HslControls {hsl} match={$hsl_score} guess={hslGuess} />
+        <CmykControls {cmyk} match={$cmyk_score} guess={cmykGuess} />
     </div>
     <div class="w-full max-w-md px-6 py-4 antiScroll article">
         <h1>What's this?</h1>
@@ -149,7 +158,11 @@
     }
 
     button {
-        @apply uppercase border-[1px] m-4 px-4 text-white border-white w-fit;
+        @apply uppercase border-[1px] px-4 w-fit border-stone-500;
+    }
+
+    .swatch button {
+        @apply text-[var(--button-text)] border-[var(--button-text)];
     }
 
     .swatch {
@@ -177,7 +190,7 @@
     }
 
     .titleContainer {
-        @apply px-3 pt-2 pb-6;
+        @apply px-3 pt-2 pb-4;
     }
 
     .annotationContainer {
@@ -185,7 +198,7 @@
     }
 
     .annotation {
-        @apply float-right py-2 px-3 text-white;
+        @apply float-right py-2 px-3 text-[var(--button-text)];
     }
 
     .article h1 {

@@ -144,21 +144,95 @@ export const createHexTransparency = (hex: string, alpha: number): string | null
 }
 
 export const invertRgbColor = (rgb: RgbColor): RgbColor => {
-
     return { r: 255 - rgb.r, g: 255 - rgb.g, b: 255 - rgb.b }
 }
 
 /* Other */
 
 export const calculateError = (answer: GenericColor, guess: GenericColor): number => {
-    console.log(answer, guess)
-    let score = 0
+    let error = 0
     for (let key of Object.keys(answer)) {
-        score += Math.abs(answer[key] - guess[key])
+        error += Math.abs(answer[key] - guess[key])
     }
-    return score
+    return error
 }
 
 export const calculateMatch = (answer: number, guess: number): number => {
     return Math.floor(Math.abs(answer - guess) / answer * 100)
 }
+
+export const sumMatches = (pairs: { guess: number, percent: number }[]) => {
+    let divisor = 0
+    let sum = 0
+
+    for (let pair of pairs) {
+        if (!isDisabled(pair.guess)) {
+            sum += pair.percent
+            divisor++
+        }
+    }
+
+    return divisor === 0 ? "???" : `${Math.floor(sum / divisor)}%`;
+}
+
+export const isDisabled = (guess: number): boolean => {
+    return guess >= 1 && guess === Math.floor(guess)
+}
+
+export const hasGuess = (guess: number): boolean => {
+    return guess > 1
+}
+
+/* Date Generator */
+
+export const isDaily = (c1: RgbColor, c2: RgbColor) => {
+    return JSON.stringify(c1) === JSON.stringify(c2)
+}
+
+export const getColorFromDate = (date: Date): RgbColor => {
+    // Format date as consistent string (YYYY-MM-DD)
+    const dateString = date.toISOString().split('T')[0];
+
+    // Generate hash from date string
+    const hash = hashString(dateString);
+
+    // Convert hash to RGB
+    const rgb = hashToRGB(hash);
+
+    // Convert to hex
+    return rgb;
+};
+
+const hashString = (str: string): number => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32-bit integer
+    }
+    return Math.abs(hash);
+};
+
+/**
+ * Converts a hash number to RGB values
+ */
+const hashToRGB = (hash: number): RgbColor => {
+    // Use modulo to ensure values are between 0-255
+    const r = (hash % 255);
+    const g = ((hash * 7) % 255);
+    const b = ((hash * 13) % 255);
+
+    return { r, g, b };
+};
+
+/**
+ * Converts RGB values to hex string
+ */
+const rgbToHex = ({ r, g, b }: RgbColor): string => {
+    const toHex = (n: number): string => {
+        const hex = n.toString(16);
+        return hex.length === 1 ? `0${hex}` : hex;
+    };
+
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+};

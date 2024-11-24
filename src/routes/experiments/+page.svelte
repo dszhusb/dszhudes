@@ -40,6 +40,13 @@
             description="The engine behind the shell theme and color palettes of this site. Built from formulas modeling real shells and a little creative interpretation along the way."
         />
         <ExperimentBlock
+            title="Hex Matcher"
+            link="hex_matcher"
+            image="hex_matcher"
+            description="Fancy yourself a designer with a keen eye? Try your hand at matching
+            the given hexcode color with rgb, hsl, and cmyk."
+        />
+        <ExperimentBlock
             title="Ceramic Gallery"
             link="object_gallery"
             image="ceramics"

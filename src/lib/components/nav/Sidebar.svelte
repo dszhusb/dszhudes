@@ -167,6 +167,9 @@
 					<a href="/paragraphs" class="experiment">
 						<p>Paragraphs</p>
 					</a>
+					<a href="/hex_matcher" class="experiment col-span-2">
+						<p>Hex Matcher</p>
+					</a>
 				</div>
 			{/if}
 		</div>

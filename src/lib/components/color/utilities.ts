@@ -204,12 +204,17 @@ export const getColorFromDate = (date: Date): RgbColor => {
 };
 
 const hashString = (str: string): number => {
+    const primes = [31, 83, 131, 197, 233];
     let hash = 0;
+
     for (let i = 0; i < str.length; i++) {
         const char = str.charCodeAt(i);
-        hash = ((hash << 5) - hash) + char;
+        // Use different primes for each character position
+        const prime = primes[i % primes.length];
+        hash = ((hash << 5) ^ (hash >> 2)) + char * prime;
         hash = hash & hash; // Convert to 32-bit integer
     }
+
     return Math.abs(hash);
 };
 

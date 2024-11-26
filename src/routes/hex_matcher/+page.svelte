@@ -37,6 +37,10 @@
     const cmyk = writable({ c: 0.5, m: 0.5, y: 0.5, k: 0.5 });
     const hsl = writable({ h: 0.5, s: 0.5, l: 0.5 });
 
+    const rgbGuess = writable(1);
+    const cmykGuess = writable(1);
+    const hslGuess = writable(1);
+
     const rgb_score = derived([rgb, real_color], ([$rgb, $real_color]) =>
         calculateMatch(765, calculateError($real_color, $rgb)),
     );
@@ -51,9 +55,6 @@
         return `hsl(${$real_hsl.h}turn 100 ${$real_hsl.l > 0.5 ? 10 : 90})`;
     });
 
-    const rgbGuess = writable(1);
-    const cmykGuess = writable(1);
-    const hslGuess = writable(1);
     const total_score = derived(
         [rgbGuess, cmykGuess, hslGuess, rgb_score, cmyk_score, hsl_score],
         ([
@@ -138,7 +139,8 @@
         </p>
         <p>
             This game is inspired by <a
-                class="font-semibold text-[var(--mystery-color)]"
+                class="font-semibold"
+                style:color={`hsl(${$real_hsl.h}turn ${$real_hsl.s * 100} 40)`}
                 href="https://hexcodle.com/">Hexcodle</a
             > – a game you guess the hexcode of a color based on a swatch. I wanted
             play around with a similar concept where starting from a hexcode and
@@ -198,7 +200,7 @@
     }
 
     .annotation {
-        @apply float-right py-2 px-3 text-[var(--button-text)];
+        @apply float-right py-2 px-3 text-[var(--button-text)] uppercase;
     }
 
     .article h1 {

@@ -2,13 +2,15 @@
     import { writable, derived } from "svelte/store";
     import type { Readable } from "svelte/store";
     import RgbControls from "./RgbControls.svelte";
-    import CmykControls from "./CmykControls.svelte";
     import HslControls from "./HslControls.svelte";
+    import HwbControls from "./HwbControls.svelte";
+    import Clipboard from "$lib/assets/icons/clipboard.svelte";
+    import { getFormattedDate } from "./utilities";
     import {
         rgbaToHex,
         rgbToHsl,
+        rgbToHwb,
         randomColor,
-        rgbaToCmyk,
         invertRgbColor,
         calculateError,
         calculateMatch,
@@ -18,6 +20,7 @@
         isDaily,
     } from "$lib/components/color/utilities";
 
+    const date = getFormattedDate();
     const dateColor = getColorFromDate(new Date());
     const real_color = writable<RgbColor>(dateColor);
     const inverted_hex: Readable<string> = derived(real_color, ($real_color) =>
@@ -26,29 +29,29 @@
     const real_hex: Readable<string> = derived(real_color, ($real_color) =>
         rgbaToHex($real_color),
     );
-    const real_cmyk: Readable<CmykColor> = derived(real_color, ($real_color) =>
-        rgbaToCmyk($real_color),
-    );
     const real_hsl: Readable<HslColor> = derived(real_color, ($real_color) =>
         rgbToHsl($real_color),
     );
+    const real_hwb: Readable<HwbColor> = derived(real_color, ($real_color) =>
+        rgbToHwb($real_color),
+    );
 
     const rgb = writable({ r: 127, g: 127, b: 127 });
-    const cmyk = writable({ c: 0.5, m: 0.5, y: 0.5, k: 0.5 });
+    const hwb = writable({ h: 0.5, w: 0.5, b: 0.5 });
     const hsl = writable({ h: 0.5, s: 0.5, l: 0.5 });
 
     const rgbGuess = writable(1);
-    const cmykGuess = writable(1);
     const hslGuess = writable(1);
+    const hwbGuess = writable(1);
 
     const rgb_score = derived([rgb, real_color], ([$rgb, $real_color]) =>
         calculateMatch(765, calculateError($real_color, $rgb)),
     );
-    const cmyk_score = derived([cmyk, real_cmyk], ([$cmyk, $real_cmyk]) =>
-        Math.floor(calculateMatch(4, calculateError($real_cmyk, $cmyk))),
-    );
     const hsl_score = derived([hsl, real_hsl], ([$hsl, $real_hsl]) => {
         return Math.floor(calculateMatch(3, calculateError($real_hsl, $hsl)));
+    });
+    const hwb_score = derived([hwb, real_hwb], ([$hwb, $real_hwb]) => {
+        return Math.floor(calculateMatch(3, calculateError($real_hwb, $hwb)));
     });
 
     const buttonColor: Readable<string> = derived(real_hsl, ($real_hsl) => {
@@ -56,26 +59,36 @@
     });
 
     const total_score = derived(
-        [rgbGuess, cmykGuess, hslGuess, rgb_score, cmyk_score, hsl_score],
+        [rgbGuess, hslGuess, hwbGuess, rgb_score, hsl_score, hwb_score],
         ([
             $rgbGuess,
-            $cmykGuess,
             $hslGuess,
+            $hwbGuess,
             $rgb_score,
-            $cmyk_score,
             $hsl_score,
+            $hwb_score,
         ]) =>
             sumMatches([
                 { guess: $rgbGuess, percent: $rgb_score },
-                { guess: $cmykGuess, percent: $cmyk_score },
                 { guess: $hslGuess, percent: $hsl_score },
+                { guess: $hwbGuess, percent: $hwb_score },
             ]),
     );
 
     const resetGuesses = () => {
         rgbGuess.set(1);
-        cmykGuess.set(1);
         hslGuess.set(1);
+        hwbGuess.set(1);
+    };
+
+    const copyScore = async () => {
+        const score_p = document.getElementById("score")?.innerText;
+        try {
+            await navigator.clipboard.writeText(score_p ? score_p : "");
+            console.log("Text copied to clipboard");
+        } catch (err) {
+            console.error("Failed to copy: ", err);
+        }
     };
 </script>
 
@@ -109,19 +122,25 @@
             </div>
         </div>
         <div class="innerInfoContainer">
-            <div class="flex justify-between">
-                <h3>{isDaily($real_color, dateColor) ? "Daily " : ""}Match</h3>
-                <p>Combined: {$total_score}</p>
+            <div class="flex justify-between pb-2">
+                <h3>
+                    {isDaily($real_color, dateColor) ? "Daily " : ""}Match
+                </h3>
+                <button class="border-none px-0" on:click={() => copyScore()}>
+                    <Clipboard />
+                </button>
             </div>
             <div class="flex flex-col gap-1">
-                <p>
+                <p id="score">
+                    {isDaily($real_color, dateColor) ? date + " |" : ""}
+                    {$real_hex}
+                    | Total: {$total_score}
+                    <br />
                     RGB: {!isDisabled($rgbGuess) ? `${$rgb_score}%` : "???"}
-                </p>
-                <p>
+                    <br />
                     HSL: {!isDisabled($hslGuess) ? `${$hsl_score}%` : "???"}
-                </p>
-                <p>
-                    CMYK: {!isDisabled($cmykGuess) ? `${$cmyk_score}%` : "???"}
+                    <br />
+                    HWB: {!isDisabled($hwbGuess) ? `${$hwb_score}%` : "???"}
                 </p>
             </div>
         </div>
@@ -129,7 +148,7 @@
     <div class="guessContainer">
         <RgbControls {rgb} match={$rgb_score} guess={rgbGuess} />
         <HslControls {hsl} match={$hsl_score} guess={hslGuess} />
-        <CmykControls {cmyk} match={$cmyk_score} guess={cmykGuess} />
+        <HwbControls {hwb} match={$hwb_score} guess={hwbGuess} />
     </div>
     <div class="w-full max-w-md px-6 py-4 antiScroll article">
         <h1>What's this?</h1>
@@ -156,7 +175,7 @@
     }
 
     h3 {
-        @apply uppercase pb-3;
+        @apply uppercase;
     }
 
     button {

@@ -23,6 +23,12 @@ declare global {
         l: number
     }
 
+    type HwbColor = {
+        h: number,
+        w: number,
+        b: number
+    }
+
     type CmykColor = {
         c: number,
         m: number,

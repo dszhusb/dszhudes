@@ -85,21 +85,27 @@ export function hexToRgba(hex: string): RgbColor | null {
     }
 }
 
-/* RGB <-> CMYK*/
+/* RGB <-> HWB */
+// RGB [0, 255] https://stackoverflow.com/questions/29461757/how-to-display-hwb-hsb-cmyk-channels-using-rgb-or-hsl
+// HWB [0, 1]
 
-export const rgbaToCmyk = (c: RgbColor): CmykColor => {
-    const r = c.r / 255
-    const g = c.g / 255
-    const b = c.b / 255
-    const k = 1 - Math.max(r, g, b)
-    const divisor = 1 - k
-    return { c: (1 - r - k) / divisor, m: (1 - g - k) / divisor, y: (1 - r - b) / divisor, k }
+export const rgbToHwb = (color: RgbColor): HwbColor => {
+
+    let r = color.r / 255;
+    let g = color.g / 255;
+    let b = color.b / 255;
+
+    var f, i, w = Math.min(r, g, b);
+    let v = Math.max(r, g, b);
+    let black = 1 - v;
+
+    if (v === w) return { h: 0, w: w, b: black };
+    f = r === w ? g - b : (g === w ? b - r : r - g);
+    i = r === w ? 3 : (g === w ? 5 : 1);
+
+    return { h: (i - f / (v - w)) / 6, w: w, b: black }
 }
 
-export const cmykToRgba = (c: CmykColor): RgbColor => {
-    const factor = (1 - c.k) * 255
-    return { r: (1 - c.c) * factor, g: (1 - c.m) * factor, b: (1 - c.y) * factor }
-}
 
 /* BLENDING */
 
@@ -157,8 +163,8 @@ export const calculateError = (answer: GenericColor, guess: GenericColor): numbe
     return error
 }
 
-export const calculateMatch = (answer: number, guess: number): number => {
-    return Math.floor(Math.abs(answer - guess) / answer * 100)
+export const calculateMatch = (total: number, error: number): number => {
+    return Math.floor((total - error) / total * 100)
 }
 
 export const sumMatches = (pairs: { guess: number, percent: number }[]) => {

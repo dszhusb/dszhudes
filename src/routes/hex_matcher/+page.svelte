@@ -96,76 +96,95 @@
     class="mainContainer"
     style="--mystery-color: {$real_hex}; --inverted-mystery-color: {$inverted_hex}; --button-text: {$buttonColor};"
 >
-    <div class="infoContainer antiScroll">
-        <div class="titleContainer">
-            <h1>Match the Hex...</h1>
-            <p>
-                Test your color matching mettle across a variety of color types.
-            </p>
-        </div>
-        <div class="swatch">
-            <div class="flex flex-row gap-2 m-4">
-                <button
-                    on:click={() => {
-                        real_color.set(randomColor(0, 255));
-                        resetGuesses();
-                    }}
-                >
-                    random
-                </button>
-                <button on:click={() => real_color.set(dateColor)}>
-                    daily
-                </button>
-            </div>
-            <div class="annotationContainer">
-                <p class="annotation">{$real_hex}</p>
-            </div>
-        </div>
-        <div class="innerInfoContainer">
-            <div class="flex justify-between pb-2">
-                <h3>
-                    {isDaily($real_color, dateColor) ? "Daily " : ""}Match
-                </h3>
-                <button class="border-none px-0" on:click={() => copyScore()}>
-                    <Clipboard />
-                </button>
-            </div>
-            <div class="flex flex-col gap-1">
-                <p id="score">
-                    {isDaily($real_color, dateColor) ? date + " |" : ""}
-                    {$real_hex}
-                    | Total: {$total_score}
-                    <br />
-                    RGB: {!isDisabled($rgbGuess) ? `${$rgb_score}%` : "???"}
-                    <br />
-                    HSL: {!isDisabled($hslGuess) ? `${$hsl_score}%` : "???"}
-                    <br />
-                    HWB: {!isDisabled($hwbGuess) ? `${$hwb_score}%` : "???"}
+    <div class="centered">
+        <div class="infoContainer antiScroll">
+            <div class="titleContainer">
+                <h1>Match the Hex...</h1>
+                <p>
+                    Test your color matching mettle across a variety of color
+                    types.
                 </p>
+            </div>
+            <div class="swatch">
+                <div class="flex flex-row gap-2 m-4">
+                    <button
+                        on:click={() => {
+                            resetGuesses();
+                            real_color.set(randomColor(0, 255));
+                        }}
+                    >
+                        random
+                    </button>
+                    <button
+                        on:click={() => {
+                            resetGuesses();
+                            real_color.set(dateColor);
+                        }}
+                    >
+                        daily
+                    </button>
+                </div>
+                <div class="annotationContainer">
+                    <p class="annotation">{$real_hex}</p>
+                </div>
+            </div>
+            <div class="innerInfoContainer">
+                <div class="flex justify-between pb-2">
+                    <h3>
+                        {isDaily($real_color, dateColor) ? "Daily " : ""}Match
+                    </h3>
+                    <button
+                        class="border-none px-0"
+                        on:click={() => copyScore()}
+                    >
+                        <Clipboard />
+                    </button>
+                </div>
+                <div class="flex flex-col gap-1">
+                    <p id="score">
+                        {isDaily($real_color, dateColor) ? date + " |" : ""}
+                        {$real_hex}
+                        | Total: {$total_score}
+                        <br />
+                        RGB: {!isDisabled($rgbGuess) ? `${$rgb_score}%` : "???"}
+                        <br />
+                        HSL: {!isDisabled($hslGuess) ? `${$hsl_score}%` : "???"}
+                        <br />
+                        HWB: {!isDisabled($hwbGuess) ? `${$hwb_score}%` : "???"}
+                    </p>
+                </div>
             </div>
         </div>
     </div>
     <div class="guessContainer">
-        <RgbControls {rgb} match={$rgb_score} guess={rgbGuess} />
-        <HslControls {hsl} match={$hsl_score} guess={hslGuess} />
-        <HwbControls {hwb} match={$hwb_score} guess={hwbGuess} />
+        <div>
+            <RgbControls {rgb} match={$rgb_score} guess={rgbGuess} />
+        </div>
+        <div>
+            <HslControls {hsl} match={$hsl_score} guess={hslGuess} />
+        </div>
+        <div>
+            <HwbControls {hwb} match={$hwb_score} guess={hwbGuess} />
+        </div>
     </div>
-    <div class="w-full max-w-md px-6 py-4 antiScroll article">
-        <h1>What's this?</h1>
-        <p>
-            Fancy yourself a designer with a keen eye? Try your hand at matching
-            the given hexcode color with rgb, hsl, and cmyk.
-        </p>
-        <p>
-            This game is inspired by <a
-                class="font-semibold"
-                style:color={`hsl(${$real_hsl.h}turn ${$real_hsl.s * 100} 40)`}
-                href="https://hexcodle.com/">Hexcodle</a
-            > – a game you guess the hexcode of a color based on a swatch. I wanted
-            play around with a similar concept where starting from a hexcode and
-            swatch you match the color with other color representation methods.
-        </p>
-        <p>More coming soon!</p>
+    <div class="centered">
+        <div class="w-full max-w-md px-6 py-4 antiScroll article">
+            <h1>What's this?</h1>
+            <p>
+                Fancy yourself a designer with a keen eye? Try your hand at
+                matching the given hexcode color with rgb, hsl, and cmyk.
+            </p>
+            <p>
+                This game is inspired by <a
+                    class="font-semibold"
+                    style:color={`hsl(${$real_hsl.h}turn ${$real_hsl.s * 100} 40)`}
+                    href="https://hexcodle.com/">Hexcodle</a
+                > – a game you guess the hexcode of a color based on a swatch. I
+                wanted play around with a similar concept where starting from a hexcode
+                and swatch you match the color with other color representation methods.
+            </p>
+            <p>More coming soon!</p>
+        </div>
     </div>
 </div>
 
@@ -187,19 +206,24 @@
     }
 
     .swatch {
-        @apply w-full aspect-square md:w-96 md:h-96 bg-[var(--mystery-color)] border-y-[1.5px] border-stone-500 flex flex-col justify-between;
+        @apply w-96 h-96 bg-[var(--mystery-color)] flex flex-col justify-between;
+        @apply border-y-[1.5px] border-stone-500;
     }
 
     .mainContainer {
-        @apply flex flex-col md:flex-row divide-x-[1px] divide-stone-500 m-auto;
+        @apply flex flex-col lg:flex-row divide-x-[1px] divide-stone-500 m-auto;
     }
 
     .infoContainer {
         @apply flex flex-col max-w-96;
     }
 
+    .centered {
+        @apply w-full lg:w-fit flex justify-center pb-4 lg:pb-0;
+    }
+
     .antiScroll {
-        @apply md:h-screen md:sticky md:top-0;
+        @apply lg:h-screen lg:sticky lg:top-0;
     }
 
     .innerInfoContainer {
@@ -207,7 +231,12 @@
     }
 
     .guessContainer {
-        @apply flex flex-col;
+        @apply flex lg:flex-col;
+        @apply w-full lg:w-fit overflow-scroll;
+        @apply border-stone-500 divide-stone-500;
+        @apply border-y-[1px] lg:border-y-0;
+        @apply lg:border-y-0 lg:divide-y-[1px];
+        @apply divide-x-[1px] lg:divide-x-0;
     }
 
     .titleContainer {

@@ -41,6 +41,6 @@
     }
 
     .column {
-        @apply flex flex-col w-fit items-center pt-3 pb-4 border-b-[1px] border-stone-500;
+        @apply flex flex-col w-fit items-center pt-3 pb-4;
     }
 </style>

@@ -49,7 +49,7 @@
         guess={guess}
         writableNum={interface_hsl}
         key="l"
-        fill="hsl(0 0 {$interface_hsl.l * 100}%)"
+        fill="hsl(0turn 0% {$interface_hsl.l * 100}%)"
         final="hsl({$hsl.h}turn {$hsl.s * 100}% {$hsl.l * 100}%)"
         offset={3}
     />

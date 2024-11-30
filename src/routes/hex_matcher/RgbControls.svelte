@@ -26,7 +26,7 @@
         name="red"
         {step}
         {range}
-        guess={$guess}
+        guess={guess}
         writableNum={interface_rgb}
         key="r"
         fill="rgb(255 {255 - $interface_rgb.r} {255 - $interface_rgb.r})"
@@ -36,7 +36,7 @@
         name="green"
         {step}
         {range}
-        guess={$guess}
+        guess={guess}
         writableNum={interface_rgb}
         key="g"
         fill="rgb({255 - $interface_rgb.g} 255 {255 - $interface_rgb.g})"
@@ -46,7 +46,7 @@
         name="blue"
         {step}
         {range}
-        guess={$guess}
+        guess={guess}
         writableNum={interface_rgb}
         key="b"
         fill="rgb({255 - $interface_rgb.b} {255 - $interface_rgb.b} 255)"

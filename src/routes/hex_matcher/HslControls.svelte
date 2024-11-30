@@ -26,7 +26,7 @@
         name="hue"
         {step}
         {range}
-        guess={$guess}
+        guess={guess}
         writableNum={interface_hsl}
         key="h"
         fill="hsl({$interface_hsl.h}turn 100 50)"
@@ -36,7 +36,7 @@
         name="saturation"
         {step}
         {range}
-        guess={$guess}
+        guess={guess}
         writableNum={interface_hsl}
         key="s"
         fill="hsl(180 {$interface_hsl.s * 100} 50)"
@@ -46,7 +46,7 @@
         name="lightness"
         {step}
         {range}
-        guess={$guess}
+        guess={guess}
         writableNum={interface_hsl}
         key="l"
         fill="hsl(0 0 {$interface_hsl.l * 100})"

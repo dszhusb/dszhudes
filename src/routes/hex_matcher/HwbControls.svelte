@@ -26,7 +26,7 @@
         name="hue"
         {step}
         {range}
-        guess={$guess}
+        guess={guess}
         writableNum={interface_hwb}
         key="h"
         fill="hwb({$interface_hwb.h}turn 0% 0%)"
@@ -36,7 +36,7 @@
         name="whiteness"
         {step}
         {range}
-        guess={$guess}
+        guess={guess}
         writableNum={interface_hwb}
         key="w"
         fill="hwb(0.5turn {$interface_hwb.w * 100}% 0%)"
@@ -46,7 +46,7 @@
         name="blackness"
         {step}
         {range}
-        guess={$guess}
+        guess={guess}
         writableNum={interface_hwb}
         key="b"
         fill="hwb(0.5turn 0% {$interface_hwb.b * 100})"

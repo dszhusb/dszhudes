@@ -1,7 +1,6 @@
 <script lang="ts">
     import { fly } from "svelte/transition";
-    import { isDisabled } from "$lib/components/color/utilities";
-    import { circOut } from "svelte/easing";
+    import { isDisabled, showScore } from "$lib/components/color/utilities";
     export let writableNum;
     export let key: string;
     export let step: number;
@@ -23,7 +22,7 @@
         </div>
         <input
             type="range"
-            disabled={!isDisabled(guess)}
+            disabled={isDisabled(guess)}
             bind:value={$writableNum[key]}
             min={range.low}
             max={range.high}

@@ -155,10 +155,10 @@ export const invertRgbColor = (rgb: RgbColor): RgbColor => {
 
 /* Other */
 
-export const calculateError = (answer: GenericColor, guess: GenericColor): number => {
+export const calculateError = (answer: StringNumberObject, guess: StringNumberObject): number => {
     let error = 0
     for (let key of Object.keys(answer)) {
-        error += Math.abs(answer[key] - guess[key])
+        error += Math.abs(answer[key] - guess[key]);
     }
     return error
 }
@@ -172,7 +172,7 @@ export const sumMatches = (pairs: { guess: number, percent: number }[]) => {
     let sum = 0
 
     for (let pair of pairs) {
-        if (!isDisabled(pair.guess)) {
+        if (showScore(pair.guess)) {
             sum += pair.percent
             divisor++
         }
@@ -182,7 +182,11 @@ export const sumMatches = (pairs: { guess: number, percent: number }[]) => {
 }
 
 export const isDisabled = (guess: number): boolean => {
-    return guess >= 1 && guess === Math.floor(guess)
+    return guess >= 3
+}
+
+export const showScore = (guess: number): boolean => {
+    return guess <= 3 && guess > 0
 }
 
 export const hasGuess = (guess: number): boolean => {
@@ -227,6 +231,7 @@ const hashString = (str: string): number => {
 /**
  * Converts a hash number to RGB values
  */
+
 const hashToRGB = (hash: number): RgbColor => {
     // Use modulo to ensure values are between 0-255
     const r = (hash % 255);
@@ -234,16 +239,4 @@ const hashToRGB = (hash: number): RgbColor => {
     const b = ((hash * 13) % 255);
 
     return { r, g, b };
-};
-
-/**
- * Converts RGB values to hex string
- */
-const rgbToHex = ({ r, g, b }: RgbColor): string => {
-    const toHex = (n: number): string => {
-        const hex = n.toString(16);
-        return hex.length === 1 ? `0${hex}` : hex;
-    };
-
-    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 };

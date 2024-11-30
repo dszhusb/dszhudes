@@ -17,7 +17,7 @@
         calculateError,
         calculateMatch,
         sumMatches,
-        isDisabled,
+        showScore,
         getColorFromDate,
         isDaily,
     } from "$lib/components/color/utilities";
@@ -38,13 +38,25 @@
         rgbToHwb($real_color),
     );
 
-    const rgb = writable({ r: 127, g: 127, b: 127 });
-    const hwb = writable({ h: 0.5, w: 0.5, b: 0.5 });
-    const hsl = writable({ h: 0.5, s: 0.5, l: 0.5 });
+    const default_rgb = { r: 200, g: 200, b: 200 };
+    const default_hwb = { h: 0, w: 0.78, b: 0.22 };
+    const default_hsl = { h: 0, s: 0, l: 0.784 };
 
-    const rgbGuess = writable(1);
-    const hslGuess = writable(1);
-    const hwbGuess = writable(1);
+    const rgb_half = { r: 127, g: 127, b: 127 };
+    const hwb_half = { h: 0.5, w: 0.5, b: 0.5 };
+    const hsl_half = { h: 0.5, s: 0.5, l: 0.5 };
+
+    const interface_rgb = writable(rgb_half);
+    const interface_hwb = writable(hwb_half);
+    const interface_hsl = writable(hsl_half);
+
+    const rgb = writable(default_rgb);
+    const hwb = writable(default_hwb);
+    const hsl = writable(default_hsl);
+
+    const rgbGuess = writable(0);
+    const hslGuess = writable(0);
+    const hwbGuess = writable(0);
 
     const rgb_score = derived([rgb, real_color], ([$rgb, $real_color]) =>
         calculateMatch(765, calculateError($real_color, $rgb)),
@@ -78,9 +90,12 @@
     );
 
     const resetGuesses = () => {
-        rgbGuess.set(1);
-        hslGuess.set(1);
-        hwbGuess.set(1);
+        rgbGuess.set(0);
+        hslGuess.set(0);
+        hwbGuess.set(0);
+        rgb.set(default_rgb);
+        hwb.set(default_hwb);
+        hsl.set(default_hsl);
     };
 
     const copyScore = async () => {
@@ -151,11 +166,11 @@
                         {$real_hex}
                         | Total: {$total_score}
                         <br />
-                        RGB: {!isDisabled($rgbGuess) ? `${$rgb_score}%` : "???"}
+                        RGB: {showScore($rgbGuess) ? `${$rgb_score}%` : "???"}
                         <br />
-                        HSL: {!isDisabled($hslGuess) ? `${$hsl_score}%` : "???"}
+                        HSL: {showScore($hslGuess) ? `${$hsl_score}%` : "???"}
                         <br />
-                        HWB: {!isDisabled($hwbGuess) ? `${$hwb_score}%` : "???"}
+                        HWB: {showScore($hwbGuess) ? `${$hwb_score}%` : "???"}
                     </p>
                 </div>
             </div>
@@ -163,13 +178,28 @@
     </div>
     <div class="guessContainer">
         <div>
-            <RgbControls {rgb} match={$rgb_score} guess={rgbGuess} />
+            <RgbControls
+                {interface_rgb}
+                {rgb}
+                match={$rgb_score}
+                guess={rgbGuess}
+            />
         </div>
         <div>
-            <HslControls {hsl} match={$hsl_score} guess={hslGuess} />
+            <HslControls
+                {interface_hsl}
+                {hsl}
+                match={$hsl_score}
+                guess={hslGuess}
+            />
         </div>
         <div>
-            <HwbControls {hwb} match={$hwb_score} guess={hwbGuess} />
+            <HwbControls
+                {interface_hwb}
+                {hwb}
+                match={$hwb_score}
+                guess={hwbGuess}
+            />
         </div>
     </div>
     <div class="centered">

@@ -6,9 +6,7 @@ declare global {
         text: string
     };
 
-    type GenericColor = {
-        [index: string]: number
-    }
+    type GenericColor = RgbColor | HslColor | HwbColor;
 
     type RgbColor = {
         r: number,
@@ -34,6 +32,10 @@ declare global {
         m: number,
         y: number,
         k: number
+    }
+
+    type StringNumberObject = {
+        [index: string]: number
     }
 
     type Vector = {

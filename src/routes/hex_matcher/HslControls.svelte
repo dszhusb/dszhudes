@@ -2,23 +2,34 @@
     import type { Writable } from "svelte/store";
     import Controls from "./Controls.svelte";
     import Selector from "./Selector.svelte";
-    export let hsl;
+    export let interface_hsl: Writable<HslColor>;
+    export let hsl: Writable<HslColor>;
     export let match: number;
     export let guess: Writable<number>;
 
     const range: range = { low: 0, high: 1 };
     const step = 0.01;
+
+    const submit = () => {
+        hsl.set($interface_hsl);
+    };
 </script>
 
-<Controls name="hsl" {guess} {match}>
+<Controls
+    name="hsl"
+    {guess}
+    {match}
+    {submit}
+    last={`hsl(${$hsl.h * 360} ${$hsl.s * 100} ${$hsl.l * 100})`}
+>
     <Selector
         name="hue"
         {step}
         {range}
         guess={$guess}
-        writableNum={hsl}
+        writableNum={interface_hsl}
         key="h"
-        fill="hsl({$hsl.h}turn 100 50)"
+        fill="hsl({$interface_hsl.h}turn 100 50)"
         offset={1}
     />
     <Selector
@@ -26,9 +37,9 @@
         {step}
         {range}
         guess={$guess}
-        writableNum={hsl}
+        writableNum={interface_hsl}
         key="s"
-        fill="hsl(180 {$hsl.s * 100} 50)"
+        fill="hsl(180 {$interface_hsl.s * 100} 50)"
         offset={2}
     />
     <Selector
@@ -36,9 +47,9 @@
         {step}
         {range}
         guess={$guess}
-        writableNum={hsl}
+        writableNum={interface_hsl}
         key="l"
-        fill="hsl(0 0 {$hsl.l * 100})"
+        fill="hsl(0 0 {$interface_hsl.l * 100})"
         final="hsl({$hsl.h * 360} {$hsl.s * 100} {$hsl.l * 100})"
         offset={3}
     />

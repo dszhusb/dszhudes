@@ -31,6 +31,10 @@ export const rgbToHsl = (color: RgbColor): HslColor => { // https://stackoverflo
     if (vmax === c.b) hsl.h = (c.r - c.g) / d + 4;
     hsl.h /= 6;
 
+    hsl.h = Math.floor(hsl.h * 100) / 100
+    hsl.s = Math.floor(hsl.h * 100) / 100
+    hsl.l = Math.floor(hsl.h * 100) / 100
+
     return hsl;
 }
 
@@ -103,7 +107,7 @@ export const rgbToHwb = (color: RgbColor): HwbColor => {
     f = r === w ? g - b : (g === w ? b - r : r - g);
     i = r === w ? 3 : (g === w ? 5 : 1);
 
-    return { h: (i - f / (v - w)) / 6, w: w, b: black }
+    return { h: (i - f / (v - w)) / 6, w: Math.floor(w * 100) / 100, b: Math.floor(black * 100) / 100 }
 }
 
 

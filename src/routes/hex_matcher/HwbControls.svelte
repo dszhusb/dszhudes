@@ -20,7 +20,7 @@
     {guess}
     {match}
     {submit}
-    last={`hwb(${$hwb.h * 360} ${$hwb.w * 100} ${$hwb.b * 100})`}
+    last={`hwb(${$hwb.h}turn ${$hwb.w * 100}% ${$hwb.b * 100}%)`}
 >
     <Selector
         name="hue"
@@ -49,8 +49,8 @@
         guess={guess}
         writableNum={interface_hwb}
         key="b"
-        fill="hwb(0.5turn 0% {$interface_hwb.b * 100})"
-        final="hwb({$hwb.h * 360} {$hwb.w * 100} {$hwb.b * 100})"
+        fill="hwb(0.5turn 0% {$interface_hwb.b * 100}%)"
+        final="hwb({$hwb.h}turn {$hwb.w * 100}% {$hwb.b * 100}%)"
         offset={3}
     />
 </Controls>

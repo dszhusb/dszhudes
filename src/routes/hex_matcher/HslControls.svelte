@@ -20,7 +20,7 @@
     {guess}
     {match}
     {submit}
-    last={`hsl(${$hsl.h * 360} ${$hsl.s * 100} ${$hsl.l * 100})`}
+    last={`hsl(${$hsl.h}turn ${$hsl.s * 100}% ${$hsl.l * 100}%)`}
 >
     <Selector
         name="hue"
@@ -29,7 +29,7 @@
         guess={guess}
         writableNum={interface_hsl}
         key="h"
-        fill="hsl({$interface_hsl.h}turn 100 50)"
+        fill="hsl({$interface_hsl.h}turn 100% 50%)"
         offset={1}
     />
     <Selector
@@ -39,7 +39,7 @@
         guess={guess}
         writableNum={interface_hsl}
         key="s"
-        fill="hsl(180 {$interface_hsl.s * 100} 50)"
+        fill="hsl(0.5turn {$interface_hsl.s * 100}% 50%)"
         offset={2}
     />
     <Selector
@@ -49,8 +49,8 @@
         guess={guess}
         writableNum={interface_hsl}
         key="l"
-        fill="hsl(0 0 {$interface_hsl.l * 100})"
-        final="hsl({$hsl.h * 360} {$hsl.s * 100} {$hsl.l * 100})"
+        fill="hsl(0 0 {$interface_hsl.l * 100}%)"
+        final="hsl({$hsl.h}turn {$hsl.s * 100}% {$hsl.l * 100}%)"
         offset={3}
     />
 </Controls>

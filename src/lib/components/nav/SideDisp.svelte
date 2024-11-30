@@ -18,6 +18,8 @@
     import { gsap } from "gsap";
     import { onMount } from "svelte";
     import { hIcon, hColors, darkMotif } from "$lib/store";
+    import { fade } from "svelte/transition";
+    import { circOut } from "svelte/easing";
     import { page } from "$app/stores";
     import Zhu from "$lib/components/nav/Zhu.svelte";
     import Back from "$lib/components/nav/Back.svelte";
@@ -80,6 +82,10 @@
             style:background-color={darkThemed ? darkMotif.f3 : "var(--c3)"}
             style:border-color={darkThemed ? darkMotif.f3 : "var(--c3)"}
             class="relative rounded-full w-fit px-2 py-5 mx-auto"
+            out:fade={{
+                duration: 500,
+                easing: circOut,
+            }}
         >
             <div
                 style:border-bottom-color={darkThemed

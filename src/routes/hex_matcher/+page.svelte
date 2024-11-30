@@ -6,6 +6,8 @@
     import HwbControls from "./HwbControls.svelte";
     import Clipboard from "$lib/assets/icons/clipboard.svelte";
     import { getFormattedDate } from "./utilities";
+    import { fly } from "svelte/transition";
+    import { circOut } from "svelte/easing";
     import {
         rgbaToHex,
         rgbToHsl,
@@ -84,7 +86,9 @@
     const copyScore = async () => {
         const score_p = document.getElementById("score")?.innerText;
         try {
-            await navigator.clipboard.writeText(score_p ? score_p : "");
+            await navigator.clipboard.writeText(
+                score_p ? "Hex Matcher | " + score_p : "",
+            );
             console.log("Text copied to clipboard");
         } catch (err) {
             console.error("Failed to copy: ", err);
@@ -95,6 +99,7 @@
 <div
     class="mainContainer"
     style="--mystery-color: {$real_hex}; --inverted-mystery-color: {$inverted_hex}; --button-text: {$buttonColor};"
+    in:fly={{ duration: 500, opacity: 0.8, x: 50, easing: circOut }}
 >
     <div class="centered">
         <div class="infoContainer antiScroll">

@@ -31,10 +31,6 @@ export const rgbToHsl = (color: RgbColor): HslColor => { // https://stackoverflo
     if (vmax === c.b) hsl.h = (c.r - c.g) / d + 4;
     hsl.h /= 6;
 
-    hsl.h = Math.floor(hsl.h * 100) / 100
-    hsl.s = Math.floor(hsl.h * 100) / 100
-    hsl.l = Math.floor(hsl.h * 100) / 100
-
     return hsl;
 }
 

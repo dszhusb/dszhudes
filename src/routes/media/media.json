@@ -22,7 +22,7 @@
             "blurb": "This is the book that inspired the theming of this website as well as my general fascination for studying the mathematical properties of organic forms. I also love the concept of modeling of speculative life based on existing forms."
         },
         {
-            "title": "the gravity of math: how Ggometry rules the universe",
+            "title": "the gravity of math: how Geometry rules the universe",
             "author": "Steve Nadis, Shing-Tung Yau",
             "link": "https://www.amazon.com/Gravity-Math-Geometry-Rules-Universe/dp/1541604296",
             "image": "gravitymath",
@@ -55,6 +55,62 @@
             "link": "https://www.najmieh.com/book/silk-road-cooking-a-vegetarian-journey/",
             "image": "silkroad",
             "blurb": "The cuisines of the regions along the historical Silk Road are underappreciated in American culture. This book provides a fascinating look at select dishes and their cultural history."
+        },
+        {
+            "title": "exhalation",
+            "author": "Ted Chiang",
+            "link": "https://www.amazon.com/Exhalation-Stories-Ted-Chiang/dp/1101947888",
+            "image": "exhalation",
+            "blurb": "Having read \"Stories of your life and many others\" first, I was nervous this collection would not meet my sky high expectations. Not to fear, these stories seemed to tick by like the second hand of a clock."
+        },
+        {
+            "title": "kung food",
+            "author": "Jon Kung",
+            "link": "https://www.penguinrandomhouse.com/books/708348/kung-food-by-jon-kung/",
+            "image": "kungfood",
+            "blurb": "As a Chinese American, Jon Kung's discussion of the \"third culture\" experience speaks to my heart not to mention the recipes. I regularly make the asian chicken salads and clay pot rice."
+        },
+        {
+            "title": "the paper menagerie and other stories",
+            "author": "Ken Liu",
+            "link": "https://kenliu.name",
+            "image": "papermenagerie",
+            "blurb": "These stories blend the line between science fiction and fantasy in a lovely way, providing novel representations of Chinese culture in genres its often stereotyped in. Representation aside, these are also just amazing stories full stop."
+        },
+        {
+            "title": "xi'an famous foods",
+            "author": "Jason Wang",
+            "link": "https://www.xianfoods.com",
+            "image": "xianfamousfoods",
+            "blurb": "Xian Famous Foods was the first restaurant I visited when I moved to New York. Growing up in the midwest, Chinese food was a monolith to me. XFF for me was a delicious realization that Chinese food was much more diverse than I had previously understood."
+        },
+        {
+            "title": "a memory called empire",
+            "author": "Arkady Martine",
+            "link": "https://www.arkadymartine.net/books/amce",
+            "image": "amemorycalledempire",
+            "blurb": "I'm a sucker for sci-fi and worldbuiling. The imagery of a galactic Aztec empire with the food, culture, cities, and linguistics to match was a feast for the imagination.."
+        },
+        {
+            "title": "braiding sweetgrass",
+            "author": "Robin Wall Kimmerer",
+            "link": "https://milkweed.org/book/braiding-sweetgrass",
+            "image": "braidingsweetgrass",
+            "blurb": "Reads as a collection of short narratives exploring the interactions between American Indigenous culture, the land, and the author. This book touched the part of me that squat by the sidewalk to watch ants crawl by and tumbles through a meadow."
+        },
+        {
+            "title": "dai dark",
+            "author": "Q Hayashida",
+            "link": "https://www.amazon.com/Dai-Dark-Vol/dp/1648271162",
+            "image": "daidark",
+            "blurb": "A combination of the whimsical and macabre, the narratives and settings Hayashida creates are unlike any other media that I've ever interacted with."
+        },
+        {
+            "title": "delicious in dungeon",
+            "author": "Ryoko Kui",
+            "link": "https://www.barnesandnoble.com/b/series/delicious-in-dungeon-series/_/N-301e",
+            "image": "deliciousindungeon",
+            "blurb": "Beautiful art, tightly written, 10/10. This manga begins with exploring the concept of the fantasy \"dungeon\" as an ecosystem before rapidly spiralling into a wider narrative about what it means to be human – all through the lens of eating!"
         }
     ],
     "music_blurbs": [

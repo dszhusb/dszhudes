@@ -54,6 +54,3 @@
         offset={3}
     />
 </Controls>
-
-<style lang="postcss">
-</style>

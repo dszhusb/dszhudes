@@ -30,28 +30,34 @@
     in:fly={{ duration: 500, opacity: 0.8, y: -100, easing: circOut }}
 >
     <div
-        class="w-full px-12 pt-8 pb-10 flex flex-col lg:flex-row place-content-between lg:items-center gap-6 bg-gradient-to-b from-[var(--t50)] to-transparent to-[75%]"
+        class="w-full px-12 pt-8 pb-10 bg-gradient-to-b from-[var(--t50)] to-transparent to-[75%]"
     >
-        <h1 class="uppercase font-mono font-light">the media on my mind...</h1>
-        <div class="filters">
-            <button
-                class:active={$items.length === mixed.length}
-                on:click={() => {
-                    items.set(shuffle(mixed));
-                }}>All</button
-            >
-            <button
-                class:active={$items.length === books.length}
-                on:click={() => {
-                    items.set(shuffle(books));
-                }}>Books</button
-            >
-            <button
-                class:active={$items.length === songs.length}
-                on:click={() => {
-                    items.set(shuffle(songs));
-                }}>Music</button
-            >
+        <div
+            class="w-full flex flex-col lg:flex-row place-content-between lg:items-center gap-6"
+        >
+            <h1 class="uppercase font-mono font-light">
+                In my bookshelf / playlist...
+            </h1>
+            <div class="filters">
+                <button
+                    class:active={$items.length === mixed.length}
+                    on:click={() => {
+                        items.set(shuffle(mixed));
+                    }}>All</button
+                >
+                <button
+                    class:active={$items.length === books.length}
+                    on:click={() => {
+                        items.set(shuffle(books));
+                    }}>Books</button
+                >
+                <button
+                    class:active={$items.length === songs.length}
+                    on:click={() => {
+                        items.set(shuffle(songs));
+                    }}>Music</button
+                >
+            </div>
         </div>
     </div>
     {#key $items}

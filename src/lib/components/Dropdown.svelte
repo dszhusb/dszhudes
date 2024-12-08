@@ -27,10 +27,6 @@
         @apply flex flex-row divide-stone-800 divide-x-[1px];
     }
 
-    p {
-        @apply m-0 p-0;
-    }
-
     button {
         @apply px-3 py-2 uppercase flex;
     }

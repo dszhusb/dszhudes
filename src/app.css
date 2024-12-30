@@ -27,7 +27,7 @@
     }
 
     a {
-        @apply hover:underline
+        @apply hover:underline;
     }
 
     h1 {
@@ -68,5 +68,21 @@
 
     .content p {
         @apply pb-4 max-w-3xl mx-auto leading-relaxed px-8
+    }
+
+    html {
+        font-size: 10px;
+    }
+
+    @media (min-width: 300px) {
+        html {
+            font-size: calc(10px + 6 * ((100vw - 320px) / 680));
+        }
+    }
+
+    @media (min-width: 1024px) {
+        html {
+            font-size: 16px;
+        }
     }
 }

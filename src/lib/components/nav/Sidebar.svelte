@@ -178,7 +178,7 @@
 
 <style lang="postcss">
 	nav {
-		@apply sticky top-0 max-h-screen h-full w-60 border-r-[1px] border-stone-800 overscroll-contain flex flex-col gap-y-0;
+		@apply sticky top-0 max-h-screen h-full w-56 border-r-[1px] border-stone-800 overscroll-contain flex flex-col gap-y-0;
 	}
 	.button {
 		@apply w-full flex place-content-center text-stone-800;

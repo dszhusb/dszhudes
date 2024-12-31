@@ -15,7 +15,13 @@
 </script>
 
 <script lang="ts">
-    import { getRandomShell } from "./utilities";
+    import { writable } from "svelte/store";
+    import interval from "$lib/utils/interval";
+    import {
+        getRandomShell,
+        randomizeShell,
+        initializeShells,
+    } from "./utilities";
     import type { Shell } from "./utilities";
     import Headshot from "$lib/assets/icons/headshot.webp";
     import Bust from "$lib/assets/icons/bust.png";
@@ -28,20 +34,16 @@
         { low: 6, high: 10 },
     ];
 
-    const shells: Shell[] = [];
-    for (let i = 0; i < ranges.length; i++) {
-        shells.push(getRandomShell(ranges, threshold, i));
-    }
+    const shells = writable<Shell[]>([]);
 
     hIcon.subscribe(() => {
-        for (let i = 0; i < shells.length; i++) {
-            shells[i] = getRandomShell(ranges, threshold, i);
-        }
+        shells.set(initializeShells(ranges, threshold));
     });
 
-    export const randomizeShell = (ranges: range[], index: number): void => {
-        shells[index] = getRandomShell(ranges, threshold, index);
-    };
+    let reset = interval(
+        () => shells.set(initializeShells(ranges, threshold)),
+        2000,
+    );
 </script>
 
 <div class="relative overflow-clip">
@@ -51,9 +53,14 @@
         src={Bust}
         alt="bust"
     />
-    {#each shells as s, index}
+    {#each $shells as s, index}
         <button
-            on:click={() => randomizeShell(ranges, index)}
+            on:click={() => {
+                shells.update((s) =>
+                    randomizeShell(s, ranges, index, threshold),
+                );
+                reset();
+            }}
             class="shell"
             style="--rotation: {s.rotation}deg; --h-rotation: {s.rotation +
                 30}deg; --x: {s.position.x}%; --y: {s.position

@@ -25,6 +25,8 @@
 </div>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     .container {
         @apply border-[1px] border-stone-800 max-w-lg;
     }

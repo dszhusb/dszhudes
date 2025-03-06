@@ -68,6 +68,8 @@
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     .draggable {
         user-select: none;
         cursor: move;

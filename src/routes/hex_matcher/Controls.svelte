@@ -36,6 +36,8 @@
 </div>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     h3 {
         @apply uppercase;
     }

@@ -40,6 +40,8 @@
 </main>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     .column {
         @apply divide-y-[1px] divide-stone-800
     }

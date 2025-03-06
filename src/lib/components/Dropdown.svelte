@@ -19,6 +19,8 @@
 </div>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     .container {
         @apply border-stone-800 border-[1px] w-fit relative flex flex-row;
     }

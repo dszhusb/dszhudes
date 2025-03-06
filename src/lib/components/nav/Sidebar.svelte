@@ -123,7 +123,7 @@
 	</div>
 	<div class="relative h-full w-full">
 		<div
-			class="w-full h-full bg-gradient-to-b from-transparent to-[var(--nav-t50)] absolute top-0 pointer-events-none"
+			class="w-full h-full bg-linear-to-b from-transparent to-[var(--nav-t50)] absolute top-0 pointer-events-none"
 		/>
 		<div
 			role="toolbar"
@@ -177,6 +177,8 @@
 </nav>
 
 <style lang="postcss">
+	@reference "tailwindcss";
+
 	nav {
 		@apply sticky top-0 max-h-screen h-full w-56 border-r-[1px] border-stone-800 overscroll-contain flex flex-col gap-y-0;
 	}

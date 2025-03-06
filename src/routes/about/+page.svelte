@@ -89,6 +89,8 @@
 </main>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     h1 {
         @apply pt-2 pb-8;
     }

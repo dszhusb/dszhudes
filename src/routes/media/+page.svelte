@@ -30,7 +30,7 @@
     in:fly={{ duration: 500, opacity: 0.8, y: -100, easing: circOut }}
 >
     <div
-        class="w-full px-12 pt-8 pb-10 bg-gradient-to-b from-[var(--t50)] to-transparent to-[75%]"
+        class="w-full px-12 pt-8 pb-10 bg-linear-to-b from-[var(--t50)] to-transparent to-75%"
     >
         <div
             class="w-full flex flex-col lg:flex-row place-content-between lg:items-center gap-6"
@@ -135,6 +135,8 @@
 </main>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     h3 {
         @apply m-0 p-0;
     }

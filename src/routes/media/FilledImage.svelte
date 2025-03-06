@@ -40,6 +40,8 @@
 </div>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     .underlay {
         @apply w-auto h-full absolute -z-40 top-0 blur-md scale-125 brightness-90;
     }

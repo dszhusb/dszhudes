@@ -41,6 +41,8 @@
 </button>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     svg:active {
         @apply border-0;
     }

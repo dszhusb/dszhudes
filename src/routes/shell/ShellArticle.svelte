@@ -24,6 +24,8 @@
 </article>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     article {
         @apply flex flex-col gap-4 mr-6;
     }

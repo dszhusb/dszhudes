@@ -2,9 +2,15 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { enhancedImages } from '@sveltejs/enhanced-img';
 import { svelteTesting } from '@testing-library/svelte/vite'
 import { defineConfig } from 'vitest/config';
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-	plugins: [sveltekit(), enhancedImages(), svelteTesting()],
+	plugins: [
+		tailwindcss(),
+		sveltekit(), 
+		enhancedImages(), 
+		svelteTesting()
+	],
 	assetsInclude: ['**/*.glb'],
 	test: {
 		environment: 'jsdom',

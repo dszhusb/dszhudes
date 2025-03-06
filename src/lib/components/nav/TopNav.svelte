@@ -68,7 +68,7 @@
                 </div>
             </li>
             <li
-                class="w-full p-2 bg-white/50 text-stone-800 text-center lowercase font-mono backdrop-blur-sm"
+                class="w-full p-2 bg-white/50 text-stone-800 text-center lowercase font-mono backdrop-blur-xs"
             >
                 <p>more on desktop...</p>
             </li>
@@ -77,6 +77,8 @@
 </nav>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     a {
         @apply h-fit;
     }

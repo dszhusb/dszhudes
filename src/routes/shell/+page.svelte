@@ -261,6 +261,8 @@
 </main>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     label {
         @apply font-mono font-light flex flex-row items-center;
     }

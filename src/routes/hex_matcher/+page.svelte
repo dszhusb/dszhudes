@@ -224,6 +224,8 @@
 </div>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     h1 {
         @apply uppercase font-light py-2;
     }

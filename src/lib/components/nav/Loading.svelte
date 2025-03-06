@@ -20,7 +20,7 @@
 </script>
 
 <div
-    class="w-full h-full min-h-screen flex items-center justify-center bg-gradient-to-b from-[var(--t50)] to-transparent"
+    class="w-full h-full min-h-screen flex items-center justify-center bg-linear-to-b from-[var(--t50)] to-transparent"
     transition:fade
 >
     <enhanced:img

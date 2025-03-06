@@ -45,6 +45,8 @@
 </li>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     a {
         @apply hover:no-underline text-[var(--text)] decoration-[var(--text)];
     }

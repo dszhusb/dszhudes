@@ -59,6 +59,8 @@
 </div>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     label {
         @apply uppercase;
     }

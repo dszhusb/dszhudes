@@ -38,7 +38,7 @@
 </script>
 
 <div
-    class="relative w-full flex flex-col items-center overflow-hidden bg-gradient-to-b from-transparent from-[50%] to-[var(--c3)]"
+    class="relative w-full flex flex-col items-center overflow-hidden bg-linear-to-b from-transparent from-50% to-[var(--c3)]"
 >
     {#if !flush}
         <div class="h-32 w-full" />
@@ -59,6 +59,8 @@
 </div>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     button {
         @apply m-0;
     }

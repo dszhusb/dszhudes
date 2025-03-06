@@ -75,6 +75,8 @@
 </div>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     .shell {
         @apply absolute saturate-150 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
         @apply w-[var(--size)] left-[var(--x)] top-[var(--y)] rotate-[var(--rotation)] duration-700;

@@ -13,13 +13,13 @@
 >
     {#if clicked}
         <div
-            class="backdrop-blur-sm bg-stone-800/80 px-6 py-4 w-full h-full duration-500 overflow-scroll"
+            class="backdrop-blur-xs bg-stone-800/80 px-6 py-4 w-full h-full duration-500 overflow-scroll"
         >
             <slot />
         </div>
     {:else}
         <div
-            class="opacity-0 hover:opacity-100 backdrop-blur-sm bg-stone-800/80 px-6 py-4 w-full h-full duration-500 overflow-scroll"
+            class="opacity-0 hover:opacity-100 backdrop-blur-xs bg-stone-800/80 px-6 py-4 w-full h-full duration-500 overflow-scroll"
         >
             <slot />
         </div>
@@ -27,6 +27,8 @@
 </button>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     button {
         text-align: left;
     }

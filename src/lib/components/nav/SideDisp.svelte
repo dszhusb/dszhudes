@@ -104,6 +104,8 @@
 </main>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+    
     .sideways {
         writing-mode: vertical-rl;
         text-orientation: sideways;

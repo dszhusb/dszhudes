@@ -87,7 +87,7 @@
     style="--select-color:{$c3}c0; --text:{$ctext}; --c1: {$c1}; --c2: {$c2}; --c3: {$c3}; --t50: {$t50}; --t25: {$t25}; --t15: {$t15}; --t5: {$t5}"
 >
     {#if $page.route.id != "/"}
-        <div class="block md:hidden sticky top-0 z-[999]">
+        <div class="block md:hidden sticky top-0 z-999">
             <TopNav />
         </div>
         <div
@@ -114,6 +114,8 @@
 </ThemeProvider>
 
 <style lang="postcss">
+    @reference "tailwindcss";
+
     /* .cursor {
         @apply absolute w-16 h-16 z-50 pointer-events-none -translate-x-1/2 -translate-y-1/2 saturate-150;
     } */

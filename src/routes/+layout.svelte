@@ -28,6 +28,7 @@
     import TopNav from "$lib/components/nav/TopNav.svelte";
     import Sidebar from "$lib/components/nav/Sidebar.svelte";
     import SideDisp from "$lib/components/nav/SideDisp.svelte";
+    import ThemeProvider from "../ui/ThemeProvider.svelte";
     inject();
 
     const ctext = tweened($hColors.text, colorSettings);
@@ -80,6 +81,7 @@
     />
 </svelte:head>
 
+<ThemeProvider>
 <main
     class="font-mono relative scroll-smooth w-screen flex flex-col md:flex-row"
     style="--select-color:{$c3}c0; --text:{$ctext}; --c1: {$c1}; --c2: {$c2}; --c3: {$c3}; --t50: {$t50}; --t25: {$t25}; --t15: {$t15}; --t5: {$t5}"
@@ -109,6 +111,7 @@
         {/if}
     </div>
 </main>
+</ThemeProvider>
 
 <style lang="postcss">
     /* .cursor {

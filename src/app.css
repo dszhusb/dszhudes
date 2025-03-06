@@ -5,6 +5,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@theme {
+    --example: rgba(0, 255, 0)
+}
+
+@custom-variant dark {
+    --example: rgba(255, 0, 0);
+}
+
 @layer base {
     ::-moz-selection {
         background: var(--select-color);

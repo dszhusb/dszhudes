@@ -29,7 +29,7 @@
                 >Physical Computing</a
             > at Carnegie Mellon University.
         </p>
-        <p>
+        <p class="bg-example">
             As someone who has always had a curiosity and hunger to shape how
             things could be, I create physical and digital experiences that are
             memorable, unique and carefully considered.

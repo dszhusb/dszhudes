@@ -1,4 +1,6 @@
 declare global {
+    type theme = 'light' | 'dark';
+    
     type Palette = {
         f1: string,
         f2: string,

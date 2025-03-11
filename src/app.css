@@ -6,8 +6,8 @@
 
 
 @theme {
-    --font-mono: IBM Plex Mono, monospace;
-    --font-grotesk: Space Grotesk;
+    --font-mono: "IBM Plex Mono", monospace;
+    --font-display: "Space Grotesk";
 }
 
 @custom-variant dark {

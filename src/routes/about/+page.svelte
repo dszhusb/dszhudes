@@ -18,34 +18,21 @@
         in:fly={{ duration: 500, opacity: 0.8, y: 100, easing: circOut }}
     >
         <h1 class="uppercase hover:-skew-x-6 duration-300">
-            Hi, I'm Daniel Zhu
+            Hey, I'm Daniel Zhu
         </h1>
         <p>
-            I'm a designer and creative technologist hailing from
-            <a href="https://design.cmu.edu/content/environments-1">Design</a>,
-            <a href="https://www.hcii.cmu.edu/">HCI</a>, and
-            <a
-                href="https://ideate.cmu.edu/undergraduate-programs/physical-computing/"
-                >Physical Computing</a
-            > at Carnegie Mellon University.
+            I'm a Design Engineer / Creative Technologist hailing from 
+            <a href="https://www.cmu.edu/" target="_blank">Carnegie Mellon University</a> working as a 
+            Design Engineer at <a href="https://peregrine.io" target="_blank">Peregrine Technologies</a>
         </p>
         <p>
-            As someone who has always had a curiosity and hunger to shape how
-            things could be, I create physical and digital experiences that are
-            memorable, unique and carefully considered.
-        </p>
-        <p>
-            My education as a designer has helped me develop a framework to
-            understand how people interact with other people, objects, and their
-            environment. But it's never been enough for me to sketch and
-            prototype. As a creative technologist, I've accumulated a broad
-            suite of technical skills from web development, scripting, and code
-            to electronics, 3D modeling, and physical making. One of my greatest
-            strengths is the ability to evaluate and learn the technical skills
-            I need on the fly to bring the concepts I dream of to life.
+            I involve myself in each project from the design to development,
+            reveling in figma and typescript alike. Aside from working on the web, you
+            can find me tinkering away at hardware projects, riding my bike,
+            or leaving silly <a href="https://app.thestorygraph.com/profile/dszhu" target="_blank">book reviews.</a>
         </p>
         <p class="font-bold text-[var(--text)]">
-            Send me an email if you'd like to work together!
+            Shoot me an email if you'd like to chat!
         </p>
     </div>
     <div

@@ -28,6 +28,7 @@
     import TopNav from "$lib/components/nav/TopNav.svelte";
     import Sidebar from "$lib/components/nav/Sidebar.svelte";
     import SideDisp from "$lib/components/nav/SideDisp.svelte";
+    import Grid from "$lib/components/puzzle/Grid.svelte";
     inject();
 
     const ctext = tweened($hColors.text, colorSettings);
@@ -108,6 +109,7 @@
             <slot />
         {/if}
     </div>
+    <Grid />
 </main>
 
 <style lang="postcss">

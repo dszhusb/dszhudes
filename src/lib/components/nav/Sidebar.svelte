@@ -121,7 +121,7 @@
 			>
 		</div>
 	</div>
-	<div class="relative h-full w-full">
+	<div class="relative h-full w-full overflow-auto">
 		<div
 			class="w-full h-full bg-gradient-to-b from-transparent to-[var(--nav-t50)] absolute top-0 pointer-events-none"
 		/>
@@ -178,7 +178,7 @@
 
 <style lang="postcss">
 	nav {
-		@apply sticky top-0 max-h-screen h-full w-56 border-r-[1px] border-stone-800 overscroll-contain flex flex-col gap-y-0;
+		@apply max-h-screen h-full w-56 border-r-[1px] border-stone-800 flex flex-col gap-y-0;
 	}
 	.button {
 		@apply w-full flex place-content-center text-stone-800;

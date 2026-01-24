@@ -81,7 +81,7 @@
 </svelte:head>
 
 <main
-    class="font-mono relative scroll-smooth w-screen flex flex-col md:flex-row"
+    class="font-mono relative scroll-smooth w-screen h-screen flex flex-col md:flex-row"
     style="--select-color:{$c3}c0; --text:{$ctext}; --c1: {$c1}; --c2: {$c2}; --c3: {$c3}; --t50: {$t50}; --t25: {$t25}; --t15: {$t15}; --t5: {$t5}"
 >
     {#if $page.route.id != "/"}
@@ -96,12 +96,7 @@
             <SideDisp />
         </div>
     {/if}
-    <div
-        class="w-full"
-        style:overflow={$page.route.id?.includes("paragraphs")
-            ? "auto"
-            : "visible"}
-    >
+    <div class="w-full h-full overflow-auto">
         {#if $navigating}
             <Loading />
         {:else}
